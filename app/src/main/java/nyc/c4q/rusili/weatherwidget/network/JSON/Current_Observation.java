@@ -32,7 +32,7 @@ public class Current_Observation {
         return observation_time;
     }
 
-    public class display_location{
+    public class display_location {
         String city;
         String state;
         String county;

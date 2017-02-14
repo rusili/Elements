@@ -13,12 +13,12 @@ public class RetroFitGet {
     private String apiKey;
     private int zipCode;
 
-    public RetroFitGet(String apiKeyParam, int zipCodeParam){
+    public RetroFitGet (String apiKeyParam, int zipCodeParam) {
         this.zipCode = zipCodeParam;
         apiKey = apiKeyParam;
     }
 
-    private RetrofitInterface connect(){
+    private RetrofitInterface connect () {
         retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
                 .baseUrl("http://api.wunderground.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -27,16 +27,17 @@ public class RetroFitGet {
         return retrofitInterface;
     }
 
-    public void getForecastDay(){
+    public void getForecastDay () {
         RetrofitInterface retrofitInterface = connect();
-        Call<ResponseForecastDay> getResponse = retrofitInterface.getForecast(apiKey,zipCode);
+        Call <ResponseForecastDay> getResponse = retrofitInterface.getForecast(apiKey, zipCode);
         getResponse.enqueue(new Callback <ResponseForecastDay>() {
             @Override
-            public void onResponse (Call <ResponseForecastDay> call, Response<ResponseForecastDay> response) {
+            public void onResponse (Call <ResponseForecastDay> call, Response <ResponseForecastDay> response) {
                 ResponseForecastDay jsonResponse = response.body();
                 ForecastDay[] forecastDay = jsonResponse.getForecast().getSimpleforecast().getForecastday();
                 Log.d("onSuccess: ", String.valueOf(forecastDay[0].getHigh().getFahrenheit()));
             }
+
             @Override
             public void onFailure (Call <ResponseForecastDay> call, Throwable t) {
                 Log.d("onFailure: ", t.toString());
@@ -44,16 +45,17 @@ public class RetroFitGet {
         });
     }
 
-    public void getConditions(){
+    public void getConditions () {
         RetrofitInterface retrofitInterface = connect();
-        Call<ResponseForecastDay> getResponse = retrofitInterface.getForecast(apiKey,zipCode);
+        Call <ResponseForecastDay> getResponse = retrofitInterface.getForecast(apiKey, zipCode);
         getResponse.enqueue(new Callback <ResponseForecastDay>() {
             @Override
-            public void onResponse (Call <ResponseForecastDay> call, Response<ResponseForecastDay> response) {
+            public void onResponse (Call <ResponseForecastDay> call, Response <ResponseForecastDay> response) {
                 ResponseForecastDay jsonResponse = response.body();
                 ForecastDay[] forecastDay = jsonResponse.getForecast().getSimpleforecast().getForecastday();
                 Log.d("onSuccess: ", String.valueOf(forecastDay[0].getHigh().getFahrenheit()));
             }
+
             @Override
             public void onFailure (Call <ResponseForecastDay> call, Throwable t) {
                 Log.d("onFailure: ", t.toString());

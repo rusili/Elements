@@ -22,7 +22,7 @@ public class ForecastDay {
         return year;
     }
 
-    public class date{
+    public class date {
         String monthname;
         String weekday;
         String tz_short;
@@ -40,23 +40,27 @@ public class ForecastDay {
         }
     }
 
-    public class high{
+    public class high {
         int fahrenheit;
         int celsius;
+
         public int getFahrenheit () {
             return fahrenheit;
         }
+
         public int getCelsius () {
             return celsius;
         }
     }
 
-    public class low{
+    public class low {
         int fahrenheit;
         int celsius;
+
         public int getFahrenheit () {
             return fahrenheit;
         }
+
         public int getCelsius () {
             return celsius;
         }

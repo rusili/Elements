@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.ActivitySetUp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <!-- 3x2 -->
-        <receiver android:name=".WeatherWidget3x2" android:label="Weather 3x2">
+        <receiver android:name=".activities.widgets.WeatherWidget3x2" android:label="Weather 3x2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -26,12 +26,19 @@
                        android:resource="@xml/widget_weather_3x2"/>
         </receiver>
         <!-- 4x2 -->
-        <receiver android:name=".WeatherWidget4x2" android:label="Weather 4x2">
+        <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="Weather 4x2">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                        android:resource="@xml/widget_weather_4x2"/>
+        </receiver>
+        <receiver android:name=".activities.widgets.WeatherWidget5x2" android:label="Weather 5x2">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/widget_weather_5x2"/>
         </receiver>
     </application>
 
