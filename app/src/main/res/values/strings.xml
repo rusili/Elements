@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WeatherWidget</string>
+    <string name="wunderground_api_key">b2cac2700e06dc8e</string>
+</resources>
