@@ -5,17 +5,47 @@
               android:layout_height="110dp"
     >
 
-    <TextView
-        android:id="@+id/widget_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Weather"
-        />
-
-    <Button
-        android:id="@+id/widget_button"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/widget_box_day0"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        />
+        android:layout_weight="40"
+        android:orientation="vertical"
+        >
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_box_day2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/widget_component_day"></include>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_box_day3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/widget_component_day"></include>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/widget_box_day4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/widget_component_day"></include>
+
+    </LinearLayout>
 
 </LinearLayout>

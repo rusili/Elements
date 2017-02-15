@@ -21,7 +21,7 @@ public class WeatherWidget5x2 extends BaseWeatherWidget {
             String number = String.format("%03d", (new Random().nextInt(900) + 100));
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                    R.layout.widget_layout_3x2);
+                    R.layout.widget_layout_5x2);
             remoteViews.setTextViewText(R.id.widget_textview, number);
 
             Intent intent = new Intent(context, WeatherWidget5x2.class);
