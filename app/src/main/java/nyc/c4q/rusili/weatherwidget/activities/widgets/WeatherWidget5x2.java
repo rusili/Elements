@@ -22,7 +22,6 @@ public class WeatherWidget5x2 extends BaseWeatherWidget {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_5x2);
-            remoteViews.setTextViewText(R.id.widget_textview, number);
 
             Intent intent = new Intent(context, WeatherWidget5x2.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -30,7 +29,6 @@ public class WeatherWidget5x2 extends BaseWeatherWidget {
             // PendingIntent updates the widget when the button is clicked
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            remoteViews.setOnClickPendingIntent(R.id.widget_button, pendingIntent);
             appWidgetManager.updateAppWidget(widgetID, remoteViews);
         }
     }
