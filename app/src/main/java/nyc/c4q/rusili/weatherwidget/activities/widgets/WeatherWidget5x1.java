@@ -11,7 +11,7 @@ import java.util.Random;
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.activities.BaseWeatherWidget;
 
-public class WeatherWidget3x2 extends BaseWeatherWidget {
+public class WeatherWidget5x1 extends BaseWeatherWidget {
 
     @Override
     public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -21,9 +21,9 @@ public class WeatherWidget3x2 extends BaseWeatherWidget {
             String number = String.format("%03d", (new Random().nextInt(900) + 100));
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                    R.layout.widget_layout_3x2);
+                    R.layout.widget_layout_5x1);
 
-            Intent intent = new Intent(context, WeatherWidget3x2.class);
+            Intent intent = new Intent(context, WeatherWidget5x1.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
             // PendingIntent updates the widget when the button is clicked
