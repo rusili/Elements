@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:layout_width="340dp"
+              android:layout_width="410dp"
               android:layout_height="152dp"
     >
 
@@ -13,39 +13,40 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_main"/>
+        <include
+            layout="@layout/widget_component_main2"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/widget_box_day2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20"
+        android:layout_weight="22.5"
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_day"></include>
+        <include layout="@layout/widget_component_day2"></include>
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/widget_box_day3"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20"
+        android:layout_weight="22.5"
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_day"></include>
+        <include layout="@layout/widget_component_day2"></include>
 
     </LinearLayout>
     <LinearLayout
         android:id="@+id/widget_box_day4"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20"
+        android:layout_weight="22.5"
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_day"></include>
+        <include layout="@layout/widget_component_day2"></include>
 
     </LinearLayout>
 

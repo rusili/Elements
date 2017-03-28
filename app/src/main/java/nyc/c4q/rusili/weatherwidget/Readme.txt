@@ -22,8 +22,8 @@ Height:
 2 Rows: 152 dp
 
 Width:
-4 Columns: 270 dp
-5 Columns: 350 dp
+4 Columns: 320 dp
+5 Columns: 410 dp
 
 
 Maximum:

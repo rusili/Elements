@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                    android:orientation="vertical"
-                   android:layout_width="72dp"
-                   android:layout_height="match_parent"
+                   android:layout_width="90dp"
+                   android:layout_height="68dp"
                    android:background="#80000000"
               android:paddingTop="4dp"
               android:paddingBottom="4dp"
@@ -100,65 +100,5 @@
             />
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        >
-
-        <ImageView
-            android:id="@+id/widget_component_day_image_precip"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/raintemp"
-            android:tint="@color/sky_blue"
-            />
-        <TextView
-            android:id="@+id/widget_component_day_text_precip"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/widget_component_day_image_precip"
-            android:text="73"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/textMain"
-            />
-        <TextView
-            android:id="@+id/widget_component_day_text_percent"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/widget_component_day_text_precip"
-            android:text="%"
-            android:textSize="10sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/textAlt"
-            />
-
-        <ImageView
-            android:id="@+id/widget_component_day_image_wind"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/windtemp"
-            android:tint="@color/sky_blue"
-            />
-
-        <TextView
-            android:id="@+id/widget_component_day_text_wind"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/widget_component_day_image_wind"
-            android:text="18"
-            android:textSize="12sp"
-            android:gravity="center_vertical"
-            android:textColor="@color/textMain"
-            />
-    </RelativeLayout>
 
 </LinearLayout>
