@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
@@ -36,8 +35,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
             //setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID, remoteViews);
             downloadWeatherData(context, appWidgetManager, widgetID, remoteViews);
-            //getCurrentObservation();
-
         }
     }
 
@@ -46,7 +43,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {
             @Override
             public void onConditionsRetrieved (CurrentObservation currentObservation) {
-                Log.d("onConditionsRetrieved", String.valueOf(currentObservation.getTemp_f()));
                 updateMain(context, appWidgetManager, widgetID, currentObservation);
             }
 
@@ -91,7 +87,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         SimpleDateFormat month = new SimpleDateFormat("MMM");
         SimpleDateFormat day = new SimpleDateFormat("dd");
 
-        Log.d("updateMain: ", weekday.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_weekday, weekday.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_month, month.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_day, day.format(now));

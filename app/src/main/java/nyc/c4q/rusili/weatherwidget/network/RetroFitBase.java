@@ -44,8 +44,6 @@ public class RetroFitBase {
             @Override
             public void onResponse (Call <ResponseForecastDay> call, Response <ResponseForecastDay> response) {
                 ForecastDay[] jsonResponse = response.body().getForecast().getSimpleforecast().getForecastday();
-                Log.d("getForecastDay0: ", String.valueOf(jsonResponse[0].getHigh()));
-
                 if (listener != null) {
                     listener.onForecastDaysRetrieved(jsonResponse);
                 }
@@ -65,7 +63,6 @@ public class RetroFitBase {
             @Override
             public void onResponse (Call <ResponseConditions> call, Response <ResponseConditions> response) {
                 CurrentObservation jsonResponse = response.body().getCurrent_observation();
-                Log.d("getCurrentObservation: ", String.valueOf(jsonResponse.getTemp_f()));
                 if (listener != null) {
                     listener.onConditionsRetrieved(jsonResponse);
                 }
