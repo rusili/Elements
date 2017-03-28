@@ -2,20 +2,30 @@ package nyc.c4q.rusili.weatherwidget.network;
 
 import android.util.Log;
 
+import nyc.c4q.rusili.weatherwidget.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
+import nyc.c4q.rusili.weatherwidget.network.JSON.ResponseConditions;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ResponseForecastDay;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetroFitGet {
+public class RetroFitBase {
+    private RetrofitListener listener;
+
     private String apiKey;
     private int zipCode;
 
-    public RetroFitGet (String apiKeyParam, int zipCodeParam) {
+    public RetroFitBase (String apiKeyParam, int zipCodeParam) {
+        this.listener = null;
+
         this.zipCode = zipCodeParam;
         apiKey = apiKeyParam;
+    }
+
+    public void setRetrofitListener(RetrofitListener retrofitListener){
+        this.listener = retrofitListener;
     }
 
     private RetrofitInterface connect () {
@@ -33,9 +43,12 @@ public class RetroFitGet {
         getResponse.enqueue(new Callback <ResponseForecastDay>() {
             @Override
             public void onResponse (Call <ResponseForecastDay> call, Response <ResponseForecastDay> response) {
-                ResponseForecastDay jsonResponse = response.body();
-                ForecastDay[] forecastDay = jsonResponse.getForecast().getSimpleforecast().getForecastday();
-                Log.d("onSuccess: ", String.valueOf(forecastDay[0].getHigh().getFahrenheit()));
+                ForecastDay[] jsonResponse = response.body().getForecast().getSimpleforecast().getForecastday();
+                Log.d("getForecastDay0: ", String.valueOf(jsonResponse[0].getHigh()));
+
+                if (listener != null) {
+                    listener.onForecastDaysRetrieved(jsonResponse);
+                }
             }
 
             @Override
@@ -47,19 +60,26 @@ public class RetroFitGet {
 
     public void getConditions () {
         RetrofitInterface retrofitInterface = connect();
-        Call <ResponseForecastDay> getResponse = retrofitInterface.getForecast(apiKey, zipCode);
-        getResponse.enqueue(new Callback <ResponseForecastDay>() {
+        Call <ResponseConditions> getResponse = retrofitInterface.getConditions(apiKey, zipCode);
+        getResponse.enqueue(new Callback <ResponseConditions>() {
             @Override
-            public void onResponse (Call <ResponseForecastDay> call, Response <ResponseForecastDay> response) {
-                ResponseForecastDay jsonResponse = response.body();
-                ForecastDay[] forecastDay = jsonResponse.getForecast().getSimpleforecast().getForecastday();
-                Log.d("onSuccess: ", String.valueOf(forecastDay[0].getHigh().getFahrenheit()));
+            public void onResponse (Call <ResponseConditions> call, Response <ResponseConditions> response) {
+                CurrentObservation jsonResponse = response.body().getCurrent_observation();
+                Log.d("getCurrentObservation: ", String.valueOf(jsonResponse.getTemp_f()));
+                if (listener != null) {
+                    listener.onConditionsRetrieved(jsonResponse);
+                }
             }
 
             @Override
-            public void onFailure (Call <ResponseForecastDay> call, Throwable t) {
+            public void onFailure (Call <ResponseConditions> call, Throwable t) {
                 Log.d("onFailure: ", t.toString());
             }
         });
+    }
+
+    public interface RetrofitListener{
+        public void onConditionsRetrieved (CurrentObservation currentObservation);
+        public void onForecastDaysRetrieved (ForecastDay[] forecastDays);
     }
 }

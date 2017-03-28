@@ -7,7 +7,7 @@
         >
 
     <TextView
-        android:id="@+id/widget_component_day_weekday"
+        android:id="@+id/widget_component_day_weekday4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
@@ -19,7 +19,7 @@
         />
 
     <TextView
-        android:id="@+id/widget_component_day_day"
+        android:id="@+id/widget_component_day_day4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"

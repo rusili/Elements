@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "nyc.c4q.rusili.weatherwidget"
         minSdkVersion 19
@@ -29,7 +29,10 @@ dependencies {
 
     // Butterknife:
     compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife'
+
+    // Picasso:
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
     // Retrofit:
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

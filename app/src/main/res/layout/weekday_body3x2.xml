@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="40"
+        >
+
+        <TextView
+            android:id="@+id/widget_component_day_temphigh3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="65&#xb0;"
+            android:textSize="22sp"
+            android:textColor="@color/textMain"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:id="@+id/widget_component_day_templow3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:text="45&#xb0;"
+            android:textSize="22sp"
+            android:textColor="@color/textAlt"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/widget_component_day_icon3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:src="@drawable/cloudtemp"
+        android:layout_margin="4dp"
+        android:tint="@color/textAlt"
+        />
+
+</LinearLayout>

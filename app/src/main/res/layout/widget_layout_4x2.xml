@@ -7,16 +7,17 @@
 
     <include
         android:id="@+id/widget_layout_4x2_include_main2"
-        layout="@layout/widget_component_main2"
+        layout="@layout/widget_component_mainx2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="35"
         android:orientation="vertical"
-        />
+        >
+    </include>
 
     <include
         android:id="@+id/widget_layout_4x2_include_day2"
-        layout="@layout/widget_component_day2"
+        layout="@layout/widget_component_day2x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="22.5"
@@ -25,7 +26,7 @@
 
     <include
         android:id="@+id/widget_layout_4x2_include_day3"
-        layout="@layout/widget_component_day2"
+        layout="@layout/widget_component_day3x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="22.5"

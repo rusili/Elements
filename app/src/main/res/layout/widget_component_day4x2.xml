@@ -17,7 +17,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         >
-        <include layout="@layout/weekday_header2"/>
+        <include layout="@layout/weekday_header4x2"/>
     </LinearLayout>
 
     <LinearLayout
@@ -27,7 +27,7 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/temp_body2"/>
+        <include layout="@layout/weekday_body4x2"/>
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +40,7 @@
         android:layout_marginRight="2dp"
         >
 
-        <include layout="@layout/other_footer2"/>
+        <include layout="@layout/other_footer4x2"/>
     </LinearLayout>
 
 </LinearLayout>

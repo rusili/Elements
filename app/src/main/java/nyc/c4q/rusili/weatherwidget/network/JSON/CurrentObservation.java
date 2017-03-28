@@ -1,12 +1,22 @@
 package nyc.c4q.rusili.weatherwidget.network.JSON;
 
-public class Current_Observation {
+public class CurrentObservation {
     String forecast_url;
     String observation_time;
     String weather;
     double temp_f;
     double temp_c;
     String icon_url;
+    String relative_humidity;
+    int wind_mph;
+
+    public int getWind_mph () {
+        return wind_mph;
+    }
+
+    public String getRelative_humidity () {
+        return relative_humidity;
+    }
 
     public String getForecast_url () {
         return forecast_url;

@@ -13,7 +13,7 @@
         >
 
         <TextView
-            android:id="@+id/widget_component_day_temphigh"
+            android:id="@+id/widget_component_day_temphigh2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
@@ -23,7 +23,7 @@
             android:textAlignment="center"
             />
         <TextView
-            android:id="@+id/widget_component_day_templow"
+            android:id="@+id/widget_component_day_templow2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="50"
@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/widget_component_day_icon"
+        android:id="@+id/widget_component_day_icon2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
