@@ -47,7 +47,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
             @Override
             public void onForecastDaysRetrieved (ForecastDay[] forecastDays) {
-                //updateDays(context, appWidgetManager, appWidgetIds, widgetID, remoteViews, forecastDays);
+                updateDays(appWidgetManager, widgetID, forecastDays);
             }
         });
         retroFitBase.getConditions();
@@ -55,6 +55,24 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
     }
 
     private void updateDays (AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays) {
+        remoteViews.setTextViewText(R.id.widget_component_main_hitemp, String.valueOf(forecastDays[0].getHigh().getFahrenheit()));
+        remoteViews.setTextViewText(R.id.widget_component_main_lowtemp, String.valueOf(forecastDays[0].getLow().getFahrenheit()));
+
+        remoteViews.setTextViewText(R.id.widget_component_day_weekday2, forecastDays[1].getDate().getWeekdayShort());
+        remoteViews.setTextViewText(R.id.widget_component_day_day2, forecastDays[1].getDate().getDay());
+        remoteViews.setTextViewText(R.id.widget_component_day_temphigh2, String.valueOf(forecastDays[1].getHigh().getFahrenheit()));
+        remoteViews.setTextViewText(R.id.widget_component_day_templow2, String.valueOf(forecastDays[1].getLow().getFahrenheit()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
+
+        remoteViews.setTextViewText(R.id.widget_component_day_weekday3, forecastDays[2].getDate().getWeekdayShort());
+        remoteViews.setTextViewText(R.id.widget_component_day_day3, forecastDays[2].getDate().getDay());
+        remoteViews.setTextViewText(R.id.widget_component_day_temphigh3, String.valueOf(forecastDays[2].getHigh().getFahrenheit()));
+        remoteViews.setTextViewText(R.id.widget_component_day_templow3, String.valueOf(forecastDays[2].getLow().getFahrenheit()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
+
+        appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
 
     private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
@@ -67,7 +85,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_main_weekday, weekday.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_month, month.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_day, day.format(now));
-        remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf(currentObservation.getTemp_f()));
+        remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()));
         //remoteViews.setImageViewUri(R.id.widget_component_main_icon, Uri.parse(currentObservation.getIcon_url()));
         remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
         remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));

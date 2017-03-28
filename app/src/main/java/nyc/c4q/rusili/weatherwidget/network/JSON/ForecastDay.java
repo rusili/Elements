@@ -1,38 +1,42 @@
 package nyc.c4q.rusili.weatherwidget.network.JSON;
 
 public class ForecastDay {
-    int day;
-    int month;
-    int year;
+    date date;
     high high;
     low low;
+    avewind avewind;
     String conditions;
     int avehumidity;
     String icon_url;
 
-    public int getDay () {
-        return day;
+    public class avewind{
+        int mph;
+
+        public int getMph () {
+            return mph;
+        }
     }
 
-    public int getMonth () {
-        return month;
-    }
-
-    public int getYear () {
-        return year;
+    public ForecastDay.avewind getAvewind () {
+        return avewind;
     }
 
     public class date {
-        String monthname;
-        String weekday;
+        String day;
+        String monthname_short;
+        String weekday_short;
         String tz_short;
 
-        public String getMonthname () {
-            return monthname;
+        public String getDay () {
+            return day;
         }
 
-        public String getWeekday () {
-            return weekday;
+        public String getMonthnameShort () {
+            return monthname_short;
+        }
+
+        public String getWeekdayShort () {
+            return weekday_short;
         }
 
         public String getTz_short () {
@@ -64,6 +68,10 @@ public class ForecastDay {
         public int getCelsius () {
             return celsius;
         }
+    }
+
+    public ForecastDay.date getDate () {
+        return date;
     }
 
     public ForecastDay.high getHigh () {

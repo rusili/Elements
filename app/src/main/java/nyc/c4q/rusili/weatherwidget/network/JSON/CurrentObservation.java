@@ -8,9 +8,9 @@ public class CurrentObservation {
     double temp_c;
     String icon_url;
     String relative_humidity;
-    int wind_mph;
+    double wind_mph;
 
-    public int getWind_mph () {
+    public double getWind_mph () {
         return wind_mph;
     }
 
