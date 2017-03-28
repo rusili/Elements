@@ -85,9 +85,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="40"
-                android:src="@drawable/cloudtemp"
                 android:layout_margin="8dp"
-                android:tint="@color/textAlt"
+                android:scaleType="fitCenter"
+                android:background="@color/transparent"
                 />
 
         </LinearLayout>
