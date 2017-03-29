@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_weight="40"
             android:text="TUES"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="@color/sky_blue"
             android:gravity="center"
 
@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_weight="30"
             android:text="NOV"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textColor="@color/textMain"
             android:gravity="center"
             android:layout_marginTop="1dp"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_weight="20"
             android:text="25"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textColor="@color/textMain"
             android:gravity="center"
             />
@@ -116,7 +116,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/dummy_widget_component_main_hi"
                 android:text="65&#xb0;"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textColor="@color/textMain"
                 android:gravity="center_vertical"
                 />
@@ -126,7 +126,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:text="45&#xb0;"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textColor="@color/textMain"
                 android:gravity="center_vertical"
                 android:layout_marginRight="8dp"
@@ -180,7 +180,7 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/dummy_widget_component_day_image_precip"
                 android:text="73"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/textMain"
                 />
@@ -200,7 +200,7 @@
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/dummy_widget_component_day_image_wind"
                 android:text="18"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/textMain"
                 />

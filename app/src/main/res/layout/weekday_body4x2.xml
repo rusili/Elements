@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="50"
             android:text="65&#xb0;"
-            android:textSize="22sp"
+            android:textSize="23sp"
             android:textColor="@color/textMain"
             android:textAlignment="center"
             />
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="50"
             android:text="45&#xb0;"
-            android:textSize="22sp"
+            android:textSize="23sp"
             android:textColor="@color/textAlt"
             android:textAlignment="center"
             />

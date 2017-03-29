@@ -33,7 +33,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
 
-            //setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID, remoteViews);
+            setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID, remoteViews);
             downloadWeatherData(context, appWidgetManager, widgetID, remoteViews);
         }
     }
@@ -63,7 +63,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_day_day2, forecastDays[1].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh2, String.valueOf(forecastDays[1].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow2, String.valueOf(forecastDays[1].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity() + "%"));
         remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
         appWidgetTarget = new AppWidgetTarget(context, remoteViews, R.id.widget_component_day_icon2, widgetID);
         Glide.with(context).load(forecastDays[1].getIcon_url()).asBitmap().into(appWidgetTarget);
@@ -72,7 +72,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_day_day3, forecastDays[2].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh3, String.valueOf(forecastDays[2].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow3, String.valueOf(forecastDays[2].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity()));
+        remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity() + "%"));
         remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
         remoteViews.setImageViewUri(R.id.widget_component_day_icon3, Uri.parse(forecastDays[2].getIcon_url()));
         appWidgetTarget = new AppWidgetTarget(context, remoteViews, R.id.widget_component_day_icon3, widgetID);
@@ -107,6 +107,5 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
-
     }
 }

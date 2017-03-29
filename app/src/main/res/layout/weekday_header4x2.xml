@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:text="TUES"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textColor="@color/sky_blue"
         android:gravity="center"
 
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:text="25"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textColor="@color/textMain"
         android:gravity="center"
         />
