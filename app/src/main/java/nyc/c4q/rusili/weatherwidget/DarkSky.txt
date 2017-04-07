@@ -1,0 +1,12 @@
+Darksky icons:
+
+clear-day
+clear-night
+partly-cloud-day
+partly-cloud-night
+cloudy
+rain
+sleet
+snow
+wind
+fog

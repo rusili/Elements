@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.AppWidgetTarget;
 
 import java.text.SimpleDateFormat;
@@ -19,12 +18,15 @@ import nyc.c4q.rusili.weatherwidget.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
 import nyc.c4q.rusili.weatherwidget.network.RetroFitBase;
 import nyc.c4q.rusili.weatherwidget.utilities.Constants;
+import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget {
     private RetroFitBase retroFitBase;
     private RetroFitBase.RetrofitListener retrofitListener;
     private RemoteViews remoteViews;
     private AppWidgetTarget appWidgetTarget;
+    private GlideWrapper glideWrapper;
+    private CharSequence twoCharWeekday;
 
     @Override
     public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -33,8 +35,10 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
 
-            setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID, remoteViews);
+            glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
+            setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID);
             downloadWeatherData(context, appWidgetManager, widgetID, remoteViews);
+            setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID);
         }
     }
 
@@ -43,45 +47,43 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {
             @Override
             public void onConditionsRetrieved (CurrentObservation currentObservation) {
-                updateMain(context, appWidgetManager, widgetID, currentObservation);
+                updateMain(appWidgetManager, widgetID, currentObservation);
             }
 
             @Override
             public void onForecastDaysRetrieved (ForecastDay[] forecastDays) {
-                updateDays(context, appWidgetManager, widgetID, forecastDays);
+                updateDays(appWidgetManager, widgetID, forecastDays);
             }
         });
         retroFitBase.getConditions();
         retroFitBase.getForecastDay();
     }
 
-    private void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays) {
+    private void updateDays (AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays) {
         remoteViews.setTextViewText(R.id.widget_component_main_hitemp, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_main_lowtemp, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 
-        remoteViews.setTextViewText(R.id.widget_component_day_weekday2, forecastDays[1].getDate().getWeekdayShort());
+        remoteViews.setTextViewText(R.id.widget_component_day_weekday2, getTwoCharWeekday(forecastDays[1].getDate().getWeekdayShort()));
         remoteViews.setTextViewText(R.id.widget_component_day_day2, forecastDays[1].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh2, String.valueOf(forecastDays[1].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow2, String.valueOf(forecastDays[1].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity() + "%"));
         remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
-        appWidgetTarget = new AppWidgetTarget(context, remoteViews, R.id.widget_component_day_icon2, widgetID);
-        Glide.with(context).load(forecastDays[1].getIcon_url()).asBitmap().into(appWidgetTarget);
+        glideWrapper.inflateImage(R.id.widget_component_day_icon2, forecastDays[1].getIcon_url());
 
-        remoteViews.setTextViewText(R.id.widget_component_day_weekday3, forecastDays[2].getDate().getWeekdayShort());
+        remoteViews.setTextViewText(R.id.widget_component_day_weekday3, getTwoCharWeekday(forecastDays[2].getDate().getWeekdayShort()));
         remoteViews.setTextViewText(R.id.widget_component_day_day3, forecastDays[2].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh3, String.valueOf(forecastDays[2].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow3, String.valueOf(forecastDays[2].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity() + "%"));
         remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
         remoteViews.setImageViewUri(R.id.widget_component_day_icon3, Uri.parse(forecastDays[2].getIcon_url()));
-        appWidgetTarget = new AppWidgetTarget(context, remoteViews, R.id.widget_component_day_icon3, widgetID);
-        Glide.with(context).load(forecastDays[2].getIcon_url()).asBitmap().into(appWidgetTarget);
+        glideWrapper.inflateImage(R.id.widget_component_day_icon3, forecastDays[2].getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
 
-    private void updateMain (Context context, AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
+    private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
         Date now = new Date();
         SimpleDateFormat weekday = new SimpleDateFormat("E");
         SimpleDateFormat month = new SimpleDateFormat("MMM");
@@ -93,19 +95,30 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
         remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
-        appWidgetTarget = new AppWidgetTarget(context, remoteViews, R.id.widget_component_main_icon, widgetID);
-        Glide.with(context).load(currentObservation.getIcon_url()).asBitmap().into(appWidgetTarget);
+        glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
 
-    private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID, RemoteViews remoteViews){
+    private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID){
         Intent intent = new Intent(context, WeatherWidget4x2.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
-        // PendingIntent updates the widget when the button is clicked
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
+    }
+
+    public CharSequence getTwoCharWeekday (String weekdayShort) {
+        CharSequence charSequence;
+
+        if (weekdayShort.contains("T") || weekdayShort.contains("S")){
+            charSequence = weekdayShort.substring(0,2);
+        } else {
+            charSequence = String.valueOf(weekdayShort.charAt(0));
+        }
+
+        return charSequence;
     }
 }
