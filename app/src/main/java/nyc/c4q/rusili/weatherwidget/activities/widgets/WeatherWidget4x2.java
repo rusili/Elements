@@ -91,13 +91,22 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
         remoteViews.setTextViewText(R.id.widget_component_main_weekday, weekday.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_month, month.format(now));
-        remoteViews.setTextViewText(R.id.widget_component_main_day, day.format(now));
+        remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(day.format(now)));
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
         remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
         glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
+    }
+
+    private CharSequence ifSingleDigit (String format) {
+        CharSequence charSequence = null;
+
+        if (Integer.parseInt(format) < 10){
+            charSequence = String.valueOf(format.charAt(1));
+        }
+        return charSequence;
     }
 
     private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID){
@@ -111,7 +120,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
     }
 
     public CharSequence getTwoCharWeekday (String weekdayShort) {
-        CharSequence charSequence;
+        CharSequence charSequence = null;
 
         if (weekdayShort.contains("T") || weekdayShort.contains("S")){
             charSequence = weekdayShort.substring(0,2);

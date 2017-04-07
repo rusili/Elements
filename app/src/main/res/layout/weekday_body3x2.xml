@@ -43,6 +43,7 @@
         android:layout_margin="4dp"
         android:scaleType="fitCenter"
         android:background="@color/transparent"
+        android:tint="@color/f9"
         />
 
 </LinearLayout>
