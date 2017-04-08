@@ -4,10 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="152dp"
               android:background="#80000000"
-              android:paddingTop="@dimen/day_vertial_margin"
-              android:paddingBottom="@dimen/day_vertial_margin"
-              android:paddingLeft="@dimen/day_horizontal_margin"
-              android:paddingRight="@dimen/day_horizontal_margin"
+              android:paddingTop="@dimen/day_vertical_padding"
+              android:paddingBottom="@dimen/day_vertical_padding"
+              android:paddingLeft="@dimen/day_horizontal_padding"
+              android:paddingRight="@dimen/day_horizontal_padding"
     >
 
     <RelativeLayout
@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:text="12"
-            android:textSize="20sp"
+            android:textSize="@dimen/day_date_fontsize"
             android:textColor="@color/textMain"
             />
     </RelativeLayout>

@@ -4,16 +4,16 @@
              android:layout_height="152dp"
              android:background="#80000000"
              android:orientation="vertical"
-             android:paddingBottom="8dp"
-             android:paddingTop="8dp"
+             android:paddingBottom="@dimen/day_vertical_padding"
+             android:paddingTop="@dimen/day_vertical_padding"
     >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="20"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:paddingLeft="@dimen/day_horizontal_padding"
+        android:paddingRight="@dimen/day_horizontal_padding"
         >
         <TextView
             android:id="@+id/widget_component_main_weekday"
@@ -61,7 +61,7 @@
                 android:gravity="top"
                 android:text="65&#xb0;"
                 android:textColor="@color/textMain"
-                android:textSize="20sp"
+                android:textSize="@dimen/day_highlowtemp_fontsize"
                 />
 
             <TextView
@@ -85,7 +85,7 @@
                     android:gravity="bottom"
                     android:text="45"
                     android:textColor="@color/textMain"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/day_highlowtemp_fontsize"
                     />
 
                 <TextView
