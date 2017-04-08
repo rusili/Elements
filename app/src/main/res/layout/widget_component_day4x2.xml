@@ -5,25 +5,43 @@
               android:layout_height="152dp"
               android:background="#80000000"
               android:paddingTop="8dp"
-              android:paddingBottom="4dp"
+              android:paddingBottom="8dp"
               android:paddingLeft="4dp"
               android:paddingRight="4dp"
     >
 
-    <TextView
-        android:id="@+id/widget_component_day_weekday4"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="15"
-        android:text="TU"
-        android:textSize="18sp"
-        android:textColor="@color/light_sky_blue"
-        />
+        android:layout_weight="20"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:id="@+id/widget_component_day_weekday4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:text="TU"
+            android:textSize="18sp"
+            android:textColor="@color/light_sky_blue"
+            />
+
+        <TextView
+            android:id="@+id/widget_component_day_day4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="12"
+            android:textSize="20sp"
+            android:textColor="@color/textMain"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="70"
+        android:layout_weight="80"
         android:orientation="vertical"
         >
 
@@ -42,7 +60,6 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="40"
-            android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_partly_cloudy"
@@ -60,16 +77,5 @@
             android:textColor="@color/textMain"
             />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/widget_component_day_day4"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="15"
-        android:text="12"
-        android:layout_gravity="end|bottom"
-        android:textSize="20sp"
-        android:textColor="@color/textMain"
-        />
 
 </LinearLayout>

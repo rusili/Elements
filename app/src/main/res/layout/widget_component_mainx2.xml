@@ -24,7 +24,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="top|end"
         >
 
         <TextView
@@ -55,7 +55,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="24dp"
         >
 
         <LinearLayout
@@ -75,6 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="66"
+                android:layout_marginTop="8dp"
                 android:background="@color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_partly_cloudy"
@@ -95,6 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
                 android:layout_weight="75"
+                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:text="65&#xb0;"
                 android:textAlignment="viewEnd"
@@ -115,7 +117,7 @@
         android:id="@+id/widget_component_main_hitemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="bottom|left"
         android:gravity="center_vertical"
         android:text="65&#xb0;"
         android:textColor="@color/textMain"
@@ -126,8 +128,7 @@
         android:id="@+id/widget_component_main_lowtemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
+        android:layout_gravity="bottom|right"
         android:text="45"
         android:textColor="@color/textMain"
         android:textSize="18sp"

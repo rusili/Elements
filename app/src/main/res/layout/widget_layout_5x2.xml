@@ -13,8 +13,6 @@
         android:orientation="vertical"
         >
 
-        <include
-            layout="@layout/widget_component_mainx22"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/widget_box_day2"
@@ -24,7 +22,7 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_day3x2"></include>
+        <include layout="@layout/widget_component_day2x2"></include>
 
     </LinearLayout>
     <LinearLayout
@@ -46,7 +44,19 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/widget_component_day3x2"></include>
+        <include layout="@layout/widget_component_day4x2"></include>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/widget_box_day5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="22.5"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/widget_component_day5x2"></include>
 
     </LinearLayout>
 
