@@ -83,7 +83,6 @@
                 android:id="@+id/widget_component_day_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/cloudtemp"
                 android:tint="@color/textAlt"
                 />
 

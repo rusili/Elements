@@ -92,13 +92,13 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
     private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
         Date now = new Date();
         SimpleDateFormat weekday = new SimpleDateFormat("E");
-        SimpleDateFormat month = new SimpleDateFormat("MMM");
+        SimpleDateFormat month = new SimpleDateFormat("MM");
         SimpleDateFormat day = new SimpleDateFormat("dd");
 
         remoteViews.setTextViewText(R.id.widget_component_main_weekday, weekday.format(now));
-        remoteViews.setTextViewText(R.id.widget_component_main_month, month.format(now));
-        remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(day.format(now)));
+        remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
+        remoteViews.setTextViewText(R.id.widget_component_main_location, currentObservation.getDisplay_location().getCity());
         //remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
         //remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
         glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());

@@ -9,6 +9,7 @@ public class CurrentObservation {
     String icon_url;
     String relative_humidity;
     double wind_mph;
+    display_location display_location;
 
     public double getWind_mph () {
         return wind_mph;
@@ -40,6 +41,10 @@ public class CurrentObservation {
 
     public String getObservation_time () {
         return observation_time;
+    }
+
+    public CurrentObservation.display_location getDisplay_location () {
+        return display_location;
     }
 
     public class display_location {

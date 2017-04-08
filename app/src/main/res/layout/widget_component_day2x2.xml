@@ -4,17 +4,16 @@
               android:layout_width="match_parent"
               android:layout_height="152dp"
               android:background="#80000000"
-              android:paddingTop="8dp"
-              android:paddingBottom="8dp"
-              android:paddingLeft="4dp"
-              android:paddingRight="4dp"
+              android:paddingTop="@dimen/day_vertial_margin"
+              android:paddingBottom="@dimen/day_vertial_margin"
+              android:paddingLeft="@dimen/day_horizontal_margin"
+              android:paddingRight="@dimen/day_horizontal_margin"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
-        android:gravity="center_vertical"
         >
 
         <TextView
@@ -23,8 +22,10 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:text="TU"
-            android:textSize="18sp"
-            android:textColor="@color/light_sky_blue"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/day_weekday_fontsize"
+            android:textColor="@color/textAlt"
+            android:textAllCaps="true"
             />
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_alignParentRight="true"
             android:text="12"
             android:textSize="20sp"
-            android:textColor="@color/textMain"
+            android:textColor="@color/light_sky_blue"
             />
     </RelativeLayout>
 
@@ -52,18 +53,19 @@
             android:layout_weight="30"
             android:text="45"
             android:gravity="top|center_horizontal"
-            android:textSize="22sp"
+            android:textSize="@dimen/day_highlowtemp_fontsize"
             android:textColor="@color/textMain"
             />
         <ImageView
             android:id="@+id/widget_component_day_icon2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="40"
             android:layout_marginTop="4dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_partly_cloudy"
             android:tint="@color/light_sky_blue"
+            android:scaleType="fitCenter"
             />
 
         <TextView
@@ -73,9 +75,10 @@
             android:layout_weight="30"
             android:text="35"
             android:gravity="bottom|center_horizontal"
-            android:textSize="22sp"
+            android:textSize="@dimen/day_highlowtemp_fontsize"
             android:textColor="@color/textMain"
             />
+
     </LinearLayout>
 
 </LinearLayout>
