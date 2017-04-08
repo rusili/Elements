@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.request.target.AppWidgetTarget;
@@ -67,19 +66,26 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_day_day2, forecastDays[1].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh2, String.valueOf(forecastDays[1].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow2, String.valueOf(forecastDays[1].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity() + "%"));
-        remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity() + "%"));
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
         glideWrapper.inflateImage(R.id.widget_component_day_icon2, forecastDays[1].getIcon_url());
 
         remoteViews.setTextViewText(R.id.widget_component_day_weekday3, getTwoCharWeekday(forecastDays[2].getDate().getWeekdayShort()));
         remoteViews.setTextViewText(R.id.widget_component_day_day3, forecastDays[2].getDate().getDay());
         remoteViews.setTextViewText(R.id.widget_component_day_temphigh3, String.valueOf(forecastDays[2].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_day_templow3, String.valueOf(forecastDays[2].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity() + "%"));
-        remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
-        remoteViews.setImageViewUri(R.id.widget_component_day_icon3, Uri.parse(forecastDays[2].getIcon_url()));
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity() + "%"));
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
         glideWrapper.inflateImage(R.id.widget_component_day_icon3, forecastDays[2].getIcon_url());
 
+        remoteViews.setTextViewText(R.id.widget_component_day_weekday4, getTwoCharWeekday(forecastDays[3].getDate().getWeekdayShort()));
+        remoteViews.setTextViewText(R.id.widget_component_day_day4, forecastDays[3].getDate().getDay());
+        remoteViews.setTextViewText(R.id.widget_component_day_temphigh4, String.valueOf(forecastDays[3].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+        remoteViews.setTextViewText(R.id.widget_component_day_templow4, String.valueOf(forecastDays[3].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip4, String.valueOf(forecastDays[3].getAvehumidity() + "%"));
+        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind4, String.valueOf(forecastDays[3].getAvewind().getMph()));
+        glideWrapper.inflateImage(R.id.widget_component_day_icon4, forecastDays[3].getIcon_url());
+        
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
 
@@ -93,8 +99,8 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
         remoteViews.setTextViewText(R.id.widget_component_main_month, month.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(day.format(now)));
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
-        remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
+        //remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
+        //remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
         glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);

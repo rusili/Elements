@@ -1,69 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="140dp"
-              android:layout_height="152dp"
-              android:background="#80000000"
-              android:paddingTop="8dp"
-              android:paddingBottom="4dp"
-              android:paddingLeft="8dp"
-              android:paddingRight="8dp"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="140dp"
+             android:layout_height="152dp"
+             android:background="#80000000"
+             android:orientation="vertical"
+             android:paddingBottom="4dp"
+             android:paddingLeft="8dp"
+             android:paddingRight="8dp"
+             android:paddingTop="8dp"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:layout_marginRight="4dp"
+    <TextView
+        android:id="@+id/widget_component_main_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="TUE"
+        android:textColor="@color/sky_blue"
+        android:textSize="22sp"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         >
 
         <TextView
-            android:id="@+id/widget_component_main_weekday"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="40"
-            android:text="TUES"
-            android:textSize="22sp"
-            android:textColor="@color/sky_blue"
+            android:id="@+id/widget_component_main_day"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
             android:gravity="center"
-
+            android:text="25"
+            android:textColor="@color/light_sky_blue"
+            android:textSize="24sp"
             />
+
         <TextView
             android:id="@+id/widget_component_main_month"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="30"
-            android:text="NOV"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginRight="4dp"
+            android:layout_toLeftOf="@id/widget_component_main_day"
+            android:gravity="center_vertical"
+            android:text="APR"
+            android:textColor="@color/textMain"
             android:textSize="18sp"
-            android:textColor="@color/textMain"
-            android:gravity="center"
-            android:layout_marginTop="1dp"
-            />
-        <TextView
-            android:id="@+id/widget_component_main_day"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
-            android:text="25"
-            android:textSize="24sp"
-            android:textColor="@color/textMain"
-            android:gravity="center"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="60"
-        android:orientation="vertical"
-        android:layout_marginBottom="4dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="18dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="70"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="33"
+                />
+
+            <ImageView
+                android:id="@+id/widget_component_main_icon"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="66"
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_partly_cloudy"
+                android:tint="@color/light_sky_blue"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             >
 
@@ -71,141 +93,43 @@
                 android:id="@+id/widget_component_main_currenttemp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="60"
-                android:layout_marginRight="-8dp"
-                android:text="65&#xb0;"
-                android:textSize="44sp"
-                android:textColor="@color/textMain"
-                android:textAlignment="viewEnd"
+                android:layout_gravity="bottom"
+                android:layout_weight="75"
                 android:gravity="center_vertical"
+                android:text="65&#xb0;"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/textMain"
+                android:textSize="52sp"
                 />
 
-            <ImageView
-                android:id="@+id/widget_component_main_icon"
+            <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="40"
-                android:layout_margin="8dp"
-                android:scaleType="fitCenter"
-                android:background="@color/transparent"
-                android:tint="@color/f9"
+                android:layout_weight="25"
                 />
-
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-            android:orientation="horizontal"
-            >
+    </FrameLayout>
 
-            <TextView
-                android:id="@+id/dummy_widget_component_main_hi"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:text="Hi: "
-                android:textSize="14sp"
-                android:textColor="@color/textMain"
-                android:gravity="bottom"
-                android:layout_marginLeft="8dp"
-                />
-            <TextView
-                android:id="@+id/widget_component_main_hitemp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/dummy_widget_component_main_hi"
-                android:text="65&#xb0;"
-                android:textSize="22sp"
-                android:textColor="@color/textMain"
-                android:gravity="center_vertical"
-                />
-            <TextView
-                android:id="@+id/widget_component_main_lowtemp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:text="45&#xb0;"
-                android:textSize="22sp"
-                android:textColor="@color/textMain"
-                android:gravity="center_vertical"
-                android:layout_marginRight="8dp"
-                />
-            <TextView
-                android:id="@+id/dummy_widget_component_main_low"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/widget_component_main_lowtemp"
-                android:text="Lo: "
-                android:textSize="14sp"
-                android:textColor="@color/textMain"
-                android:gravity="bottom"
-                />
+    <TextView
+        android:id="@+id/widget_component_main_hitemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="center_vertical"
+        android:text="65&#xb0;"
+        android:textColor="@color/textMain"
+        android:textSize="22sp"
+        />
 
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/widget_component_main_lowtemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:gravity="bottom"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        >
-
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="bottom"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            >
-
-            <ImageView
-                android:id="@+id/dummy_widget_component_day_image_precip"
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/raintemp"
-                android:tint="@color/sky_blue"
-                />
-            <TextView
-                android:id="@+id/widget_component_main_text_precip"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/dummy_widget_component_day_image_precip"
-                android:text="73"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:textColor="@color/textMain"
-                />
-
-            <ImageView
-                android:id="@+id/dummy_widget_component_day_image_wind"
-                android:layout_width="12dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/windtemp"
-                android:tint="@color/sky_blue"
-                />
-
-            <TextView
-                android:id="@+id/widget_component_main_text_wind"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/dummy_widget_component_day_image_wind"
-                android:text="18"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                android:textColor="@color/textMain"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-
-</LinearLayout>
+        android:text="45"
+        android:textColor="@color/textMain"
+        android:textSize="18sp"
+        />
+</FrameLayout>

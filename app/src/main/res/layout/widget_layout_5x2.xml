@@ -14,7 +14,7 @@
         >
 
         <include
-            layout="@layout/widget_component_mainx2"/>
+            layout="@layout/widget_component_mainx22"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/widget_box_day2"

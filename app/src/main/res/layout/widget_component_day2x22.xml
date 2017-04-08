@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="90dp"
+    android:layout_height="152dp"
+    android:background="#80000000"
+    android:paddingTop="8dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        >
+        <include layout="@layout/weekday_header2x2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/weekday_body2x2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        >
+
+        <include layout="@layout/other_footer2x2"/>
+    </LinearLayout>
+
+</LinearLayout>

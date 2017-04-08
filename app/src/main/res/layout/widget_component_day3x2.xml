@@ -1,46 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="90dp"
-    android:layout_height="152dp"
-    android:background="#80000000"
-    android:paddingTop="8dp"
-    android:paddingBottom="4dp"
-    android:paddingLeft="4dp"
-    android:paddingRight="4dp"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="152dp"
+              android:background="#80000000"
+              android:paddingTop="8dp"
+              android:paddingBottom="4dp"
+              android:paddingLeft="4dp"
+              android:paddingRight="4dp"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/widget_component_day_weekday3"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="20"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        >
-        <include layout="@layout/weekday_header3x2"/>
-    </LinearLayout>
+        android:layout_weight="15"
+        android:text="TU"
+        android:textSize="18sp"
+        android:textColor="@color/light_sky_blue"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
+        android:layout_weight="70"
         android:orientation="vertical"
         >
 
-        <include layout="@layout/weekday_body3x2"/>
+        <TextView
+            android:id="@+id/widget_component_day_temphigh3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:text="45"
+            android:gravity="top|center_horizontal"
+            android:textSize="22sp"
+            android:textColor="@color/textMain"
+            />
+        <ImageView
+            android:id="@+id/widget_component_day_icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="40"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_partly_cloudy"
+            android:tint="@color/light_sky_blue"
+            />
+
+        <TextView
+            android:id="@+id/widget_component_day_templow3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:text="35"
+            android:gravity="bottom|center_horizontal"
+            android:textSize="22sp"
+            android:textColor="@color/textMain"
+            />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/widget_component_day_day3"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="20"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        >
-
-        <include layout="@layout/other_footer3x2"/>
-    </LinearLayout>
+        android:layout_weight="15"
+        android:text="12"
+        android:layout_gravity="end|bottom"
+        android:textSize="20sp"
+        android:textColor="@color/textMain"
+        />
 
 </LinearLayout>
