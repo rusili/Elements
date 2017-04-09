@@ -25,7 +25,7 @@
             android:text="TU"
             android:gravity="center_vertical"
             android:textSize="@dimen/day_weekday_fontsize"
-            android:textColor="@color/light_sky_blue"
+            android:textColor="@color/textAlt"
             android:textAllCaps="true"
             />
 
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:text="12"
             android:textSize="@dimen/day_date_fontsize"
-            android:textColor="@color/textMain"
+            android:textColor="@color/light_sky_blue"
             />
     </RelativeLayout>
 

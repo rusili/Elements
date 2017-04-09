@@ -1,63 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:layout_width="410dp"
-              android:layout_height="152dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
     >
 
-    <LinearLayout
-        android:id="@+id/widget_box_day0"
+    <include
+        android:id="@+id/widget_layout_4x2_include_main2"
+        layout="@layout/widget_component_mainx2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="35"
+        android:layout_weight="40"
         android:orientation="vertical"
         >
+    </include>
 
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/widget_box_day2"
+    <include
+        android:id="@+id/widget_layout_4x2_include_day2"
+        layout="@layout/widget_component_day2x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="22.5"
+        android:layout_weight="20"
         android:orientation="vertical"
-        >
+        />
 
-        <include layout="@layout/widget_component_day2x2"></include>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/widget_box_day3"
+    <include
+        android:id="@+id/widget_layout_4x2_include_day3"
+        layout="@layout/widget_component_day3x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="22.5"
+        android:layout_weight="20"
         android:orientation="vertical"
-        >
+        />
 
-        <include layout="@layout/widget_component_day3x2"></include>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/widget_box_day4"
+    <include
+        android:id="@+id/widget_layout_4x2_include_day4"
+        layout="@layout/widget_component_day4x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="22.5"
+        android:layout_weight="20"
         android:orientation="vertical"
-        >
+        />
 
-        <include layout="@layout/widget_component_day4x2"></include>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/widget_box_day5"
+    <include
+        android:id="@+id/widget_layout_4x2_include_day5"
+        layout="@layout/widget_component_day5x2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="22.5"
+        android:layout_weight="20"
         android:orientation="vertical"
-        >
-
-        <include layout="@layout/widget_component_day5x2"></include>
-
-    </LinearLayout>
+        />
 
 </LinearLayout>

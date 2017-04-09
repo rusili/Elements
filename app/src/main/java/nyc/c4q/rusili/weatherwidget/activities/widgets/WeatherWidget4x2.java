@@ -2,8 +2,11 @@ package nyc.c4q.rusili.weatherwidget.activities.widgets;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -45,17 +49,26 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
     private int zipCode = 0;
     private GlideWrapper glideWrapper;
     private AppWidgetManager appWidgetManager;
+    private int[] appWidgetIds;
     private int widgetID;
+    private static final String ACTION_UPDATE_CLICK = "4x2_UPDATE_CLICK";
 
     @Override
     public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         this.context = context;
         this.appWidgetManager = appWidgetManager;
+        this.appWidgetIds = appWidgetIds;
 
         for (int widgetID : appWidgetIds) {
             this.widgetID = widgetID;
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
+
+            Intent intent = new Intent(context, WeatherWidget4x2.class);
+            intent.setAction(ACTION_UPDATE_CLICK);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+
             glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
             startGoogleAPIClient(context);
             //setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID);
@@ -136,15 +149,23 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
         return charSequence;
     }
 
-    //    private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID){
-//        Intent intent = new Intent(context, WeatherWidget4x2.class);
-//        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-//                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        //remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
-//        appWidgetManager.updateAppWidget(widgetID, remoteViews);
-//    }
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        if (intent.getAction().equals(ACTION_UPDATE_CLICK)){
+            Log.d(String.valueOf(getClass()), "Clicked!");
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
+                    (context);
+
+            ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(),getClass().getName());
+
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
+                    thisAppWidgetComponentName);
+
+            onUpdate(context, appWidgetManager, appWidgetIds);
+        }
+    }
 
     private void startGoogleAPIClient (Context context){
         if (mGoogleApiClient == null) {
