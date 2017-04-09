@@ -9,7 +9,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -36,91 +35,68 @@ import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 5;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
     private GoogleApiClient mGoogleApiClient;
     private Context context;
     private RetroFitBase retroFitBase;
-    private RetroFitBase.RetrofitListener retrofitListener;
-    private Geocoder geocoder;
     private RemoteViews remoteViews;
-    private GlideWrapper glideWrapper;
     private Location mLastLocation;
     private boolean locationPermissionGranted;
     private int zipCode = 0;
+    private GlideWrapper glideWrapper;
+    private AppWidgetManager appWidgetManager;
+    private int widgetID;
 
     @Override
     public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         this.context = context;
-        for (final int widgetID : appWidgetIds) {
+        this.appWidgetManager = appWidgetManager;
+
+        for (int widgetID : appWidgetIds) {
+            this.widgetID = widgetID;
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
-            startGoogleAPIClient(context);
             glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    downloadWeatherData(context, appWidgetManager, widgetID, remoteViews);
-                }
-            }, 1000);
+            startGoogleAPIClient(context);
             //setUpUpdateOnClick(context, appWidgetManager, appWidgetIds, widgetID);
         }
     }
 
-    private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews) {
+    private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews, final int zipCode) {
+        RetroFitBase.RetrofitListener retrofitListener;
+
         retroFitBase = new RetroFitBase(Constants.DEVELOPER_KEY.API_KEY, zipCode);
         retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {
             @Override
             public void onConditionsRetrieved (CurrentObservation currentObservation) {
                 updateMain(appWidgetManager, widgetID, currentObservation);
             }
-
             @Override
             public void onForecastDaysRetrieved (ForecastDay[] forecastDays) {
-                updateDays(appWidgetManager, widgetID, forecastDays);
+                updateDays(context, appWidgetManager, widgetID, forecastDays);
             }
         });
         retroFitBase.getConditions();
         retroFitBase.getForecastDay();
     }
 
-    private int getLastLocation (Location mLastLocation) {
-        geocoder = new Geocoder(context, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-            zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        context = null;
-        return zipCode;
-    }
-
-    private void updateDays (AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays) {
+    private void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays) {
+        int resID = 0;
         remoteViews.setTextViewText(R.id.widget_component_main_hitemp, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_main_lowtemp, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 
-        remoteViews.setTextViewText(R.id.widget_component_day_weekday2, getTwoCharWeekday(forecastDays[1].getDate().getWeekdayShort()));
-        remoteViews.setTextViewText(R.id.widget_component_day_day2, forecastDays[1].getDate().getDay());
-        remoteViews.setTextViewText(R.id.widget_component_day_temphigh2, String.valueOf(forecastDays[1].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_templow2, String.valueOf(forecastDays[1].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip2, String.valueOf(forecastDays[1].getAvehumidity() + "%"));
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind2, String.valueOf(forecastDays[1].getAvewind().getMph()));
-        glideWrapper.inflateImage(R.id.widget_component_day_icon2, forecastDays[1].getIcon_url());
-
-        remoteViews.setTextViewText(R.id.widget_component_day_weekday3, getTwoCharWeekday(forecastDays[2].getDate().getWeekdayShort()));
-        remoteViews.setTextViewText(R.id.widget_component_day_day3, forecastDays[2].getDate().getDay());
-        remoteViews.setTextViewText(R.id.widget_component_day_temphigh3, String.valueOf(forecastDays[2].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_templow3, String.valueOf(forecastDays[2].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip3, String.valueOf(forecastDays[2].getAvehumidity() + "%"));
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind3, String.valueOf(forecastDays[2].getAvewind().getMph()));
-        glideWrapper.inflateImage(R.id.widget_component_day_icon3, forecastDays[2].getIcon_url());
-
-        remoteViews.setTextViewText(R.id.widget_component_day_weekday4, getTwoCharWeekday(forecastDays[3].getDate().getWeekdayShort()));
-        remoteViews.setTextViewText(R.id.widget_component_day_day4, forecastDays[3].getDate().getDay());
-        remoteViews.setTextViewText(R.id.widget_component_day_temphigh4, String.valueOf(forecastDays[3].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_day_templow4, String.valueOf(forecastDays[3].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_precip4, String.valueOf(forecastDays[3].getAvehumidity() + "%"));
-        //remoteViews.setTextViewText(R.id.widget_component_day_text_wind4, String.valueOf(forecastDays[3].getAvewind().getMph()));
-        glideWrapper.inflateImage(R.id.widget_component_day_icon4, forecastDays[3].getIcon_url());
+        for(int i=1 ; i<4 ; i++) {
+            resID = context.getResources().getIdentifier("widget_component_day_weekday" + String.valueOf(i+1), "id", context.getPackageName());
+            remoteViews.setTextViewText(resID, getTwoCharWeekday(forecastDays[i].getDate().getWeekdayShort()));
+            resID = context.getResources().getIdentifier("widget_component_day_day" + String.valueOf(i+1), "id", context.getPackageName());
+            remoteViews.setTextViewText(resID, forecastDays[i].getDate().getDay());
+            resID = context.getResources().getIdentifier("widget_component_day_temphigh" + String.valueOf(i+1), "id", context.getPackageName());
+            remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+            resID = context.getResources().getIdentifier("widget_component_day_templow" + String.valueOf(i+1), "id", context.getPackageName());
+            remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+            resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i+1), "id", context.getPackageName());
+            glideWrapper.inflateImage(resID, forecastDays[i].getIcon_url());
+        }
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
@@ -135,8 +111,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
         remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
         remoteViews.setTextViewText(R.id.widget_component_main_location, currentObservation.getDisplay_location().getCity());
-        //remoteViews.setTextViewText(R.id.widget_component_main_text_precip, currentObservation.getRelative_humidity());
-        //remoteViews.setTextViewText(R.id.widget_component_main_text_wind, String.valueOf(currentObservation.getWind_mph()));
         glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
@@ -151,16 +125,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
         return charSequence;
     }
 
-//    private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID){
-//        Intent intent = new Intent(context, WeatherWidget4x2.class);
-//        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-//                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        //remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
-//        appWidgetManager.updateAppWidget(widgetID, remoteViews);
-//    }
-
     private CharSequence getTwoCharWeekday (String weekdayShort) {
         CharSequence charSequence = null;
 
@@ -169,9 +133,18 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
         } else {
             charSequence = String.valueOf(weekdayShort.charAt(0));
         }
-
         return charSequence;
     }
+
+    //    private void setUpUpdateOnClick(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, int widgetID){
+//        Intent intent = new Intent(context, WeatherWidget4x2.class);
+//        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+//                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        //remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+//        appWidgetManager.updateAppWidget(widgetID, remoteViews);
+//    }
 
     private void startGoogleAPIClient (Context context){
         if (mGoogleApiClient == null) {
@@ -187,25 +160,32 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
     @Override
     public void onConnected (@Nullable Bundle bundle) {
         if (ContextCompat.checkSelfPermission(context.getApplicationContext(),
-                android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             locationPermissionGranted = true;
         } else {
             ActivityCompat.requestPermissions((Activity) context,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION);
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         getLastLocation(mLastLocation);
     }
 
-    @Override
-    public void onConnectionSuspended (int i) {
-
+    private void getLastLocation (Location mLastLocation) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+            zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        downloadWeatherData(context, appWidgetManager, widgetID, remoteViews, zipCode);
+        context = null;
     }
 
     @Override
-    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
-
-    }
+    public void onConnectionSuspended (int i) {}
+    @Override
+    public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {}
 }

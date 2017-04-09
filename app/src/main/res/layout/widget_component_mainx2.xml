@@ -93,11 +93,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom|end"
-                    android:text="Great Neck"
+                    android:text="Long Island City"
                     android:textColor="@color/textMain"
                     android:textSize="12sp"
                     android:textAllCaps="true"
-                    android:singleLine="true"
                     />
             </LinearLayout>
 
