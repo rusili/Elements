@@ -38,7 +38,6 @@ import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 
 public abstract class BaseWeatherWidget extends AppWidgetProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
-    public String ACTION_UPDATE_CLICK;
 
     public Context context;
     public GoogleApiClient mGoogleApiClient;
@@ -57,6 +56,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
     public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
+
+    public void setOnClickUpdate(){}
 
     public CharSequence ifSingleDigit (String format) {
         CharSequence charSequence = null;
@@ -181,15 +182,20 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
     public void onReceive (Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (intent.getAction().equals(ACTION_UPDATE_CLICK)) {
-            Log.d(String.valueOf(getClass()), "Clicked!");
+        if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
+            Log.d(String.valueOf(getClass()), "Clicked Update!");
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-
             ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
-
             onUpdate(context, appWidgetManager, appWidgetIds);
+        } else if (intent.getAction().equals("4x2_CONFIG_CLICK")){
+            Log.d(String.valueOf(getClass()), "Clicked Config!");
+            Intent intentConfig = new Intent(context, ConfigurationActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("Data", getClass().getName() + "/" + widgetID);
+            intentConfig.putExtras(bundle);
+            intentConfig.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intentConfig);
         }
     }
 }

@@ -16,6 +16,7 @@ import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private int numOfDays;
     public static final String ACTION_UPDATE_CLICK = "4x2_UPDATE_CLICK";
+    public static final String ACTION_CONFIG_CLICK = "4x2_CONFIG_CLICK";
 
     @Override
     public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -26,14 +27,27 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
 
-            Intent intent = new Intent(context, WeatherWidget5x2.class);
-            intent.setAction(ACTION_UPDATE_CLICK);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+            //setOnClickUpdate();
+            setOnClickConfig();
 
             glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
             startGoogleAPIClient(context);
         }
+    }
+
+    private void setOnClickConfig () {
+        Intent intent = new Intent(context, WeatherWidget4x2.class);
+        intent.setAction(ACTION_CONFIG_CLICK);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+    }
+
+    @Override
+    public void setOnClickUpdate () {
+        Intent intent = new Intent(context, WeatherWidget4x2.class);
+        intent.setAction(ACTION_UPDATE_CLICK);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
     }
 
     @Override

@@ -20,6 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ConfigurationActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
 
         <!--&lt;!&ndash; 4x1 &ndash;&gt;-->
         <!--<receiver android:name=".activities.widgets.WeatherWidget4x1" android:label="Weather 4x1">-->
