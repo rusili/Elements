@@ -6,30 +6,37 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import java.util.Random;
-
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.activities.BaseWeatherWidget;
+import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
+import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 
-public class WeatherWidget5x2 extends BaseWeatherWidget {
+public class WeatherWidget5x2 extends BaseWeatherWidget{
+    private int numOfDays;
+    public static final String ACTION_UPDATE_CLICK = "5x2_UPDATE_CLICK";
 
     @Override
-    public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        final int numofWidgets = appWidgetIds.length;
+    public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        this.context = context;
 
         for (int widgetID : appWidgetIds) {
-            String number = String.format("%03d", (new Random().nextInt(900) + 100));
-
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+            this.widgetID = widgetID;
+            remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_5x2);
 
             Intent intent = new Intent(context, WeatherWidget5x2.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds);
-            // PendingIntent updates the widget when the button is clicked
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            appWidgetManager.updateAppWidget(widgetID, remoteViews);
+            intent.setAction(ACTION_UPDATE_CLICK);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widget_layout_5x2_container, pendingIntent);
+
+            glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
+            startGoogleAPIClient(context);
         }
+    }
+
+    @Override
+    public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
+        numOfDays = 5;
+        super.updateDays(context, appWidgetManager, widgetID, forecastDays, numOfDays);
     }
 }

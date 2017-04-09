@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface RetrofitInterface {
 
-    @GET ("api/{apikey}/forecast/q/{zipcode}.json")
+    @GET ("api/{apikey}/forecast10day/q/{zipcode}.json")
     Call <ResponseForecastDay> getForecast (@Path ("apikey") String apikeyParam, @Path ("zipcode") int zipcodeParam);
 
     @GET ("api/{apikey}/conditions/q/{zipcode}.json")

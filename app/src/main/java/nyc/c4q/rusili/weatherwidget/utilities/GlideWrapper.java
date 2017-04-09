@@ -35,8 +35,6 @@ public class GlideWrapper {
             resourceID = R.drawable.ic_sun;
         } else if (resource.contains("clear-night")){
             resourceID = R.drawable.ic_moon;
-        } else if (resource.contains("cloudy")){
-            resourceID = R.drawable.ic_cloud;
         } else if (resource.contains("storms")){
             resourceID = R.drawable.ic_lightning;
         } else if (resource.contains("rain")){
@@ -49,6 +47,8 @@ public class GlideWrapper {
             resourceID = R.drawable.ic_wind;
         } else if (resource.contains("fog") || (resource.contains("hazy"))) {
             resourceID = R.drawable.ic_fog;
+        } else if (resource.contains("cloudy")){
+            resourceID = R.drawable.ic_cloud;
         }  else if (resource.contains("mostly") || resource.contains("partly")) {
             resourceID = R.drawable.ic_partly_cloudy;
         }
