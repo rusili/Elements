@@ -12,9 +12,9 @@
     <dimen name="minWidth_5">320dp</dimen>
 
     <dimen name="day_horizontal_padding">6dp</dimen>
-    <dimen name="day_vertical_padding">8dp</dimen>
+    <dimen name="day_vertical_padding">4dp</dimen>
 
     <dimen name="day_weekday_fontsize">16sp</dimen>
     <dimen name="day_date_fontsize">20sp</dimen>
-    <dimen name="day_highlowtemp_fontsize">20sp</dimen>
+    <dimen name="day_highlowtemp_fontsize">22sp</dimen>
 </resources>

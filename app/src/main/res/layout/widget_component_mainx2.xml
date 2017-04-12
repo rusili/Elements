@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="140dp"
-             android:layout_height="152dp"
-             android:background="#80000000"
-             android:orientation="vertical"
-             android:paddingBottom="@dimen/day_vertical_padding"
-             android:paddingTop="@dimen/day_vertical_padding"
+              android:layout_width="140dp"
+              android:layout_height="152dp"
+              android:orientation="vertical"
     >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="20"
-        android:paddingLeft="@dimen/day_horizontal_padding"
-        android:paddingRight="@dimen/day_horizontal_padding"
+        android:background="@color/background"
+        android:elevation="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="@dimen/day_vertical_padding"
         >
+
         <TextView
             android:id="@+id/widget_component_main_weekday"
             android:layout_width="wrap_content"
@@ -22,7 +24,7 @@
             android:gravity="center_vertical"
             android:text="TUE"
             android:textAllCaps="true"
-            android:textColor="@color/textAlt"
+            android:textColor="@color/textMain"
             android:textSize="20sp"
             />
 
@@ -34,7 +36,7 @@
             android:gravity="center"
             android:text="25"
             android:textColor="@color/light_sky_blue"
-            android:textSize="24sp"
+            android:textSize="22sp"
             />
 
     </RelativeLayout>
@@ -43,14 +45,44 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="80"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:background="@color/background"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="27.5"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="45"
+                android:background="@drawable/horizontalgradient1"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="27.5"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/horizontalgradient2"
+            android:orientation="vertical"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingRight="12dp"
+            android:paddingTop="4dp"
             >
 
             <TextView
@@ -94,9 +126,9 @@
                     android:layout_height="match_parent"
                     android:gravity="bottom|end"
                     android:text="Long Island City"
+                    android:textAllCaps="true"
                     android:textColor="@color/textMain"
                     android:textSize="12sp"
-                    android:textAllCaps="true"
                     />
             </LinearLayout>
 
@@ -106,6 +138,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
             >
 
             <TextView
@@ -118,8 +152,8 @@
                 android:id="@+id/widget_component_main_icon"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:layout_weight="66"
                 android:layout_marginTop="8dp"
+                android:layout_weight="66"
                 android:background="@color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_partly_cloudy"
@@ -139,8 +173,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:layout_weight="75"
                 android:layout_marginTop="8dp"
+                android:layout_weight="75"
                 android:gravity="center_vertical"
                 android:text="65&#xb0;"
                 android:textAlignment="viewEnd"
@@ -156,5 +190,4 @@
         </LinearLayout>
 
     </FrameLayout>
-
 </LinearLayout>
