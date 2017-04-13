@@ -21,11 +21,12 @@
             android:id="@+id/widget_component_main_weekday"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:text="TUE"
             android:textAllCaps="true"
             android:textColor="@color/textMain"
             android:textSize="20sp"
+            android:layout_marginBottom="-4dp"
             />
 
         <TextView
@@ -65,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="45"
-                android:background="@drawable/horizontalgradient1"
+                android:background="@drawable/leftendgradient"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -138,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingRight="8dp"
+            android:paddingRight="12dp"
             android:paddingTop="4dp"
             >
 
@@ -151,7 +152,7 @@
             <ImageView
                 android:id="@+id/widget_component_main_icon"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="66"
                 android:background="@color/transparent"
@@ -166,6 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginRight="4dp"
             >
 
             <TextView
@@ -179,7 +181,7 @@
                 android:text="65&#xb0;"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/textMain"
-                android:textSize="52sp"
+                android:textSize="50sp"
                 />
 
             <TextView
