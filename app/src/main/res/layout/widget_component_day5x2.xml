@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="152dp"
-              android:background="#80000000"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="152dp"
     >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/verticalgradient1"
+        android:scaleType="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +24,7 @@
         android:layout_weight="20"
         android:elevation="8dp"
         android:gravity="center_vertical"
-        android:background="@color/background"
+        android:background="@color/grayFour"
         >
 
         <TextView
@@ -23,7 +35,7 @@
             android:text="TU"
             android:gravity="center_vertical"
             android:textSize="@dimen/day_weekday_fontsize"
-            android:textColor="@color/textAlt"
+            android:textColor="@color/light_sky_blue"
             android:textAllCaps="true"
             android:paddingLeft="@dimen/day_horizontal_padding"
             />
@@ -35,7 +47,7 @@
             android:layout_alignParentRight="true"
             android:text="12"
             android:textSize="@dimen/day_date_fontsize"
-            android:textColor="@color/light_sky_blue"
+            android:textColor="@color/textMain"
             android:paddingRight="@dimen/day_horizontal_padding"
             />
     </RelativeLayout>
@@ -46,6 +58,7 @@
         android:layout_weight="80"
         android:orientation="vertical"
         android:background="@color/background"
+        android:paddingBottom="@dimen/bottom_marginpadding"
         >
 
         <TextView
@@ -83,3 +96,4 @@
     </LinearLayout>
 
 </LinearLayout>
+    </FrameLayout>

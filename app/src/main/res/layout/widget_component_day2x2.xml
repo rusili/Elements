@@ -1,97 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="152dp"
-              android:orientation="vertical"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="152dp"
     >
 
-    <RelativeLayout
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/verticalgradient1"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20"
-        android:background="@color/background"
-        android:paddingTop="@dimen/day_vertical_padding"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
 
-        <TextView
-            android:id="@+id/widget_component_day_weekday2"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:gravity="center_vertical"
-            android:text="TU"
-            android:textAllCaps="true"
-            android:textColor="@color/textMain"
-            android:textSize="@dimen/day_weekday_fontsize"
-            android:paddingLeft="@dimen/day_horizontal_padding"
-            />
+            android:layout_height="0dp"
+            android:layout_weight="20"
+            android:background="@color/grayTwo"
 
-        <TextView
-            android:id="@+id/widget_component_day_day2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:text="12"
-            android:textColor="@color/light_sky_blue"
-            android:textSize="@dimen/day_date_fontsize"
-            android:paddingRight="@dimen/day_horizontal_padding"
-            />
-    </RelativeLayout>
-
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="80"
-        android:background="@color/background"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/horizontalgradient2"
             >
 
-            <TextView
-                android:id="@+id/widget_component_day_temphigh2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="27.5"
-                android:gravity="top|center_horizontal"
-                android:text="45"
-                android:textColor="@color/textMain"
-                android:textSize="@dimen/day_highlowtemp_fontsize"
-                />
-
             <ImageView
-                android:id="@+id/widget_component_day_icon2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="45"
-                android:scaleType="fitCenter"
-                android:paddingTop="8dp"
-                android:paddingBottom="2dp"
-                android:src="@drawable/ic_partly_cloudy"
-                android:background="@drawable/horizontalgradient1"
-                android:tint="@color/light_sky_blue"
+                android:layout_height="match_parent"
+                android:background="@color/grayTwoOverlay"
                 />
 
-            <TextView
-                android:id="@+id/widget_component_day_templow2"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="27.5"
-                android:gravity="bottom|center_horizontal"
-                android:text="35"
-                android:textColor="@color/textMain"
-                android:textSize="@dimen/day_highlowtemp_fontsize"
-                />
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/day_vertical_padding"
+                >
 
-        </LinearLayout>
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/widget_component_day_weekday2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/day_horizontal_padding"
+                    android:text="TU"
+                    android:textAllCaps="true"
+                    android:textColor="@color/light_sky_blue"
+                    android:textSize="@dimen/day_weekday_fontsize"
+                    />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/widget_component_day_day2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="@dimen/day_horizontal_padding"
+                    android:text="12"
+                    android:textColor="@color/textMain"
+                    android:textSize="@dimen/day_date_fontsize"
+                    />
+            </RelativeLayout>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="80"
+            android:background="@color/grayTwo"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_marginpadding"
+                android:paddingTop="10dp"
+                >
+
+                <TextView
+                    android:id="@+id/widget_component_day_temphigh2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="27.5"
+                    android:gravity="top|center_horizontal"
+                    android:text="45"
+                    android:textColor="@color/textMain"
+                    android:textSize="@dimen/day_highlowtemp_fontsize"
+                    />
+
+                <ImageView
+                    android:id="@+id/widget_component_day_icon2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="45"
+                    android:paddingBottom="2dp"
+                    android:paddingTop="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_partly_cloudy"
+                    android:tint="@color/light_sky_blue"
+                    />
+
+                <TextView
+                    android:id="@+id/widget_component_day_templow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="27.5"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="35"
+                    android:textColor="@color/textMain"
+                    android:textSize="@dimen/day_highlowtemp_fontsize"
+                    />
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>
