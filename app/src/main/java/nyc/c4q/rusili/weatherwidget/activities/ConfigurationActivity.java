@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import nyc.c4q.rusili.weatherwidget.R;
 
@@ -20,8 +22,18 @@ public class ConfigurationActivity extends AppCompatActivity{
         setContentView(R.layout.activity_configuration);
         setResult(RESULT_CANCELED);
 
-        getAppWidgetID();
+        initialize();
     }
+
+    private void initialize () {
+        getAppWidgetID();
+        //setToolbar();
+    }
+
+//    private void setToolbar () {
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_configuration_toolbar);
+//        setSupportActionBar(toolbar);
+//    }
 
     private void getAppWidgetID(){
         appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
@@ -41,5 +53,22 @@ public class ConfigurationActivity extends AppCompatActivity{
         intentConfig.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, intentConfig);
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_configuration, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.activity_configuration_menu_button_accept) {
+            finishConfiguration();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

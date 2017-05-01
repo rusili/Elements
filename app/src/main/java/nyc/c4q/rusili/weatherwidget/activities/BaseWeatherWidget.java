@@ -60,7 +60,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
     public void setOnClickUpdate(){}
 
     public CharSequence ifSingleDigit (String format) {
-        CharSequence charSequence = null;
+        CharSequence charSequence = format;
 
         if (Integer.parseInt(format) < 10){
             charSequence = String.valueOf(format.charAt(1));
@@ -69,7 +69,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
     }
 
     public CharSequence getTwoCharWeekday (String weekdayShort) {
-        CharSequence charSequence = null;
+        CharSequence charSequence = weekdayShort;
 
         if (weekdayShort.contains("T") || weekdayShort.contains("S")){
             charSequence = weekdayShort.substring(0,2);

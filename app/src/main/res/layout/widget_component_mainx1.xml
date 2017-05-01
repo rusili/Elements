@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="140dp"
-              android:layout_height="68dp"
+             android:layout_width="140dp"
+             android:layout_height="68dp"
              android:background="#80000000"
+             android:orientation="vertical"
     >
 
     <LinearLayout
@@ -24,32 +24,34 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="45"
-                android:text="TUES"
-                android:textSize="13sp"
-                android:textColor="@color/sky_blue"
                 android:gravity="center"
+                android:text="TUES"
+                android:textColor="@color/sky_blue"
+                android:textSize="13sp"
 
                 />
+
             <TextView
                 android:id="@+id/widget_component_day_month"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="35"
-                android:text="NOV"
-                android:textSize="10sp"
-                android:textColor="@color/textMain"
-                android:gravity="center"
                 android:layout_marginTop="2dp"
+                android:layout_weight="35"
+                android:gravity="center"
+                android:text="NOV"
+                android:textColor="@color/textMain"
+                android:textSize="10sp"
                 />
+
             <TextView
                 android:id="@+id/widget_component_day_day"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
-                android:text="25"
-                android:textSize="13sp"
-                android:textColor="@color/textMain"
                 android:gravity="center"
+                android:text="25"
+                android:textColor="@color/textMain"
+                android:textSize="13sp"
                 />
 
         </LinearLayout>
@@ -65,20 +67,22 @@
                 android:id="@+id/widget_component_main_currenttemp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="10&#xb0;"
                 android:textColor="@color/sky_blue"
                 android:textSize="28sp"
-                android:gravity="center"
                 />
+
             <TextView
                 android:id="@+id/widget_component_main_fahrenheit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:text="F"
                 android:textColor="@color/sky_blue"
                 android:textSize="28sp"
-                android:gravity="center"
                 />
+
             <ImageView
                 android:id="@+id/widget_component_day_icon"
                 android:layout_width="wrap_content"
@@ -101,19 +105,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="50"
                 android:text="15&#xb0;"
-                android:textSize="20sp"
-                android:textColor="@color/textMain"
                 android:textAlignment="center"
+                android:textColor="@color/textMain"
+                android:textSize="20sp"
                 />
+
             <TextView
                 android:id="@+id/widget_component_day_templow"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
                 android:text="5&#xb0;"
-                android:textSize="20sp"
-                android:textColor="@color/textAlt"
                 android:textAlignment="center"
+                android:textColor="@color/textAlt"
+                android:textSize="20sp"
                 />
 
         </LinearLayout>

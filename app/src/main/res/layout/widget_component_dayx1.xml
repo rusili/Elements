@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                   android:orientation="vertical"
-                   android:layout_width="90dp"
-                   android:layout_height="68dp"
-                   android:background="#80000000"
-              android:paddingTop="4dp"
+              android:layout_width="90dp"
+              android:layout_height="68dp"
+              android:background="#80000000"
+              android:orientation="vertical"
               android:paddingBottom="4dp"
               android:paddingLeft="2dp"
               android:paddingRight="2dp"
+              android:paddingTop="4dp"
     >
 
     <LinearLayout
@@ -22,32 +22,34 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="45"
-            android:text="TUES"
-            android:textSize="12sp"
-            android:textColor="@color/sky_blue"
             android:gravity="center"
+            android:text="TUES"
+            android:textColor="@color/sky_blue"
+            android:textSize="12sp"
 
             />
+
         <TextView
             android:id="@+id/widget_component_day_month"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="35"
-            android:text="NOV"
-            android:textSize="10sp"
-            android:textColor="@color/textMain"
-            android:gravity="center"
             android:layout_marginTop="1dp"
+            android:layout_weight="35"
+            android:gravity="center"
+            android:text="NOV"
+            android:textColor="@color/textMain"
+            android:textSize="10sp"
             />
+
         <TextView
             android:id="@+id/widget_component_day_day"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="20"
-            android:text="25"
-            android:textSize="12sp"
-            android:textColor="@color/textMain"
             android:gravity="center"
+            android:text="25"
+            android:textColor="@color/textMain"
+            android:textSize="12sp"
             />
 
     </LinearLayout>
@@ -62,8 +64,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
             android:layout_weight="40"
+            android:orientation="horizontal"
             >
 
             <TextView
@@ -72,19 +74,20 @@
                 android:layout_height="match_parent"
                 android:layout_weight="50"
                 android:text="65&#xb0;"
-                android:textSize="18sp"
-                android:textColor="@color/textMain"
                 android:textAlignment="center"
+                android:textColor="@color/textMain"
+                android:textSize="18sp"
                 />
+
             <TextView
                 android:id="@+id/widget_component_day_templow"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
                 android:text="45&#xb0;"
-                android:textSize="18sp"
-                android:textColor="@color/textAlt"
                 android:textAlignment="center"
+                android:textColor="@color/textAlt"
+                android:textSize="18sp"
                 />
 
         </LinearLayout>
@@ -93,8 +96,8 @@
             android:id="@+id/widget_component_day_icon"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="60"
             android:layout_margin="4dp"
+            android:layout_weight="60"
             android:tint="@color/textAlt"
             />
 

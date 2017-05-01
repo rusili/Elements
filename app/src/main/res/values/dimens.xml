@@ -5,7 +5,7 @@
     <dimen name="widget_margin">8dp</dimen>
 
     <dimen name="minHeight_1">40dp</dimen>
-    <dimen name="minHeight_2">70dp</dimen>
+    <dimen name="minHeight_2">110dp</dimen>
 
     <dimen name="minWidth_3">180dp</dimen>
     <dimen name="minWidth_4">250dp</dimen>

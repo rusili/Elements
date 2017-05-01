@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,8 +8,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/verticalgradient1"
         android:scaleType="center"
+        android:src="@drawable/verticalgradient1"
         />
 
     <LinearLayout
@@ -27,43 +26,43 @@
 
             >
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/grayFourOverlay"
-            />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/day_vertical_padding"
-            >
-
-            <TextView
-                android:id="@+id/widget_component_day_weekday4"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical"
-                android:text="TU"
-                android:textAllCaps="true"
-                android:textColor="@color/light_sky_blue"
-                android:textSize="@dimen/day_weekday_fontsize"
-                android:paddingLeft="@dimen/day_horizontal_padding"
+                android:background="@color/grayFourOverlay"
                 />
 
-            <TextView
-                android:id="@+id/widget_component_day_day4"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:text="12"
-                android:textColor="@color/textMain"
-                android:textSize="@dimen/day_date_fontsize"
-                android:paddingRight="@dimen/day_horizontal_padding"
-                />
-        </RelativeLayout>
-</FrameLayout>
+                android:paddingTop="@dimen/day_vertical_padding"
+                >
+
+                <TextView
+                    android:id="@+id/widget_component_day_weekday4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/day_horizontal_padding"
+                    android:text="TU"
+                    android:textAllCaps="true"
+                    android:textColor="@color/light_sky_blue"
+                    android:textSize="@dimen/day_weekday_fontsize"
+                    />
+
+                <TextView
+                    android:id="@+id/widget_component_day_day4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="@dimen/day_horizontal_padding"
+                    android:text="12"
+                    android:textColor="@color/textMain"
+                    android:textSize="@dimen/day_date_fontsize"
+                    />
+            </RelativeLayout>
+        </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -76,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
                 android:paddingBottom="@dimen/bottom_marginpadding"
+                android:paddingTop="10dp"
                 >
 
                 <TextView
@@ -97,9 +96,9 @@
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="45"
-                    android:scaleType="fitCenter"
-                    android:paddingTop="8dp"
                     android:paddingBottom="2dp"
+                    android:paddingTop="8dp"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_partly_cloudy"
                     android:tint="@color/light_sky_blue"
                     />

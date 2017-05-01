@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
               android:layout_width="320dp"
               android:layout_height="68dp"
+              android:orientation="horizontal"
     >
 
     <LinearLayout
@@ -15,6 +15,7 @@
 
         <include layout="@layout/widget_component_mainx1"/>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/widget_box_day2"
         android:layout_width="0dp"
@@ -26,6 +27,7 @@
         <include layout="@layout/widget_component_dayx1"></include>
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/widget_box_day3"
         android:layout_width="0dp"

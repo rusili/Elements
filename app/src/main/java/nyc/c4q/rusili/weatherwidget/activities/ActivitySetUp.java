@@ -6,6 +6,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import nyc.c4q.rusili.weatherwidget.R;
 
 public class ActivitySetUp extends AppCompatActivity {
@@ -19,6 +22,8 @@ public class ActivitySetUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getPermissions();
+
+        bugTest();
     }
 
     private void getPermissions () {
@@ -33,4 +38,22 @@ public class ActivitySetUp extends AppCompatActivity {
         }
     }
 
+    private void bugTest(){
+        Date now = new Date();
+        SimpleDateFormat weekday = new SimpleDateFormat("E");
+        SimpleDateFormat month = new SimpleDateFormat("MM");
+        SimpleDateFormat day = new SimpleDateFormat("dd");
+
+        CharSequence a = month.format(now);
+        CharSequence b = day.format(now);
+
+        CharSequence charSequence = null;
+
+        if (Integer.parseInt(day.format(now)) < 10){
+            charSequence = String.valueOf(day.format(now).charAt(1));
+        } else {
+            charSequence = String.valueOf(day.format(now));
+            charSequence.toString();
+        }
+    }
 }

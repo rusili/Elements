@@ -13,6 +13,8 @@ import nyc.c4q.rusili.weatherwidget.activities.BaseWeatherWidget;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
 import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
 
+import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
+
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private int numOfDays;
     public static final String ACTION_UPDATE_CLICK = "4x2_UPDATE_CLICK";
@@ -28,15 +30,16 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
                     R.layout.widget_layout_4x2);
 
             //setOnClickUpdate();
-            setOnClickConfig();
+            setOnClickConfig(widgetID);
 
             glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
             startGoogleAPIClient(context);
         }
     }
 
-    private void setOnClickConfig () {
+    private void setOnClickConfig (int widgetID) {
         Intent intent = new Intent(context, WeatherWidget4x2.class);
+        intent.putExtra(EXTRA_APPWIDGET_ID, widgetID);
         intent.setAction(ACTION_CONFIG_CLICK);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);

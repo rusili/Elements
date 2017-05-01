@@ -63,10 +63,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/bottom_marginpadding"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="8dp"
-            android:paddingBottom="@dimen/bottom_marginpadding"
             >
 
             <TextView
@@ -84,8 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="45"
-                android:paddingTop="8dp"
                 android:paddingBottom="2dp"
+                android:paddingTop="8dp"
                 />
 
 
@@ -151,8 +151,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_marginRight="4dp"
+            android:orientation="horizontal"
             >
 
             <TextView
