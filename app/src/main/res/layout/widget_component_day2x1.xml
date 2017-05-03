@@ -21,7 +21,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="20"
+            android:layout_weight="25"
             android:background="@color/grayTwo"
 
             >
@@ -35,11 +35,11 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="@dimen/height2_day_vertical_padding"
+                android:paddingTop="@dimen/height1_day_vertical_padding"
                 >
 
                 <TextView
-                    android:id="@+id/widget_component_day_weekday2"
+                    android:id="@+id/widget_component_day_weekday2_height1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -48,18 +48,19 @@
                     android:text="TU"
                     android:textAllCaps="true"
                     android:textColor="@color/light_sky_blue"
-                    android:textSize="@dimen/height2_day_weekday_fontsize"
+                    android:textSize="@dimen/height1_day_weekday_fontsize"
                     />
 
                 <TextView
-                    android:id="@+id/widget_component_day_day2"
+                    android:id="@+id/widget_component_day_day2_height1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
                     android:paddingRight="@dimen/height2_day_horizontal_padding"
                     android:text="12"
                     android:textColor="@color/textMain"
-                    android:textSize="@dimen/height2_day_date_fontsize"
+                    android:textSize="@dimen/height1_day_date_fontsize"
                     />
             </RelativeLayout>
         </FrameLayout>
@@ -68,7 +69,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="80"
+            android:layout_weight="75"
             android:background="@color/grayTwo"
             >
 
@@ -76,43 +77,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/height2_bottom_marginpadding"
-                android:paddingTop="10dp"
                 >
 
                 <TextView
-                    android:id="@+id/widget_component_day_temphigh2"
+                    android:id="@+id/widget_component_day_temphigh2_height1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="27.5"
-                    android:gravity="top|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
                     android:text="45"
                     android:textColor="@color/textMain"
-                    android:textSize="@dimen/height2_day_highlowtemp_fontsize"
+                    android:textSize="@dimen/height1_day_highlowtemp_fontsize"
+                    android:paddingTop="@dimen/height1_main_top_marginpadding"
                     />
 
                 <ImageView
-                    android:id="@+id/widget_component_day_icon2"
+                    android:id="@+id/widget_component_day_icon2_height1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal|bottom"
+                    android:paddingTop="6dp"
                     android:layout_weight="45"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="8dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_partly_cloudy"
                     android:tint="@color/light_sky_blue"
                     />
 
                 <TextView
-                    android:id="@+id/widget_component_day_templow2"
+                    android:id="@+id/widget_component_day_templow2_height1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="27.5"
-                    android:gravity="bottom|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
                     android:text="35"
                     android:textColor="@color/textMain"
-                    android:textSize="@dimen/height2_day_highlowtemp_fontsize"
+                    android:textSize="@dimen/height1_day_highlowtemp_fontsize"
+                    android:layout_marginBottom="@dimen/height1_day_bottom_marginpadding"
                     />
 
             </LinearLayout>

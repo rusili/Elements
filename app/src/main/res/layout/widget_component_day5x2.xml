@@ -35,7 +35,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="@dimen/day_vertical_padding"
+                android:paddingTop="@dimen/height2_day_vertical_padding"
                 >
 
                 <TextView
@@ -44,11 +44,11 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/day_horizontal_padding"
+                    android:paddingLeft="@dimen/height2_day_horizontal_padding"
                     android:text="TU"
                     android:textAllCaps="true"
                     android:textColor="@color/light_sky_blue"
-                    android:textSize="@dimen/day_weekday_fontsize"
+                    android:textSize="@dimen/height2_day_weekday_fontsize"
                     />
 
                 <TextView
@@ -56,10 +56,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:paddingRight="@dimen/day_horizontal_padding"
+                    android:paddingRight="@dimen/height2_day_horizontal_padding"
                     android:text="12"
                     android:textColor="@color/textMain"
-                    android:textSize="@dimen/day_date_fontsize"
+                    android:textSize="@dimen/height2_day_date_fontsize"
                     />
             </RelativeLayout>
         </FrameLayout>
@@ -69,7 +69,7 @@
             android:layout_height="0dp"
             android:layout_weight="80"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/bottom_marginpadding"
+            android:paddingBottom="@dimen/height2_bottom_marginpadding"
             android:paddingTop="10dp"
             android:background="@color/grayFour"
             >
@@ -82,7 +82,7 @@
                 android:gravity="top|center_horizontal"
                 android:text="45"
                 android:textColor="@color/textMain"
-                android:textSize="@dimen/day_highlowtemp_fontsize"
+                android:textSize="@dimen/height2_day_highlowtemp_fontsize"
                 />
 
             <ImageView
@@ -106,7 +106,7 @@
                 android:gravity="bottom|center_horizontal"
                 android:text="35"
                 android:textColor="@color/textMain"
-                android:textSize="@dimen/day_highlowtemp_fontsize"
+                android:textSize="@dimen/height2_day_highlowtemp_fontsize"
                 />
         </LinearLayout>
 

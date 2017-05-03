@@ -1,8 +1,6 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="widget_margin">8dp</dimen>
+
+    <!-- Minimum Widget Dimensions -->
 
     <dimen name="minHeight_1">40dp</dimen>
     <dimen name="minHeight_2">110dp</dimen>
@@ -11,12 +9,31 @@
     <dimen name="minWidth_4">250dp</dimen>
     <dimen name="minWidth_5">320dp</dimen>
 
-    <dimen name="day_horizontal_padding">8dp</dimen>
-    <dimen name="day_vertical_padding">4dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 
-    <dimen name="bottom_marginpadding">12dp</dimen>
 
-    <dimen name="day_weekday_fontsize">13sp</dimen>
-    <dimen name="day_date_fontsize">20sp</dimen>
-    <dimen name="day_highlowtemp_fontsize">20sp</dimen>
+    <dimen name="height2_day_horizontal_padding">8dp</dimen>
+    <dimen name="height2_day_vertical_padding">4dp</dimen>
+
+    <dimen name="height2_bottom_marginpadding">12dp</dimen>
+    <dimen name="height1_day_bottom_marginpadding">4dp</dimen>
+    <dimen name="height1_main_bottom_marginpadding">6dp</dimen>
+    <dimen name="height1_main_top_marginpadding">1dp</dimen>
+
+
+    <dimen name="height1_day_weekday_fontsize">11sp</dimen>
+    <dimen name="height1_day_date_fontsize">12sp</dimen>
+    <dimen name="height1_day_highlowtemp_fontsize">14sp</dimen>
+    <dimen name="height1_main_weekday_fontsize">14sp</dimen>
+    <dimen name="height1_main_date_fontsize">14sp</dimen>
+    <dimen name="height1_main_highlowtemp_fontsize">16sp</dimen>
+
+    <dimen name="height2_day_weekday_fontsize">13sp</dimen>
+    <dimen name="height2_day_date_fontsize">20sp</dimen>
+    <dimen name="height2_day_highlowtemp_fontsize">20sp</dimen>
+
+    <dimen name="height1_day_vertical_padding">2dp</dimen>
 </resources>

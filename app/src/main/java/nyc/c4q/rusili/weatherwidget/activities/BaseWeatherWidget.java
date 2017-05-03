@@ -142,11 +142,11 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
         SimpleDateFormat month = new SimpleDateFormat("MM");
         SimpleDateFormat day = new SimpleDateFormat("dd");
 
-        remoteViews.setTextViewText(R.id.widget_component_main_weekday, weekday.format(now));
-        remoteViews.setTextViewText(R.id.widget_component_main_day, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
-        remoteViews.setTextViewText(R.id.widget_component_main_currenttemp, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_main_location, currentObservation.getDisplay_location().getCity());
-        glideWrapper.inflateImage(R.id.widget_component_main_icon, currentObservation.getIcon_url());
+        remoteViews.setTextViewText(R.id.widget_component_main_weekday_height2, weekday.format(now));
+        remoteViews.setTextViewText(R.id.widget_component_main_day_height2, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
+        remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
+        remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
+        glideWrapper.inflateImage(R.id.widget_component_main_icon_height2, currentObservation.getIcon_url());
 
         appWidgetManager.updateAppWidget(widgetID, remoteViews);
     }
@@ -154,8 +154,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
     public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
 
         int resID = 0;
-        remoteViews.setTextViewText(R.id.widget_component_main_hitemp, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
-        remoteViews.setTextViewText(R.id.widget_component_main_lowtemp, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+        remoteViews.setTextViewText(R.id.widget_component_main_hitemp_height2, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+        remoteViews.setTextViewText(R.id.widget_component_main_lowtemp_height2, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 
         for (int i = 1; i < numOfDays; i++) {
             resID = context.getResources().getIdentifier("widget_component_day_weekday" + String.valueOf(i + 1), "id", context.getPackageName());
