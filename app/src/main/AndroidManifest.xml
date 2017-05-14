@@ -27,13 +27,13 @@
         </activity>
 
         <!-- 4x1 -->
-        <receiver android:name=".activities.widgets.WeatherWidget4x1" android:label="Weather 4x1">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                       android:resource="@xml/widget_weather_4x1"/>
-        </receiver>
+        <!--<receiver android:name=".activities.widgets.WeatherWidget4x1" android:label="Weather 4x1">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.appwidget.provider"-->
+                       <!--android:resource="@xml/widget_weather_4x1"/>-->
+        <!--</receiver>-->
 
         <!-- 4x2 -->
         <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="Weather 4x2">
@@ -44,23 +44,23 @@
                        android:resource="@xml/widget_weather_4x2"/>
         </receiver>
 
-        <!-- 5x1 -->
-        <receiver android:name=".activities.widgets.WeatherWidget5x1" android:label="Weather 5x1">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                       android:resource="@xml/widget_weather_5x1"/>
-        </receiver>
+        <!--&lt;!&ndash; 5x1 &ndash;&gt;-->
+        <!--<receiver android:name=".activities.widgets.WeatherWidget5x1" android:label="Weather 5x1">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.appwidget.provider"-->
+                       <!--android:resource="@xml/widget_weather_5x1"/>-->
+        <!--</receiver>-->
 
-        <!-- 5x2 -->
-        <receiver android:name=".activities.widgets.WeatherWidget5x2" android:label="Weather 5x2">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                       android:resource="@xml/widget_weather_5x2"/>
-        </receiver>
+        <!--&lt;!&ndash; 5x2 &ndash;&gt;-->
+        <!--<receiver android:name=".activities.widgets.WeatherWidget5x2" android:label="Weather 5x2">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data android:name="android.appwidget.provider"-->
+                       <!--android:resource="@xml/widget_weather_5x2"/>-->
+        <!--</receiver>-->
     </application>
 
 </manifest>

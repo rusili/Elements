@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.network.JSON.CurrentObservation;
@@ -142,6 +143,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
         SimpleDateFormat month = new SimpleDateFormat("MM");
         SimpleDateFormat day = new SimpleDateFormat("dd");
 
+        remoteViews.setTextViewText(R.id.widget_component_main_onClickDebug, String.valueOf(new Random(100)));
+
         remoteViews.setTextViewText(R.id.widget_component_main_weekday_height2, weekday.format(now));
         remoteViews.setTextViewText(R.id.widget_component_main_day_height2, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
         remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
@@ -184,9 +187,10 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
         if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
             Log.d(String.valueOf(getClass()), "Clicked Update!");
+
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName); // 4x2 = 31
             onUpdate(context, appWidgetManager, appWidgetIds);
         } else if (intent.getAction().equals("4x2_CONFIG_CLICK")){
             Log.d(String.valueOf(getClass()), "Clicked Config!");

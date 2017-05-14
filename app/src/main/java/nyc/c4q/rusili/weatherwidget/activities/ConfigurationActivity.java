@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,7 +15,7 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
 
 public class ConfigurationActivity extends AppCompatActivity{
-    private int appWidgetId;
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     @Override
     protected void onCreate (@Nullable Bundle savedInstanceState) {
@@ -27,16 +28,15 @@ public class ConfigurationActivity extends AppCompatActivity{
 
     private void initialize () {
         getAppWidgetID();
-        //setToolbar();
+        setToolbar();
     }
 
-//    private void setToolbar () {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_configuration_toolbar);
-//        setSupportActionBar(toolbar);
-//    }
+    private void setToolbar () {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_configuration_toolbar);
+        setSupportActionBar(toolbar);
+    }
 
     private void getAppWidgetID(){
-        appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {

@@ -26,3 +26,6 @@ Maximum:
 720p = 4 columns
 1080p = 5 columns
 1440p = 5 columns
+
+Main Activity starts when you run the application
+COnfiguration Activity starts when you put the widget on your home screen

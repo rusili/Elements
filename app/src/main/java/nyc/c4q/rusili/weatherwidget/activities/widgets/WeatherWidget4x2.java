@@ -29,8 +29,8 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
             remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.widget_layout_4x2);
 
-            //setOnClickUpdate();
-            setOnClickConfig(widgetID);
+            setOnClickUpdate();
+            //setOnClickConfig(widgetID);
 
             glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
             startGoogleAPIClient(context);
