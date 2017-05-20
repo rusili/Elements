@@ -10,20 +10,20 @@
         android:layout_height="56dp"
         android:background="@color/colorAccent"
         >
-
     </android.support.v7.widget.Toolbar>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="activity_configuration"
+
+    <ImageView
+        android:id="@+id/activityconfiguration_imageview_preview"
+        android:layout_width="320dp"
+        android:layout_height="110dp"
         />
 
-    <Button
-        android:id="@+id/activity_configuration_menu_button_accept"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activityconfiguration_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="Accept"
-        />
+        android:layout_height="match_parent"
+        >
+    </android.support.v4.view.ViewPager>
 
 
 </LinearLayout>

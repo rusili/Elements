@@ -5,6 +5,6 @@
                     android:updatePeriodMillis="3600000"
                     android:initialLayout="@layout/widget_layout_4x2"
                     android:widgetCategory="home_screen"
-                    android:configure="nyc.c4q.rusili.weatherwidget.activities.ConfigurationActivity"
+                    android:configure="nyc.c4q.rusili.weatherwidget.activities.configuration.ActivityConfiguration"
     >
 </appwidget-provider>

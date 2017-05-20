@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "nyc.c4q.rusili.weatherwidget"
@@ -24,8 +24,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+
+    // Advanced Recycler View
+    compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.0@aar'){
+        transitive=true}
 
     // Color Picker:
     compile 'com.1gravity:android-colorpicker:2.0.2'
@@ -36,6 +40,9 @@ dependencies {
 
     // Glide:
     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    // Recycler View
+    compile "com.android.support:recyclerview-v7:25.3.1"
 
     // Retrofit:
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
