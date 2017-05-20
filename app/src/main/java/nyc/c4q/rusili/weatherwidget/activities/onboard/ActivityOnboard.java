@@ -4,14 +4,13 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+
+import com.github.paolorotolo.appintro.AppIntro;
+import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import nyc.c4q.rusili.weatherwidget.R;
 
-public class ActivityOnboard extends AppCompatActivity {
-	private ImageView imageView;
-
+public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 5;
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 	private boolean locationPermissionGranted;
@@ -19,17 +18,17 @@ public class ActivityOnboard extends AppCompatActivity {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_onboard);
 		initialize();
 	}
 
 	private void initialize () {
 		getPermissions();
-		setViews();
+		setSlides();
 	}
 
-	private void setViews () {
-		imageView = (ImageView) findViewById(R.id.activity_onboard_imageview);
+	private void setSlides () {
+		addSlide(AppIntroFragment.newInstance("Slide1", "Slide1", R.drawable.cloudtemp, getResources().getColor(R.color.transparent)));
+		addSlide(AppIntroFragment.newInstance("Slide1", "Slide1", R.drawable.windtemp, getResources().getColor(R.color.transparent)));
 	}
 
 	private void getPermissions () {

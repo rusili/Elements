@@ -15,9 +15,6 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
 
 public class ActivityConfiguration extends AppCompatActivity {
-
-	// Configuration has multiple fragments, uses MVP
-
 	private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
 	@Override

@@ -27,9 +27,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 
-    // Advanced Recycler View
+    // Advanced Recycler View:
     compile ('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.0@aar'){
         transitive=true}
+
+    // App Intro:
+    compile 'com.github.paolorotolo:appintro:4.1.0'
 
     // Color Picker:
     compile 'com.1gravity:android-colorpicker:2.0.2'

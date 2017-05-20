@@ -1,12 +1,10 @@
 package nyc.c4q.rusili.weatherwidget.activities.configuration.fonts;
 
-import android.view.View;
-
 public class FragmentFontPresenter implements FragmentFontInterface.Presenter {
-	View view;
+	FragmentFont fragmentFontView;
 
-	public FragmentFontPresenter (View viewParam){
-		this.view = viewParam;
+	public FragmentFontPresenter (FragmentFont fragmentFont){
+		this.fragmentFontView = fragmentFont;
 	}
 
 	@Override

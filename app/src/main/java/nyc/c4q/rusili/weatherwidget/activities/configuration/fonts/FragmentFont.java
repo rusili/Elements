@@ -34,9 +34,8 @@ public class FragmentFont extends Fragment implements FragmentFontInterface.View
 	@Override
 	public void initialize () {
 		if (presenter == null) {
-			presenter = new FragmentFontPresenter(view);
+			setPresenter(presenter);
 		}
-		setPresenter(presenter);
 
 		setViews();
 	}
@@ -48,6 +47,6 @@ public class FragmentFont extends Fragment implements FragmentFontInterface.View
 
 	@Override
 	public void setPresenter (FragmentFontInterface.Presenter presenter) {
-		this.presenter = presenter;
+		this.presenter = new FragmentFontPresenter(this);
 	}
 }
