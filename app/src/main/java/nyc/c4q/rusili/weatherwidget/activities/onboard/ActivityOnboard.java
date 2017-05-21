@@ -3,6 +3,7 @@ package nyc.c4q.rusili.weatherwidget.activities.onboard;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 import com.github.paolorotolo.appintro.AppIntro;
@@ -11,7 +12,6 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import nyc.c4q.rusili.weatherwidget.R;
 
 public class ActivityOnboard extends AppIntro {
-	private static final int PERMISSIONS_REQUEST_ACCESS_COARSE_LOCATION = 5;
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 	private boolean locationPermissionGranted;
 
@@ -27,8 +27,30 @@ public class ActivityOnboard extends AppIntro {
 	}
 
 	private void setSlides () {
-		addSlide(AppIntroFragment.newInstance("Slide1", "Slide1", R.drawable.cloudtemp, getResources().getColor(R.color.transparent)));
-		addSlide(AppIntroFragment.newInstance("Slide1", "Slide1", R.drawable.windtemp, getResources().getColor(R.color.transparent)));
+		// Introduction
+		addSlide(AppIntroFragment.newInstance("Introduction", "Slide1", R.drawable.slide_introduction, getResources().getColor(R.color.transparent)));
+		// OnClick: Update & Link
+		addSlide(AppIntroFragment.newInstance("OnClick Update & Link", "Slide1", R.drawable.slide_onclick1, getResources().getColor(R.color.transparent)));
+		// OnClick: Configuration
+		addSlide(AppIntroFragment.newInstance("OnClick Configuration", "Slide1", R.drawable.slide_onclick2, getResources().getColor(R.color.transparent)));
+		// Done!
+		addSlide(AppIntroFragment.newInstance("Done", "Slide1", R.drawable.slide_done, getResources().getColor(R.color.transparent)));
+	}
+
+	@Override
+	public void onSkipPressed(Fragment currentFragment) {
+		super.onSkipPressed(currentFragment);
+		endActivity();
+	}
+
+	@Override
+	public void onDonePressed(Fragment currentFragment) {
+		super.onDonePressed(currentFragment);
+		endActivity();
+	}
+
+	private void endActivity(){
+		finish();
 	}
 
 	private void getPermissions () {
@@ -42,6 +64,4 @@ public class ActivityOnboard extends AppIntro {
 				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}
 	}
-
-	// onSwipe code
 }
