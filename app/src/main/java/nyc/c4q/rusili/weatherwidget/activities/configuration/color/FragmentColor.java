@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.weatherwidget.activities.configuration.fonts;
+package nyc.c4q.rusili.weatherwidget.activities.configuration.color;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,22 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nyc.c4q.rusili.weatherwidget.R;
-import nyc.c4q.rusili.weatherwidget.activities.configuration.color.FragmentColor;
 
-public class FragmentFont extends Fragment implements FragmentFontInterface.View{
-	private FragmentFontInterface.Presenter presenter;
+public class FragmentColor extends Fragment implements FragmentColorInterface.View{
+	private FragmentColorInterface.Presenter presenter;
 	private View view;
 
 	private int page;
 	private String title;
 
-	public static FragmentFont newInstance(int page, String title) {
-		FragmentFont fragmentFont = new FragmentFont();
+	public static FragmentColor newInstance(int page, String title) {
+		FragmentColor fragmentColor = new FragmentColor();
 		Bundle args = new Bundle();
 		args.putInt("Page", page);
 		args.putString("Title", title);
-		fragmentFont.setArguments(args);
-		return fragmentFont;
+		fragmentColor.setArguments(args);
+		return fragmentColor;
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class FragmentFont extends Fragment implements FragmentFontInterface.View
 	}
 
 	@Override
-	public void setPresenter (FragmentFontInterface.Presenter presenter) {
-		this.presenter = new FragmentFontPresenter(this);
+	public void setPresenter (FragmentColorInterface.Presenter presenter) {
+		this.presenter = new FragmentColorPresenter(this);
 	}
 }

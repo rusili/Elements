@@ -4,6 +4,8 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,6 +17,11 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
 
 public class ActivityConfiguration extends AppCompatActivity {
+	private ViewPager viewPager;
+	private TabLayout tabLayout;
+
+	private ConfigurationViewPagerAdapter configurationViewPagerAdapter;
+
 	private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
 	@Override
@@ -29,11 +36,23 @@ public class ActivityConfiguration extends AppCompatActivity {
 	private void initialize () {
 		getAppWidgetID();
 		setToolbar();
+		setViews();
+		setViewPager();
+	}
+
+	private void setViewPager () {
+		configurationViewPagerAdapter = new ConfigurationViewPagerAdapter(getSupportFragmentManager());
+		viewPager.setAdapter(configurationViewPagerAdapter);
 	}
 
 	private void setToolbar () {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.activity_configuration_toolbar);
 		setSupportActionBar(toolbar);
+	}
+
+	private void setViews () {
+		viewPager = (ViewPager) findViewById(R.id.activityconfiguration_viewpager);
+		tabLayout = (TabLayout) findViewById(R.id.activityconfiguration_tablayout);
 	}
 
 	private void getAppWidgetID () {
