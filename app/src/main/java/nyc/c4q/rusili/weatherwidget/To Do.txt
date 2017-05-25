@@ -1,0 +1,10 @@
+To Do:
+New Icons from AI as vectors
+
+New Features:
+OnClick to website
+OnClick to ViewFlipper to show whole day
+Configuration Activity:
+    Color
+    Font Size
+    Transparency

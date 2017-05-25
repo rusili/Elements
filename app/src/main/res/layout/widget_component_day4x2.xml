@@ -99,8 +99,6 @@
                     android:paddingBottom="2dp"
                     android:paddingTop="8dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_partly_cloudy"
-                    android:tint="@color/light_sky_blue"
                     />
 
                 <TextView

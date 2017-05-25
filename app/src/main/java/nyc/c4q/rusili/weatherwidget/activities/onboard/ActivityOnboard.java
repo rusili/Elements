@@ -28,9 +28,9 @@ public class ActivityOnboard extends AppIntro {
 
 	private void setSlides () {
 		// Introduction
-		addSlide(AppIntroFragment.newInstance("Introduction", "Slide1", R.drawable.slide_introduction, getResources().getColor(R.color.transparent)));
+		addSlide(AppIntroFragment.newInstance("Introduction", "Slide1", R.drawable.ic_mostlycloudy, getResources().getColor(R.color.transparent)));
 		// OnClick: Update & Link
-		addSlide(AppIntroFragment.newInstance("OnClick Update & Link", "Slide1", R.drawable.slide_onclick1, getResources().getColor(R.color.transparent)));
+		addSlide(AppIntroFragment.newInstance("OnClick Update & Link", "Slide1", R.drawable.ic_mostlysunny, getResources().getColor(R.color.transparent)));
 		// OnClick: Configuration
 		addSlide(AppIntroFragment.newInstance("OnClick Configuration", "Slide1", R.drawable.slide_onclick2, getResources().getColor(R.color.transparent)));
 		// Done!

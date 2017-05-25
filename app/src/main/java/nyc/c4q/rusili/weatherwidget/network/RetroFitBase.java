@@ -63,6 +63,7 @@ public class RetroFitBase {
 			@Override
 			public void onResponse (Call <ResponseConditions> call, Response <ResponseConditions> response) {
 				CurrentObservation jsonResponse = response.body().getCurrent_observation();
+				Log.d("URL: ", call.request().url().toString());
 				if (listener != null) {
 					listener.onConditionsRetrieved(jsonResponse);
 				}

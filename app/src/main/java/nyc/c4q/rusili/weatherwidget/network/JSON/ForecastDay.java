@@ -7,7 +7,7 @@ public class ForecastDay {
 	avewind avewind;
 	String conditions;
 	int avehumidity;
-	String icon_url;
+	String icon;
 
 	public class avewind {
 		int mph;
@@ -90,7 +90,7 @@ public class ForecastDay {
 		return avehumidity;
 	}
 
-	public String getIcon_url () {
-		return icon_url;
+	public String getIcon () {
+		return icon;
 	}
 }

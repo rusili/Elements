@@ -150,12 +150,10 @@
                 android:id="@+id/widget_component_main_icon_height2"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="60"
                 android:background="@color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_partly_cloudy"
-                android:tint="@color/gray30"
                 />
 
         </LinearLayout>

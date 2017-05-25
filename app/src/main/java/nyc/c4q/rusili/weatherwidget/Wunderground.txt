@@ -1,0 +1,21 @@
+Wunderground icons:
+
+Chance:
+Flurries
+Rain
+Sleet
+Snow
+Thunderstorm
+
+
+clear / Sunny
+cloudy
+Mostly Cloudy / Partly Cloudy
+Mostly Sunny / Partly Sunny
+
+rain
+sleet
+flurries
+snow
+hazy / Fog
+thunderstorm

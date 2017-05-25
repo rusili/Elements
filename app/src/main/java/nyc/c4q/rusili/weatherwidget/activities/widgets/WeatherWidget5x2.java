@@ -9,7 +9,7 @@ import android.widget.RemoteViews;
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.utilities.BaseWeatherWidget;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
-import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
+import nyc.c4q.rusili.weatherwidget.utilities.IconInflater;
 
 public class WeatherWidget5x2 extends BaseWeatherWidget {
 	private int numOfDays;
@@ -29,7 +29,7 @@ public class WeatherWidget5x2 extends BaseWeatherWidget {
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 			remoteViews.setOnClickPendingIntent(R.id.widget_layout_5x2_container, pendingIntent);
 
-			glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
+			iconInflater = new IconInflater();
 			startGoogleAPIClient(context);
 		}
 	}

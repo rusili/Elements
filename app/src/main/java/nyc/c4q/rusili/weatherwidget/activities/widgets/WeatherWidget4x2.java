@@ -11,7 +11,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.utilities.BaseWeatherWidget;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
-import nyc.c4q.rusili.weatherwidget.utilities.GlideWrapper;
+import nyc.c4q.rusili.weatherwidget.utilities.IconInflater;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
@@ -32,7 +32,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			setOnClickUpdate();
 			//setOnClickConfig(widgetID);
 
-			glideWrapper = new GlideWrapper(context, remoteViews, widgetID);
+			iconInflater = new IconInflater();
 			startGoogleAPIClient(context);
 		}
 	}

@@ -6,7 +6,7 @@ public class CurrentObservation {
 	String weather;
 	double temp_f;
 	double temp_c;
-	String icon_url;
+	String icon;
 	String relative_humidity;
 	double wind_mph;
 	display_location display_location;
@@ -23,8 +23,8 @@ public class CurrentObservation {
 		return forecast_url;
 	}
 
-	public String getIcon_url () {
-		return icon_url;
+	public String getIcon () {
+		return icon;
 	}
 
 	public double getTemp_c () {
