@@ -15,7 +15,7 @@ import nyc.c4q.rusili.weatherwidget.utilities.ScreenMoniterService;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
-	private boolean locationPermissionGranted;
+	public boolean locationPermissionGranted;
 
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class ActivityOnboard extends AppIntro {
 	}
 
 	private void initialize () {
+		killService();
 		getPermissions();
 		createService();
 		setSlides();
@@ -31,6 +32,10 @@ public class ActivityOnboard extends AppIntro {
 
 	private void createService () {
 		startService(new Intent(ActivityOnboard.this, ScreenMoniterService.class));
+	}
+
+	private void killService(){
+		stopService(new Intent(ActivityOnboard.this, ScreenMoniterService.class));
 	}
 
 	private void setSlides () {

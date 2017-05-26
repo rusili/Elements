@@ -50,7 +50,7 @@
                        android:resource="@xml/widget_weather_4x2"/>
         </receiver>
 
-        <service android:name=".utilities.ScreenMoniterService">
+        <service android:name=".utilities.ScreenMoniterService" android:label="ScreenMonitorService">
             <intent-filter>
                 <action android:name=".utilities.ScreenMoniterService" />
             </intent-filter>

@@ -1,7 +1,10 @@
 package nyc.c4q.rusili.weatherwidget.utilities;
 
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
@@ -11,49 +14,47 @@ import android.widget.Toast;
 import nyc.c4q.rusili.weatherwidget.activities.widgets.WeatherWidget4x2;
 
 public class ScreenMoniterService extends Service{
-	BroadcastReceiver broadcastReceiver=null;
+	BroadcastReceiver broadcastReceiver;
 
 	@Override
-	public void onCreate () {
-		super.onCreate();
-
-		 Toast.makeText(getBaseContext(), "Service on create", Toast.LENGTH_SHORT).show();
+	public int onStartCommand (Intent intent, int flags, int startId) {
+		Toast.makeText(getBaseContext(), "Service onStartCommand", Toast.LENGTH_SHORT).show();
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
-		broadcastReceiver = new WeatherWidget4x2();
+		broadcastReceiver = new ScreenReceiver();
 		registerReceiver(broadcastReceiver, filter);
-	}
 
-	@Override
-	public void onStart (Intent intent, int startId) {
-		boolean screenOn = false;
-
-		try {
-			// Get ON/OFF values sent from receiver ( AEScreenOnOffReceiver.java )
-			screenOn = intent.getBooleanExtra("screen_state", false);
-		} catch (Exception e) {}
-
-		if (!screenOn) {
-			// your code here
-			// Some time required to start any service
-			Toast.makeText(getBaseContext(), "Screen on, ", Toast.LENGTH_SHORT).show();
-		} else {
-			// your code here
-			// Some time required to stop any service to save battery consumption
-			Toast.makeText(getBaseContext(), "Screen off,", Toast.LENGTH_SHORT).show();
-		}
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
 	public void onDestroy () {
 		super.onDestroy();
-
+		unregisterReceiver(broadcastReceiver);
 	}
 
 	@Nullable
 	@Override
 	public IBinder onBind (Intent intent) {
 		return null;
+	}
+
+	private final class ScreenReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(final Context context, final Intent intent) {
+			if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+				Toast.makeText(getBaseContext(), "ScreenReceiver Screen On", Toast.LENGTH_SHORT).show();
+
+				AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+				ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "WeatherWidget4x2");
+				int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
+				Intent updateWidgetIntent = new Intent(context, WeatherWidget4x2.class);
+				updateWidgetIntent.setAction("4x2_UPDATE_CLICK");
+				updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+				sendBroadcast(updateWidgetIntent);
+			}
+		}
 	}
 }

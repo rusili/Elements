@@ -4,9 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,7 +29,6 @@ import java.util.Locale;
 import java.util.Random;
 
 import nyc.c4q.rusili.weatherwidget.R;
-import nyc.c4q.rusili.weatherwidget.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.weatherwidget.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
 import nyc.c4q.rusili.weatherwidget.network.RetroFitBase;
@@ -51,15 +49,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public int zipCode = 0;
 	public int widgetID;
 	private int numOfDays;
-
-	@Override
-	public void onUpdate (Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-		super.onUpdate(context, appWidgetManager, appWidgetIds);
-		startGoogleAPIClient(context);
-	}
-
-	public void setOnClickUpdate () {
-	}
 
 	public CharSequence ifSingleDigit (String format) {
 		CharSequence charSequence = format;
@@ -89,6 +78,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 				  .addApi(LocationServices.API)
 				  .build();
 		}
+		this.context = context;
 		mGoogleApiClient.connect();
 	}
 
@@ -156,7 +146,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	}
 
 	public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
-
 		int resID = 0;
 		remoteViews.setTextViewText(R.id.widget_component_main_hitemp_height2, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_lowtemp_height2, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
@@ -178,45 +167,10 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	}
 
 	@Override
-	public void onConnectionSuspended (int i) {
-	}
+	public void onConnectionSuspended (int i) {}
 
 	@Override
 	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
-	}
-
-	@Override
-	public void onReceive (Context context, Intent intent) {
-		super.onReceive(context, intent);
-
-		if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-			screenOff = true;
-			Intent i = new Intent(context, ScreenMoniterService.class);
-			i.putExtra("screen_state", screenOff);
-			context.startService(i);
-		} else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
-			onUpdate(context, appWidgetManager, appWidgetIds);
-
-			screenOff = false;
-			Intent i = new Intent(context, ScreenMoniterService.class);
-			i.putExtra("screen_state", screenOff);
-			context.startService(i);
-		}
-		if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
-			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
-			onUpdate(context, appWidgetManager, appWidgetIds);
-		} else if (intent.getAction().equals("4x2_CONFIG_CLICK")) {
-			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("Data", getClass().getName() + "/" + widgetID);
-			intentConfig.putExtras(bundle);
-			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(intentConfig);
-		}
+		Log.d("onConnectionFailed: ", connectionResult.getErrorMessage());
 	}
 }
