@@ -47,6 +47,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public RemoteViews remoteViews;
 
 	public boolean locationPermissionGranted;
+	private boolean screenOff;
 	public int zipCode = 0;
 	public int widgetID;
 	private int numOfDays;
@@ -188,10 +189,26 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
 
+		if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+			screenOff = true;
+			Intent i = new Intent(context, ScreenMoniterService.class);
+			i.putExtra("screen_state", screenOff);
+			context.startService(i);
+		} else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
+			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
+			onUpdate(context, appWidgetManager, appWidgetIds);
+
+			screenOff = false;
+			Intent i = new Intent(context, ScreenMoniterService.class);
+			i.putExtra("screen_state", screenOff);
+			context.startService(i);
+		}
 		if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName); // 4x2 = 31
+			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 			onUpdate(context, appWidgetManager, appWidgetIds);
 		} else if (intent.getAction().equals("4x2_CONFIG_CLICK")) {
 			Intent intentConfig = new Intent(context, ActivityConfiguration.class);

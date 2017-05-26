@@ -1,5 +1,8 @@
-To Do:
-New Icons from AI as vectors
+To Do for Launch:
+Change default look
+Make sure it doesn't stop updating:
+    Update when screen unlock? (Service)
+    or use ASync
 
 New Features:
 OnClick to website

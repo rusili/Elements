@@ -25,7 +25,6 @@ public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 				return null;
 		}	}
 
-	// Returns the page title for the top indicator
 	@Override
 	public CharSequence getPageTitle(int position) {
 		return "Page " + position;

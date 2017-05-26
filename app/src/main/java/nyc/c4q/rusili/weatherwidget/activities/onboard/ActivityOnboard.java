@@ -1,5 +1,6 @@
 package nyc.c4q.rusili.weatherwidget.activities.onboard;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -10,6 +11,7 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import nyc.c4q.rusili.weatherwidget.R;
+import nyc.c4q.rusili.weatherwidget.utilities.ScreenMoniterService;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
@@ -23,7 +25,12 @@ public class ActivityOnboard extends AppIntro {
 
 	private void initialize () {
 		getPermissions();
+		createService();
 		setSlides();
+	}
+
+	private void createService () {
+		startService(new Intent(ActivityOnboard.this, ScreenMoniterService.class));
 	}
 
 	private void setSlides () {

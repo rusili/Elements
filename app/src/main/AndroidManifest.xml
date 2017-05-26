@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -36,13 +37,24 @@
         <!--</receiver>-->
 
         <!-- 4x2 -->
-        <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="Weather 4x2">
+        <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="Weather 4x2"
+                  android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">
+
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
             <meta-data android:name="android.appwidget.provider"
                        android:resource="@xml/widget_weather_4x2"/>
         </receiver>
+
+        <service android:name=".utilities.ScreenMoniterService">
+            <intent-filter>
+                <action android:name=".utilities.ScreenMoniterService" />
+            </intent-filter>
+        </service>
 
         <!--&lt;!&ndash; 5x1 &ndash;&gt;-->
         <!--<receiver android:name=".activities.widgets.WeatherWidget5x1" android:label="Weather 5x1">-->
