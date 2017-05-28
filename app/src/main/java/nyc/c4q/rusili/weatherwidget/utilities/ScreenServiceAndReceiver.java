@@ -16,14 +16,15 @@ import java.util.Calendar;
 import nyc.c4q.rusili.weatherwidget.activities.widgets.WeatherWidget4x2;
 
 public class ScreenServiceAndReceiver extends Service{
-	BroadcastReceiver broadcastReceiver;
+	private BroadcastReceiver broadcastReceiver;
+	public static long currentTIme;
 
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
 		Toast.makeText(getBaseContext(), "Service onStartCommand", Toast.LENGTH_SHORT).show();
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-		broadcastReceiver = new ScreenReceiver();
+		broadcastReceiver = new ScreenReceiver(currentTIme);
 		registerReceiver(broadcastReceiver, filter);
 
 		return super.onStartCommand(intent, flags, startId);
@@ -45,6 +46,10 @@ public class ScreenServiceAndReceiver extends Service{
 	private final class ScreenReceiver extends BroadcastReceiver {
 		private Calendar calendar;
 		private long timeInMilliseconds;
+
+		public ScreenReceiver (long currentTIme) {
+			timeInMilliseconds = currentTIme;
+		}
 
 		@Override
 		public void onReceive(final Context context, final Intent intent) {

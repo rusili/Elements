@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Calendar;
+
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
@@ -51,7 +53,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
 	}
 
-	public void setOnClickUpdate (Context context) {
+	private void setOnClickUpdate (Context context) {
 		Intent intent = new Intent(context, WeatherWidget4x2.class);
 		intent.setAction(ACTION_UPDATE_CLICK);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
@@ -71,7 +73,11 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
 
 			if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)){		// Checks to make sure the service is running. If not, restart the service.
+				Calendar calendar = Calendar.getInstance();
+				long timeInMillisecondsCurrent = calendar.getTimeInMillis();
+
 				context.startService(new Intent(context, ScreenServiceAndReceiver.class));
+				ScreenServiceAndReceiver.currentTIme = timeInMillisecondsCurrent;
 			}
 
 			Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
