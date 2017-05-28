@@ -11,7 +11,7 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import nyc.c4q.rusili.weatherwidget.R;
-import nyc.c4q.rusili.weatherwidget.utilities.ScreenMoniterService;
+import nyc.c4q.rusili.weatherwidget.utilities.ScreenServiceAndReceiver;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
@@ -31,11 +31,11 @@ public class ActivityOnboard extends AppIntro {
 	}
 
 	private void createService () {
-		startService(new Intent(ActivityOnboard.this, ScreenMoniterService.class));
+		startService(new Intent(ActivityOnboard.this, ScreenServiceAndReceiver.class));
 	}
 
 	private void killService(){
-		stopService(new Intent(ActivityOnboard.this, ScreenMoniterService.class));
+		stopService(new Intent(ActivityOnboard.this, ScreenServiceAndReceiver.class));
 	}
 
 	private void setSlides () {

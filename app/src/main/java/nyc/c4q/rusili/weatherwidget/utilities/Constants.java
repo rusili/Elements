@@ -9,4 +9,8 @@ public class Constants {
 	public interface SYMBOLS {
 		public static String DEGREE = "\u00b0";
 	}
+
+	public interface UPDATE_DELAY{
+		public static long MILLISECONDS = 3600000;
+	}
 }

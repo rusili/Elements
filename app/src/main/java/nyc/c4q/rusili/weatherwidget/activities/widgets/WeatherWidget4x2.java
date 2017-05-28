@@ -17,14 +17,16 @@ import nyc.c4q.rusili.weatherwidget.activities.configuration.ActivityConfigurati
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
 import nyc.c4q.rusili.weatherwidget.utilities.BaseWeatherWidget;
 import nyc.c4q.rusili.weatherwidget.utilities.IconInflater;
-import nyc.c4q.rusili.weatherwidget.utilities.ScreenMoniterService;
+import nyc.c4q.rusili.weatherwidget.utilities.ScreenServiceAndReceiver;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	private int numOfDays;
+
 	public static final String ACTION_UPDATE_CLICK = "4x2_UPDATE_CLICK";
 	public static final String ACTION_CONFIG_CLICK = "4x2_CONFIG_CLICK";
+
+	private int numOfDays;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -67,16 +69,17 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		super.onReceive(context, intent);
 
 		if (intent.getAction().equals("4x2_UPDATE_CLICK")) {
-			Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
 
-			if (!isMyServiceRunning(context, ScreenMoniterService.class)){
-				context.startService(new Intent(context, ScreenMoniterService.class));
+			if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)){		// Checks to make sure the service is running. If not, restart the service.
+				context.startService(new Intent(context, ScreenServiceAndReceiver.class));
 			}
 
+			Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
 			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 			onUpdate(context, appWidgetManager, appWidgetIds);
+
 		} else if (intent.getAction().equals("4x2_CONFIG_CLICK")) {
 			Toast.makeText(context, intent.getAction(), Toast.LENGTH_SHORT).show();
 
