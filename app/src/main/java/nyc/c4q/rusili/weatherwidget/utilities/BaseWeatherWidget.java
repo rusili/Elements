@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -79,7 +82,22 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 				  .build();
 		}
 		this.context = context;
-		mGoogleApiClient.connect();
+
+		if (isNetworkConnected(context)) {
+			mGoogleApiClient.connect();
+		} else {
+			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private boolean isNetworkConnected (Context context) {
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+			  activeNetwork.isConnectedOrConnecting();
+
+		return isConnected;
 	}
 
 	@Override
@@ -167,7 +185,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	}
 
 	@Override
-	public void onConnectionSuspended (int i) {}
+	public void onConnectionSuspended (int i) {
+	}
 
 	@Override
 	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {

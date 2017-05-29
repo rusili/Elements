@@ -6,6 +6,7 @@ import nyc.c4q.rusili.weatherwidget.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ForecastDay;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ResponseConditions;
 import nyc.c4q.rusili.weatherwidget.network.JSON.ResponseForecastDay;
+import nyc.c4q.rusili.weatherwidget.utilities.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +31,7 @@ public class RetroFitBase {
 
 	private RetrofitInterface connect () {
 		retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-			  .baseUrl("http://api.wunderground.com/")
+			  .baseUrl(Constants.API_URL.WUNDERGROUND)
 			  .addConverterFactory(GsonConverterFactory.create())
 			  .build();
 		RetrofitInterface retrofitInterface = retrofit.create(RetrofitInterface.class);

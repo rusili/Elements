@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 
 import nyc.c4q.rusili.weatherwidget.R;
 
-public class FragmentColor extends Fragment implements FragmentColorInterface.View{
+public class FragmentColor extends Fragment implements FragmentColorInterface.View {
 	private FragmentColorInterface.Presenter presenter;
 	private View view;
 
 	private int page;
 	private String title;
 
-	public static FragmentColor newInstance(int page, String title) {
+	public static FragmentColor newInstance (int page, String title) {
 		FragmentColor fragmentColor = new FragmentColor();
 		Bundle args = new Bundle();
 		args.putInt("Page", page);
@@ -26,7 +26,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		page = getArguments().getInt("Page", 0);
 		title = getArguments().getString("Title");

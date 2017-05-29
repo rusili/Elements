@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 import nyc.c4q.rusili.weatherwidget.activities.widgets.WeatherWidget4x2;
 
-public class ScreenServiceAndReceiver extends Service{
+public class ScreenServiceAndReceiver extends Service {
 	private BroadcastReceiver broadcastReceiver;
 	public static long currentTIme;
 
@@ -52,7 +52,7 @@ public class ScreenServiceAndReceiver extends Service{
 		}
 
 		@Override
-		public void onReceive(final Context context, final Intent intent) {
+		public void onReceive (final Context context, final Intent intent) {
 
 			if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
 				calendar = Calendar.getInstance();
@@ -65,15 +65,15 @@ public class ScreenServiceAndReceiver extends Service{
 					ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "WeatherWidget4x2");
 					int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 					Intent updateWidgetIntent = new Intent(context, WeatherWidget4x2.class);
-					updateWidgetIntent.setAction("4x2_UPDATE_CLICK");
+					updateWidgetIntent.setAction(Constants.ACTION.UPDATE_SCREEN);
 					updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 					sendBroadcast(updateWidgetIntent);
 				}
 			}
 		}
 
-		private boolean checkTime(long timeInMillisecondsParam){
-			if ((timeInMillisecondsParam-timeInMilliseconds)> Constants.UPDATE_DELAY.MILLISECONDS){
+		private boolean checkTime (long timeInMillisecondsParam) {
+			if ((timeInMillisecondsParam - timeInMilliseconds) > Constants.UPDATE_DELAY.MILLISECONDS) {
 				timeInMilliseconds = timeInMillisecondsParam;
 				return true;
 			}

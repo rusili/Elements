@@ -34,7 +34,7 @@ public class ActivityOnboard extends AppIntro {
 		startService(new Intent(ActivityOnboard.this, ScreenServiceAndReceiver.class));
 	}
 
-	private void killService(){
+	private void killService () {
 		stopService(new Intent(ActivityOnboard.this, ScreenServiceAndReceiver.class));
 	}
 
@@ -50,18 +50,18 @@ public class ActivityOnboard extends AppIntro {
 	}
 
 	@Override
-	public void onSkipPressed(Fragment currentFragment) {
+	public void onSkipPressed (Fragment currentFragment) {
 		super.onSkipPressed(currentFragment);
 		endActivity();
 	}
 
 	@Override
-	public void onDonePressed(Fragment currentFragment) {
+	public void onDonePressed (Fragment currentFragment) {
 		super.onDonePressed(currentFragment);
 		endActivity();
 	}
 
-	private void endActivity(){
+	private void endActivity () {
 		finish();
 	}
 

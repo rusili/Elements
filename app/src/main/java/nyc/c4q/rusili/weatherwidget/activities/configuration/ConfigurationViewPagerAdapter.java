@@ -10,7 +10,7 @@ import nyc.c4q.rusili.weatherwidget.activities.configuration.fonts.FragmentFont;
 public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 	private static int NUM_PAGES = 3;
 
-	public ConfigurationViewPagerAdapter(FragmentManager fragmentManager){
+	public ConfigurationViewPagerAdapter (FragmentManager fragmentManager) {
 		super(fragmentManager);
 	}
 
@@ -23,10 +23,11 @@ public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 				return FragmentFont.newInstance(1, "Fonts");
 			default:
 				return null;
-		}	}
+		}
+	}
 
 	@Override
-	public CharSequence getPageTitle(int position) {
+	public CharSequence getPageTitle (int position) {
 		return "Page " + position;
 	}
 

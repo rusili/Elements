@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import nyc.c4q.rusili.weatherwidget.R;
 import nyc.c4q.rusili.weatherwidget.activities.configuration.color.FragmentColor;
 
-public class FragmentFont extends Fragment implements FragmentFontInterface.View{
+public class FragmentFont extends Fragment implements FragmentFontInterface.View {
 	private FragmentFontInterface.Presenter presenter;
 	private View view;
 
 	private int page;
 	private String title;
 
-	public static FragmentFont newInstance(int page, String title) {
+	public static FragmentFont newInstance (int page, String title) {
 		FragmentFont fragmentFont = new FragmentFont();
 		Bundle args = new Bundle();
 		args.putInt("Page", page);
@@ -27,7 +27,7 @@ public class FragmentFont extends Fragment implements FragmentFontInterface.View
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		page = getArguments().getInt("Page", 0);
 		title = getArguments().getString("Title");

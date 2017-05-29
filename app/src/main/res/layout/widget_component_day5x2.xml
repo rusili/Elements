@@ -45,10 +45,10 @@
                     android:layout_alignParentLeft="true"
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/height2_day_horizontal_padding"
-                    android:text="TU"
                     android:textAllCaps="true"
                     android:textColor="@color/light_sky_blue"
                     android:textSize="@dimen/height2_day_weekday_fontsize"
+                    android:text="@string/day_weekday_default"
                     />
 
                 <TextView
@@ -57,9 +57,9 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
                     android:paddingRight="@dimen/height2_day_horizontal_padding"
-                    android:text="12"
                     android:textColor="@color/textMain"
                     android:textSize="@dimen/height2_day_date_fontsize"
+                    android:text="@string/day_date_default"
                     />
             </RelativeLayout>
         </FrameLayout>
@@ -80,9 +80,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="27.5"
                 android:gravity="top|center_horizontal"
-                android:text="45"
                 android:textColor="@color/textMain"
                 android:textSize="@dimen/height2_day_highlowtemp_fontsize"
+                android:text="@string/day_high_default"
                 />
 
             <ImageView
@@ -91,7 +91,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="45"
-                android:paddingBottom="2dp"
+                android:paddingBottom="8dp"
                 android:paddingTop="8dp"
                 android:scaleType="fitCenter"
                 />
@@ -102,9 +102,9 @@
                 android:layout_height="0dp"
                 android:layout_weight="27.5"
                 android:gravity="bottom|center_horizontal"
-                android:text="35"
                 android:textColor="@color/textMain"
                 android:textSize="@dimen/height2_day_highlowtemp_fontsize"
+                android:text="@string/day_low_default"
                 />
         </LinearLayout>
 

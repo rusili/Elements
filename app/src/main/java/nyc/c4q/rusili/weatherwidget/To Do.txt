@@ -1,8 +1,7 @@
 To Do for Launch:
-Change default look
-Make sure it doesn't stop updating:
-    Update when screen unlock? (Service)
-    or use ASync
+UI
+Onboard
+Check internet onCreate of widget
 
 New Features:
 OnClick to website
