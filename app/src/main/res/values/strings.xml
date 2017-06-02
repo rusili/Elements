@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeatherWidget</string>
+    <string name="app_name">SimplyWeather</string>
     <string name="wunderground_api_key">b2cac2700e06dc8e</string>
 
     <string name="main_weekday_default"></string>

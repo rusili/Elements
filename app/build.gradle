@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "nyc.c4q.rusili.weatherwidget"
+        applicationId "nyc.c4q.rusili.SimplyWeather"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

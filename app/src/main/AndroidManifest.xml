@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="nyc.c4q.rusili.weatherwidget">
+    package="nyc.c4q.rusili.SimplyWeather">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <action android:name="android.appwidget.action.APPWIDGET_DISABLED" />
 
     <application
         android:allowBackup="true"
@@ -22,23 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.configuration.ActivityConfiguration">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
 
-        <!-- 4x1 -->
-        <!--<receiver android:name=".activities.widgets.WeatherWidget4x1" android:label="Weather 4x1">-->
+        <!--<activity android:name=".activities.configuration.ActivityConfiguration">-->
             <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+                <!--<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />-->
             <!--</intent-filter>-->
-            <!--<meta-data android:name="android.appwidget.provider"-->
-                       <!--android:resource="@xml/widget_weather_4x1"/>-->
-        <!--</receiver>-->
+        <!--</activity>-->
 
         <!-- 4x2 -->
-        <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="Weather 4x2"
+        <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="SimplyWeather"
                   android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">
 
             <intent-filter>
@@ -51,29 +46,12 @@
                        android:resource="@xml/widget_weather_4x2"/>
         </receiver>
 
-        <service android:name=".utilities.ScreenServiceAndReceiver" android:label="ScreenMonitorService">
+        <service android:name=".activities.widgets.ScreenServiceAndReceiver" android:label="ScreenMonitorService">
             <intent-filter>
                 <action android:name=".utilities.ScreenMoniterService" />
             </intent-filter>
         </service>
 
-        <!--&lt;!&ndash; 5x1 &ndash;&gt;-->
-        <!--<receiver android:name=".activities.widgets.WeatherWidget5x1" android:label="Weather 5x1">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-            <!--</intent-filter>-->
-            <!--<meta-data android:name="android.appwidget.provider"-->
-                       <!--android:resource="@xml/widget_weather_5x1"/>-->
-        <!--</receiver>-->
-
-        <!--&lt;!&ndash; 5x2 &ndash;&gt;-->
-        <!--<receiver android:name=".activities.widgets.WeatherWidget5x2" android:label="Weather 5x2">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-            <!--</intent-filter>-->
-            <!--<meta-data android:name="android.appwidget.provider"-->
-                       <!--android:resource="@xml/widget_weather_5x2"/>-->
-        <!--</receiver>-->
     </application>
 
 </manifest>

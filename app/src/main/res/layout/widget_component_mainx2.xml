@@ -38,16 +38,16 @@
                 android:textSize="22sp"
                 />
 
-            <TextView
-                android:id="@+id/widget_component_main_onClickDebug"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@id/widget_component_main_weekday_height2"
-                android:gravity="bottom"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/widget_component_main_onClickDebug"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_toRightOf="@id/widget_component_main_weekday_height2"-->
+                <!--android:gravity="bottom"-->
+                <!--android:textAllCaps="true"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="12sp"-->
+                <!--/>-->
 
             <TextView
                 android:id="@+id/widget_component_main_day_height2"
