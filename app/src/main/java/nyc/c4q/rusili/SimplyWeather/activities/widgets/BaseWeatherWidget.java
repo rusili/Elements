@@ -45,6 +45,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public IconInflater iconInflater;
 	public RetroFitBase retroFitBase;
 	public Location mLastLocation;
+	public static BaseWeatherWidget instance = null;
 
 	public RemoteViews remoteViews;
 
@@ -83,6 +84,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 				  .build();
 		}
 		this.context = context;
+		instance = this;
 
 		if (isNetworkConnected(context)) {
 			mGoogleApiClient.connect();
@@ -108,7 +110,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 			  == PackageManager.PERMISSION_GRANTED) {
 			locationPermissionGranted = true;
 		} else {
-			ActivityCompat.requestPermissions((Activity) context,
+			ActivityCompat.requestPermissions((Activity) context.getApplicationContext(),
 				  new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}

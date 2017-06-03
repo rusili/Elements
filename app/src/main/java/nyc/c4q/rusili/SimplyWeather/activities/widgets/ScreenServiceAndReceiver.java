@@ -24,7 +24,7 @@ public class ScreenServiceAndReceiver extends Service {
 		broadcastReceiver = new ScreenReceiver(currentTIme);
 		registerReceiver(broadcastReceiver, filter);
 
-		return START_STICKY;
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private static ScreenServiceAndReceiver screenServiceAndReceiver = null;
+	private final Handler handler = new Handler();
+
 	private int numOfDays;
 
 	@Override
@@ -70,12 +73,19 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN) || intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
 
 			if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
-				Calendar calendar = Calendar.getInstance();
-				long timeInMillisecondsCurrent = calendar.getTimeInMillis();
 
 				context.startService(new Intent(context, ScreenServiceAndReceiver.class));
-				screenServiceAndReceiver = screenServiceAndReceiver.getServiceObject();
-				ScreenServiceAndReceiver.currentTIme = timeInMillisecondsCurrent;
+
+				handler.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						Calendar calendar = Calendar.getInstance();
+						long timeInMillisecondsCurrent = calendar.getTimeInMillis();
+
+						screenServiceAndReceiver = screenServiceAndReceiver.getServiceObject();
+						ScreenServiceAndReceiver.currentTIme = timeInMillisecondsCurrent;
+					}
+				}, 100);
 			}
 
 			if  (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)){
