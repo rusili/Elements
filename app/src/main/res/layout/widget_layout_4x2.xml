@@ -16,31 +16,56 @@
         >
     </include>
 
-    <include
-        android:id="@+id/widget_layout_4x2_include_day2"
-        layout="@layout/widget_component_day2x2"
+    <ViewFlipper
+        android:id="@+id/widget_layout_4x2_viewflipper"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="20"
-        android:orientation="vertical"
-        />
+        android:layout_weight="60"
+        >
 
-    <include
-        android:id="@+id/widget_layout_4x2_include_day3"
-        layout="@layout/widget_component_day3x2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="20"
-        android:orientation="vertical"
-        />
+        <LinearLayout
+            android:id="@+id/widget_4x2_viewflip_days"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <include
+                android:id="@+id/widget_layout_4x2_include_day2"
+                layout="@layout/widget_component_day2x2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:orientation="vertical"
+                />
 
-    <include
-        android:id="@+id/widget_layout_4x2_include_day4"
-        layout="@layout/widget_component_day4x2"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="20"
-        android:orientation="vertical"
-        />
+            <include
+                android:id="@+id/widget_layout_4x2_include_day3"
+                layout="@layout/widget_component_day3x2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:orientation="vertical"
+                />
+
+            <include
+                android:id="@+id/widget_layout_4x2_include_day4"
+                layout="@layout/widget_component_day4x2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:orientation="vertical"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/widget_4x2_viewflip_hours"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+        </LinearLayout>
+
+    </ViewFlipper>
 
 </LinearLayout>

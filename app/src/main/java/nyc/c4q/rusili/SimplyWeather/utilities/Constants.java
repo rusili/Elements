@@ -22,6 +22,7 @@ public class Constants {
 		public static String UPDATE_SCREEN = "ACTION_UPDATE_SCREEN";
 		public static String UPDATE_CLICK = "ACTION_UPDATE_CLICK";
 		public static String CONFIG_CLICK = "ACTION_CONFIG_CLICK";
+		public static String VIEWFLIPPER_CLICK = "ACTION_VIEWFLIPPER_CLICK";
 	}
 
 	public interface UPDATE_DELAY {

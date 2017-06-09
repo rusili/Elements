@@ -26,8 +26,7 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private static ScreenServiceAndReceiver screenServiceAndReceiver = null;
 	private final Handler handler = new Handler();
-
-	private int numOfDays;
+	private boolean isViewFlipperOpen = false;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -38,6 +37,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 
 			setOnClickUpdate(context);
 			//setOnClickConfig(context, widgetID);
+			setViewFlipper(context);
 
 			iconInflater = new IconInflater();
 
@@ -51,6 +51,15 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		intent.setAction(Constants.ACTION.CONFIG_CLICK);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+	}
+
+	private void setViewFlipper (Context context){
+		Toast.makeText(context, "setViewFlippertoHours", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(context, WeatherWidget4x2.class);
+		intent.setAction(Constants.ACTION.VIEWFLIPPER_CLICK);
+		intent.putExtra("isOpen", isViewFlipperOpen);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_include_main2, pendingIntent);
 	}
 
 	private void setOnClickUpdate (Context context) {
@@ -69,13 +78,14 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	@Override
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+		ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
+		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
+		RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget_layout_4x2);
 
 		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN) || intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
-
 			if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
-
 				context.startService(new Intent(context, ScreenServiceAndReceiver.class));
-
 				handler.postDelayed(new Runnable() {
 					@Override
 					public void run() {
@@ -91,12 +101,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			if  (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)){
 				Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
 			}
-
-			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-			ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
-			int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
-			onUpdate(context, appWidgetManager, appWidgetIds);
-
+			appWidgetManager.updateAppWidget(appWidgetIds, root);
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
 			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
 			Bundle bundle = new Bundle();
@@ -104,6 +109,13 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			intentConfig.putExtras(bundle);
 			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intentConfig);
+		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
+			if (intent.getBooleanExtra("isOpen", false) == false) {
+				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
+			} else if (intent.getBooleanExtra("isOpen", false) == true){
+				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
+			}
+			appWidgetManager.updateAppWidget(appWidgetIds, root);
 		}
 	}
 
