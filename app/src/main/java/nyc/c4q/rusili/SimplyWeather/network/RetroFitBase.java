@@ -2,10 +2,12 @@ package nyc.c4q.rusili.SimplyWeather.network;
 
 import android.util.Log;
 
+import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseConditions;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseHourly;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,9 +79,28 @@ public class RetroFitBase {
 		});
 	}
 
+	public void getHourlyForecast () {
+		RetrofitInterface retrofitInterface = connect();
+		Call <ResponseHourly> getResponse = retrofitInterface.getHourly(apiKey, zipCode);
+		getResponse.enqueue(new Callback <ResponseHourly>() {
+			@Override
+			public void onResponse (Call <ResponseHourly> call, Response <ResponseHourly> response) {
+				HourlyForecast[] jsonResponse = response.body().getHourly_Forecast();
+				if (listener != null) {
+					listener.onHourlyRetrieved(jsonResponse);
+				}
+			}
+
+			@Override
+			public void onFailure (Call <ResponseHourly> call, Throwable t) {
+				Log.d("onFailure: ", t.toString());
+			}
+		});
+	}
+
 	public interface RetrofitListener {
 		public void onConditionsRetrieved (CurrentObservation currentObservation);
-
 		public void onForecastDaysRetrieved (ForecastDay[] forecastDays);
+		public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts);
 	}
 }

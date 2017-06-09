@@ -95,7 +95,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 						screenServiceAndReceiver = screenServiceAndReceiver.getServiceObject();
 						ScreenServiceAndReceiver.currentTIme = timeInMillisecondsCurrent;
 					}
-				}, 100);
+				}, 500);
 			}
 
 			if  (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)){
