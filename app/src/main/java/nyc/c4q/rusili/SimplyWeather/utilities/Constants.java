@@ -26,6 +26,6 @@ public class Constants {
 	}
 
 	public interface UPDATE_DELAY {
-		public static long MILLISECONDS = 60000;
+		public static long MILLISECONDS = 3600000;
 	}
 }
