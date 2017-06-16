@@ -44,6 +44,10 @@
     <dimen name="height2_day_weekday_fontsize">13sp</dimen>
     <dimen name="height2_day_date_fontsize">20sp</dimen>
     <dimen name="height2_day_highlowtemp_fontsize">20sp</dimen>
+
+    <!-- Hours -->
+    <!-- Font -->
+    <dimen name="height2_hours_temp_fontsize">24sp</dimen>
     <!-- Height x2 -->
 
 </resources>

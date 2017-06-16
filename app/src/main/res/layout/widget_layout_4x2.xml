@@ -73,6 +73,24 @@
                 android:orientation="vertical"
                 />
 
+            <include
+                android:id="@+id/widget_layout_4x2_include_hour3"
+                layout="@layout/widget_component_hour2x3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:orientation="vertical"
+                />
+
+            <include
+                android:id="@+id/widget_layout_4x2_include_hour4"
+                layout="@layout/widget_component_hour2x4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:orientation="vertical"
+                />
+
         </LinearLayout>
 
     </ViewFlipper>

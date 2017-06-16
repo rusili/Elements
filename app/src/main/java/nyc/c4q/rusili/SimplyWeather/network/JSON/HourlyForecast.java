@@ -11,9 +11,14 @@ public class HourlyForecast {
 
 	public class FCTTIME{
 		String hour;
+		String ampm;
 
 		public String getHour () {
 			return hour;
+		}
+
+		public String getAmpm () {
+			return ampm;
 		}
 	}
 

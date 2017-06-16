@@ -54,7 +54,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	private boolean screenOff;
 	public int zipCode = 0;
 	public int widgetID;
-	private int numOfDays;
+	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
 	public CharSequence ifSingleDigit (String format) {
 		CharSequence charSequence = format;
@@ -148,7 +148,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 			@Override
 			public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts) {
-				updateHours(appWidgetManager, widgetID, hourlyForecasts);
+				updateHours(context, appWidgetManager, widgetID, hourlyForecasts, numOfDays);
 			}
 		});
 		retroFitBase.getConditions();
@@ -156,13 +156,29 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		retroFitBase.getHourlyForecast();
 	}
 
-	private void updateHours (AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts) {
-		remoteViews.setTextViewText(R.id.widget_component_hour_hour2, "5");
-		remoteViews.setTextViewText(R.id.widget_component_hour_period2, "pm");
-		//remoteViews.setImageViewResource(R.id.widget_component_hour_icon2, );
-		remoteViews.setTextViewText(R.id.widget_component_hour_temp2, "81");
+	private void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
+		int resID = 0;
+
+		for (int i = 1; i < numOfDays; i++) {
+			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
+			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[i].getFCTTIME().getHour()));
+			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
+			remoteViews.setTextViewText(resID, hourlyForecasts[i].getFCTTIME().getAmpm());
+			//resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
+			//remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
+			remoteViews.setTextViewText(resID, hourlyForecasts[i].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+		}
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
+	}
+
+	private String is12Hour (String input) {
+		int hour = Integer.parseInt(input);
+		if (hour > 12){
+			return String.valueOf(hour - 12);
+		}
+		return input;
 	}
 
 	private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {

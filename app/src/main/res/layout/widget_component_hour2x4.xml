@@ -39,7 +39,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/widget_component_hour_hour2"
+                    android:id="@+id/widget_component_hour_hour4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -52,7 +52,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/widget_component_hour_period2"
+                    android:id="@+id/widget_component_hour_period4"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -81,7 +81,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/widget_component_hour_temp2"
+                    android:id="@+id/widget_component_hour_temp4"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="27.5"
@@ -92,7 +92,7 @@
                     />
 
                 <ImageView
-                    android:id="@+id/widget_component_hour_icon2"
+                    android:id="@+id/widget_component_hour_icon4"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_gravity="center_horizontal"

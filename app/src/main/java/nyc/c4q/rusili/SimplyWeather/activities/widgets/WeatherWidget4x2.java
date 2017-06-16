@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.Calendar;
+
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
@@ -25,6 +27,8 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	private static ScreenServiceAndReceiver screenServiceAndReceiver = null;
 	private final Handler handler = new Handler();
 	private boolean isViewFlipperOpen = false;
+	private Calendar calendar;
+	private long timeInMilliseconds;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -73,6 +77,14 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		super.updateDays(context, appWidgetManager, widgetID, forecastDays, numOfDays);
 	}
 
+	private boolean checkTime (long timeInMillisecondsParam) {
+		if ((timeInMillisecondsParam - timeInMilliseconds) > Constants.UPDATE_DELAY.MILLISECONDS) {
+			timeInMilliseconds = timeInMillisecondsParam;
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
@@ -81,18 +93,24 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 		RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget_layout_4x2);
 
-		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN) || intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
-			if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
-				context.startService(new Intent(context, ScreenServiceAndReceiver.class));
-			}
+		calendar = Calendar.getInstance();
+		long timeInMillisecondsCurrent = calendar.getTimeInMillis();
 
-			if  (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)){
-				Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
-			} else {
+		if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
+			context.startService(new Intent(context, ScreenServiceAndReceiver.class));
+		}
+
+		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
+			if (checkTime(timeInMillisecondsCurrent)){
 				Toast.makeText(context, "Screen Updated!", Toast.LENGTH_SHORT).show();
+				onUpdate(context, appWidgetManager, appWidgetIds);
 			}
 
+		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
+			Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
+			timeInMilliseconds = timeInMillisecondsCurrent;
 			onUpdate(context, appWidgetManager, appWidgetIds);
+
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
 			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
 			Bundle bundle = new Bundle();
@@ -100,6 +118,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			intentConfig.putExtras(bundle);
 			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intentConfig);
+
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
 				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
