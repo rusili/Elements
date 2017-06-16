@@ -148,11 +148,21 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 			@Override
 			public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts) {
-				//
+				updateHours(appWidgetManager, widgetID, hourlyForecasts);
 			}
 		});
 		retroFitBase.getConditions();
 		retroFitBase.getForecastDay();
+		retroFitBase.getHourlyForecast();
+	}
+
+	private void updateHours (AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts) {
+		remoteViews.setTextViewText(R.id.widget_component_hour_hour2, "5");
+		remoteViews.setTextViewText(R.id.widget_component_hour_period2, "pm");
+		//remoteViews.setImageViewResource(R.id.widget_component_hour_icon2, );
+		remoteViews.setTextViewText(R.id.widget_component_hour_temp2, "81");
+
+		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
 	private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {

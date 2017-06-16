@@ -13,4 +13,8 @@
     <string name="day_high_default"></string>
     <string name="day_low_default"></string>
 
+    <string name="hour_hour_default"></string>
+    <string name="hour_period_default"></string>
+    <string name="hour_temp_default"></string>
+
 </resources>

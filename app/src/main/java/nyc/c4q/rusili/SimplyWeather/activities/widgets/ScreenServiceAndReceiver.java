@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -58,6 +59,7 @@ public class ScreenServiceAndReceiver extends Service {
 			if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
 				calendar = Calendar.getInstance();
 				long timeInMillisecondsCurrent = calendar.getTimeInMillis();
+				Toast.makeText(context, "Service ScreenCheck!", Toast.LENGTH_SHORT).show();
 
 				if (checkTime(timeInMillisecondsCurrent)) {            // Only updates if last update was over an hour ago
 					AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);

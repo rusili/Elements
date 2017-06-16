@@ -66,7 +66,7 @@ public class RetroFitBase {
 			@Override
 			public void onResponse (Call <ResponseConditions> call, Response <ResponseConditions> response) {
 				CurrentObservation jsonResponse = response.body().getCurrent_observation();
-				Log.d("URL: ", call.request().url().toString());
+				Log.d("Conditions URL: ", call.request().url().toString());
 				if (listener != null) {
 					listener.onConditionsRetrieved(jsonResponse);
 				}
@@ -86,6 +86,7 @@ public class RetroFitBase {
 			@Override
 			public void onResponse (Call <ResponseHourly> call, Response <ResponseHourly> response) {
 				HourlyForecast[] jsonResponse = response.body().getHourly_Forecast();
+				Log.d("Hourly URL: ", call.request().url().toString());
 				if (listener != null) {
 					listener.onHourlyRetrieved(jsonResponse);
 				}
