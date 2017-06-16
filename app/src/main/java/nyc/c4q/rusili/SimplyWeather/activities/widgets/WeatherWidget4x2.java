@@ -7,7 +7,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -22,8 +21,6 @@ import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	private static ScreenServiceAndReceiver screenServiceAndReceiver = null;
-	private final Handler handler = new Handler();
 	private boolean isViewFlipperOpen = false;
 
 	@Override
@@ -52,7 +49,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	}
 
 	private void setViewFlipper (Context context){
-		Toast.makeText(context, "setViewFlippertoHours", Toast.LENGTH_SHORT).show();
 		Intent intent = new Intent(context, WeatherWidget4x2.class);
 		intent.setAction(Constants.ACTION.VIEWFLIPPER_CLICK);
 		intent.putExtra("isOpen", isViewFlipperOpen);

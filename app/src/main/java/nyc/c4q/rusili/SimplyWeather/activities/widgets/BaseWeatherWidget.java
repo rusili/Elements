@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,7 +52,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public RemoteViews remoteViews;
 
 	public boolean locationPermissionGranted;
-	private boolean screenOff;
 	public int zipCode = 0;
 	public int widgetID;
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
@@ -158,19 +158,33 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 	private void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
 		int resID = 0;
+		int nextHourOffset = 0;
+
+		if (before30Minutes()){
+			nextHourOffset = 1;
+		}
 
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[i].getFCTTIME().getHour()));
+			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[i-nextHourOffset].getFCTTIME().getHour()));
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[i].getFCTTIME().getAmpm());
-			//resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			//remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextViewText(resID, hourlyForecasts[i-nextHourOffset].getFCTTIME().getAmpm());
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[i].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextViewText(resID, hourlyForecasts[i-nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+			resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
+			remoteViews.setImageViewResource(resID, iconInflater.choose(hourlyForecasts[i-nextHourOffset].getIcon()));
 		}
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
+	}
+
+	private boolean before30Minutes () {
+		Calendar calendar = Calendar.getInstance();
+		Log.d("Minutes", String.valueOf(calendar.get(Calendar.MINUTE)));
+		if (calendar.get(Calendar.MINUTE) < 30){
+			return true;
+		}
+		return false;
 	}
 
 	private String is12Hour (String input) {
