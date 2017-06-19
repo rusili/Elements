@@ -159,22 +159,22 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	private void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
 		int resID = 0;
 		int nextHourOffset = 0;
+		int hour = 1;
 
 		if (before30Minutes()){
 			nextHourOffset = 1;
 		}
-
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[i-nextHourOffset].getFCTTIME().getHour()));
+			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[i-nextHourOffset].getFCTTIME().getAmpm());
+			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getFCTTIME().getAmpm());
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[i-nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
 			resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setImageViewResource(resID, iconInflater.choose(hourlyForecasts[i-nextHourOffset].getIcon()));
+			remoteViews.setImageViewResource(resID, iconInflater.choose(hourlyForecasts[hour-nextHourOffset].getIcon()));
+			hour = hour + (i+1);
 		}
-
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
