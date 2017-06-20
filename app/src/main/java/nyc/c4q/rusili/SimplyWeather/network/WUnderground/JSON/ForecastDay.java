@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.network.JSON;
+package nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON;
 
 public class ForecastDay {
 	date date;

@@ -32,10 +32,10 @@ import java.util.List;
 import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
-import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.CurrentObservation;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.HourlyForecast;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
@@ -166,7 +166,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		}
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
+			remoteViews.setTextViewText(resID, change24to12hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getFCTTIME().getAmpm());
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
@@ -187,7 +187,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		return false;
 	}
 
-	private String is12Hour (String input) {
+	private String change24to12hour (String input) {
 		int hour = Integer.parseInt(input);
 		if (hour > 12){
 			return String.valueOf(hour - 12);

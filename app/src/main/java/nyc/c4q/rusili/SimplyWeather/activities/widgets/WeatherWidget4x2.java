@@ -14,9 +14,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
+import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 

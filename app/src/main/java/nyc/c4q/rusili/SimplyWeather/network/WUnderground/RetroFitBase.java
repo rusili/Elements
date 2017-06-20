@@ -1,13 +1,13 @@
-package nyc.c4q.rusili.SimplyWeather.network;
+package nyc.c4q.rusili.SimplyWeather.network.WUnderground;
 
 import android.util.Log;
 
-import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseConditions;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseHourly;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.HourlyForecast;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseConditions;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.CurrentObservation;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseHourly;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;

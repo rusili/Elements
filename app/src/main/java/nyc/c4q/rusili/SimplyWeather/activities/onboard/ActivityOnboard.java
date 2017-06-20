@@ -11,7 +11,7 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.activities.widgets.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;

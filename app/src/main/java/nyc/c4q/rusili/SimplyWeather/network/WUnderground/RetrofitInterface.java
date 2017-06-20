@@ -1,8 +1,8 @@
-package nyc.c4q.rusili.SimplyWeather.network;
+package nyc.c4q.rusili.SimplyWeather.network.WUnderground;
 
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseConditions;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseHourly;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseConditions;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseHourly;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

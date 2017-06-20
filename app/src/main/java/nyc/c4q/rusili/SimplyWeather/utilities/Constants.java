@@ -1,6 +1,10 @@
 package nyc.c4q.rusili.SimplyWeather.utilities;
 
-public class Constants {
+public class Constants{
+
+	public interface DEFAULT {
+		public static int INT = 222;
+	}
 
 	public interface API_URL {
 		public static String WUNDERGROUND = "http://api.wunderground.com/";
