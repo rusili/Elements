@@ -10,13 +10,11 @@ import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -26,7 +24,7 @@ import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 
-public class GoogleLocationAPI implements GoogleLocationAPIInterface , GoogleApiClient.OnConnectionFailedListener{
+public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	private static GoogleLocationAPI googleLocationAPI;
@@ -61,8 +59,7 @@ public class GoogleLocationAPI implements GoogleLocationAPIInterface , GoogleApi
 		}
 	}
 
-	@Override
-	public boolean isNetworkConnected (Context context) {
+	private boolean isNetworkConnected (Context context) {
 		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -74,7 +71,7 @@ public class GoogleLocationAPI implements GoogleLocationAPIInterface , GoogleApi
 	}
 
 	@Override
-	public int getLocation (Location location) {
+	public int getLocationZipCode (Location location) {
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		try {
 			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -88,7 +85,7 @@ public class GoogleLocationAPI implements GoogleLocationAPIInterface , GoogleApi
 
 	@Override
 	public void onConnected (@Nullable Bundle bundle) {
-		getLocation(checkPermissions());
+		getLocationZipCode(checkPermissions());
 	}
 
 	private Location checkPermissions(){
@@ -103,10 +100,4 @@ public class GoogleLocationAPI implements GoogleLocationAPIInterface , GoogleApi
 		}
 		return LocationServices.FusedLocationApi.getLastLocation(googleAPIClient);
 	}
-
-	@Override
-	public void onConnectionSuspended (int i) {}
-
-	@Override
-	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {}
 }
