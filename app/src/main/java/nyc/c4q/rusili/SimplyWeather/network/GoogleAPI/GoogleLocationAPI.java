@@ -28,8 +28,9 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	private static GoogleLocationAPI googleLocationAPI;
-	private GoogleApiClient googleAPIClient;
+	private static GoogleApiClient googleAPIClient;
 
+	private GoogleLocationAPILIstener lIstener;
 	private boolean locationPermissionGranted = false;
 	private Context context;
 
@@ -42,10 +43,13 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 		return googleLocationAPI;
 	}
 
-	@Override
-	public void startGoogleAPIClient (Context context, GoogleApiClient googleApiClient) {
-		if (googleApiClient == null) {
-			googleApiClient = new GoogleApiClient.Builder(context)
+	public void setRetrofitListener (GoogleLocationAPILIstener googleLocationAPILIstener) {
+		this.lIstener = googleLocationAPILIstener;
+	}
+
+	private void startGoogleAPIClient (Context context) {
+		if (googleAPIClient == null) {
+			googleAPIClient = new GoogleApiClient.Builder(context)
 				  .addConnectionCallbacks(this)
 				  .addOnConnectionFailedListener(this)
 				  .addApi(LocationServices.API)
@@ -53,7 +57,7 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 		}
 
 		if (isNetworkConnected(context)) {
-			googleApiClient.connect();
+			googleAPIClient.connect();
 		} else {
 			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
 		}
@@ -71,7 +75,11 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	}
 
 	@Override
-	public int getLocationZipCode (Location location) {
+	public void getZipCode (Context context) {
+		startGoogleAPIClient(context);
+	}
+
+	private int getLocation(Location location){
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		try {
 			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -85,7 +93,9 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 
 	@Override
 	public void onConnected (@Nullable Bundle bundle) {
-		getLocationZipCode(checkPermissions());
+		if (lIstener != null) {
+			lIstener.onConnection(getLocation(checkPermissions()));
+		}
 	}
 
 	private Location checkPermissions(){
@@ -99,5 +109,9 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}
 		return LocationServices.FusedLocationApi.getLastLocation(googleAPIClient);
+	}
+
+	public interface GoogleLocationAPILIstener{
+		void onConnection(int zipCode);
 	}
 }

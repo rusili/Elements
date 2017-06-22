@@ -32,10 +32,10 @@ import java.util.List;
 import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.CurrentObservation;
-import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.HourlyForecast;
-import nyc.c4q.rusili.SimplyWeather.network.WUnderground.RetroFitBase;
+import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
+import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
+import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
