@@ -16,16 +16,7 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	public WeatherPresenter(Weather4x2View weather4x2View){
 		this.weather4x2View = weather4x2View;
-	}
-
-	@Override
-	public void subscribe () {
-
-	}
-
-	@Override
-	public void unsubscribe () {
-
+		initialize();
 	}
 
 	@Override

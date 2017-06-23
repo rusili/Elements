@@ -6,8 +6,6 @@ import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseConditions
 
 public interface BaseViewInterface<T> {
 
-	void setPresenter(T presenter);
-
 	void initialize (Context context);
 
 	void updateWidget (ResponseConditionsForecast10DayHourly jsonObject);

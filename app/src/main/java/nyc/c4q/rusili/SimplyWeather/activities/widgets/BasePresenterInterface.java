@@ -1,10 +1,6 @@
 package nyc.c4q.rusili.SimplyWeather.activities.widgets;
 
-public interface BasePresenterInterface {
-
-	void subscribe();
-
-	void unsubscribe();
+public interface BasePresenterInterface<T> {
 
 	void initialize();
 

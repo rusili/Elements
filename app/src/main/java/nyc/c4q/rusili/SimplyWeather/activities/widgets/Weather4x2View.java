@@ -10,6 +10,7 @@ import android.widget.RemoteViews;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseConditionsForecast10DayHourly;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
@@ -17,6 +18,7 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	private WeatherPresenter weatherPresenter;
 	private Context context;
 	private RemoteViews remoteViews;
+	private IconInflater iconInflater;
 
 	private boolean viewFlipperHours = false;
 	private int widgetID;
@@ -40,11 +42,10 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	}
 
 	@Override
-	public void setPresenter (Object presenter) {}
-
-	@Override
 	public void initialize (Context context) {
 		this.context = context;
+		iconInflater = new IconInflater();
+
 		setOnClickListeners(context);
 	}
 
@@ -79,7 +80,7 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 
 	@Override
 	public void updateWidget (ResponseConditionsForecast10DayHourly jsonObject) {
-
+		//Need code here
 	}
 
 	public Context getContext () {
