@@ -6,14 +6,12 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
@@ -87,14 +85,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
 			Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
 			onUpdate(context, appWidgetManager, appWidgetIds);
-
-		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
-			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("Data", getClass().getName() + "/" + widgetID);
-			intentConfig.putExtras(bundle);
-			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			context.startActivity(intentConfig);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {

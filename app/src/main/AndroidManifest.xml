@@ -26,12 +26,6 @@
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".activities.configuration.ActivityConfiguration">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-
         <!-- 4x2 -->
         <receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="SimplyWeather"
                   android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">
@@ -52,6 +46,9 @@
             </intent-filter>
         </service>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="16efebd9e22f28d04ae0259543180c744789589c" />
     </application>
 
 </manifest>

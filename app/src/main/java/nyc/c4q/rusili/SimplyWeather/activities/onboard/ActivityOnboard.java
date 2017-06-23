@@ -7,9 +7,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
+import com.crashlytics.android.Crashlytics;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
+import io.fabric.sdk.android.Fabric;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.widgets.ScreenServiceAndReceiver;
 
@@ -20,6 +22,7 @@ public class ActivityOnboard extends AppIntro {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Fabric.with(this, new Crashlytics());
 		initialize();
 	}
 

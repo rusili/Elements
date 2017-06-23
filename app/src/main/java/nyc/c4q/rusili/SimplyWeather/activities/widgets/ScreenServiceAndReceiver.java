@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -60,7 +59,6 @@ public class ScreenServiceAndReceiver extends Service {
 				long timeInMillisecondsCurrent = calendar.getTimeInMillis();
 
 				if (checkTime(timeInMillisecondsCurrent)) {            // Only updates if last update was over an hour ago
-					Toast.makeText(context, "Screen Updated!", Toast.LENGTH_SHORT).show();
 
 					AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 					ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "WeatherWidget4x2");
