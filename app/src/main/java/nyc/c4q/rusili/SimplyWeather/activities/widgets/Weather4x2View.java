@@ -85,6 +85,4 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	public Context getContext () {
 		return context;
 	}
-
-
 }
