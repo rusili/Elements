@@ -49,7 +49,7 @@ public class WeatherPresenter implements BasePresenterInterface {
 		wundergroundRetrofit.setRetrofitListener(retrofitListener = new WundergroundRetrofit.RetrofitListener() {
 			@Override
 			public void onConditionsForecast10DayHourlytRetrieved (ResponseConditionsForecast10DayHourly jsonObject) {
-				weather4x2View.updateWidget();
+				weather4x2View.updateWidget(jsonObject);
 			}
 		});
 		wundergroundRetrofit.getConditionsForecast10DayHourlyForecast(apiKey, zipCode);
