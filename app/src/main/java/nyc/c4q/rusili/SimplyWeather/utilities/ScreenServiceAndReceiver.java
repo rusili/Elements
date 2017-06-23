@@ -63,7 +63,7 @@ public class ScreenServiceAndReceiver extends Service {
 					Toast.makeText(context, "Screen Updated!", Toast.LENGTH_SHORT).show();
 
 					AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-					ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "WeatherWidget4x2");
+					ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "Weather4x2View");
 					int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 					Intent updateWidgetIntent = new Intent(context, WeatherWidget4x2.class);
 					updateWidgetIntent.setAction(Constants.ACTION.UPDATE_SCREEN);

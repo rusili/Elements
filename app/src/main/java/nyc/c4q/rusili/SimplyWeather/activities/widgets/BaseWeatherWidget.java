@@ -56,26 +56,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public int widgetID;
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
-	public CharSequence ifSingleDigit (String format) {
-		CharSequence charSequence = format;
-
-		if (Integer.parseInt(format) < 10) {
-			charSequence = String.valueOf(format.charAt(1));
-		}
-		return charSequence;
-	}
-
-	public CharSequence getTwoCharWeekday (String weekdayShort) {
-		CharSequence charSequence = weekdayShort;
-
-		if (weekdayShort.contains("T") || weekdayShort.contains("S")) {
-			charSequence = weekdayShort.substring(0, 2);
-		} else {
-			charSequence = String.valueOf(weekdayShort.charAt(0));
-		}
-		return charSequence;
-	}
-
 	public void startGoogleAPIClient (Context context) {
 		if (mGoogleApiClient == null) {
 			mGoogleApiClient = new GoogleApiClient.Builder(context)

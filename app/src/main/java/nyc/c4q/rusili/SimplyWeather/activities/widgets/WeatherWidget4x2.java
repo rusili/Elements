@@ -41,29 +41,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		}
 	}
 
-	private void setOnClickConfig (Context context, int widgetID) {
-		Intent intent = new Intent(context, WeatherWidget4x2.class);
-		intent.putExtra(EXTRA_APPWIDGET_ID, widgetID);
-		intent.setAction(Constants.ACTION.CONFIG_CLICK);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
-	}
-
-	private void setViewFlipper (Context context){
-		Intent intent = new Intent(context, WeatherWidget4x2.class);
-		intent.setAction(Constants.ACTION.VIEWFLIPPER_CLICK);
-		intent.putExtra("isOpen", isViewFlipperOpen);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_include_main2, pendingIntent);
-	}
-
-	private void setOnClickUpdate (Context context) {
-		Intent intent = new Intent(context, WeatherWidget4x2.class);
-		intent.setAction(Constants.ACTION.UPDATE_CLICK);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
-	}
-
 	@Override
 	public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
 		numOfDays = Constants.NUM_OF_DAYS.WIDGET;
@@ -73,6 +50,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	@Override
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
+
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 		ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
 		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
@@ -105,16 +83,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			}
 			appWidgetManager.updateAppWidget(appWidgetIds, root);
 		}
-	}
-
-	private boolean isMyServiceRunning (Context context, Class <?> serviceClass) {
-		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-		for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-			if (serviceClass.getName().equals(service.service.getClassName())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override

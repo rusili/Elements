@@ -8,5 +8,5 @@ public interface BaseViewInterface<T> {
 
 	void initialize (Context context);
 
-	void updateWidget (ResponseConditionsForecast10DayHourly jsonObject);
+	void updateWidgetViews (ResponseConditionsForecast10DayHourly jsonObject);
 }
