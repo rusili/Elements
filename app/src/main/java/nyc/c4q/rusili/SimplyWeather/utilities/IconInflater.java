@@ -1,8 +1,19 @@
 package nyc.c4q.rusili.SimplyWeather.utilities;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.network.GoogleAPI.GoogleLocationAPI;
 
 public class IconInflater {
+	private static IconInflater iconInflater;
+
+	private IconInflater(){}
+
+	public static IconInflater getInstance(){
+		if (iconInflater == null){
+			iconInflater = new IconInflater();
+		}
+		return iconInflater;
+	}
 
 	public int choose (String resource) {
 		int resourceID = 0;

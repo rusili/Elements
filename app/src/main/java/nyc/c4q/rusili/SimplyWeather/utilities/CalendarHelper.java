@@ -5,6 +5,16 @@ import android.util.Log;
 import java.util.Calendar;
 
 public class CalendarHelper {
+	private static CalendarHelper calendarHelper;
+
+	private CalendarHelper(){}
+
+	public static CalendarHelper getInstance(){
+		if (calendarHelper == null){
+			calendarHelper = new CalendarHelper();
+		}
+		return calendarHelper;
+	}
 
 	public CharSequence ifSingleDigit (String format) {
 		CharSequence charSequence = format;
