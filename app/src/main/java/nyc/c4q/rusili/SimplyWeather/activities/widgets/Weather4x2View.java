@@ -147,8 +147,6 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 			resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setImageViewResource(resID, iconInflater.choose(forecastDayArray[i].getIcon()));
 		}
-
-		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
 	private void updateWidgetMain (CurrentObservation currentObservation) {
@@ -162,8 +160,6 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
 		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, iconInflater.choose(currentObservation.getIcon()));
-
-		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
 	@Override
