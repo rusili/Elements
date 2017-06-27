@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -43,7 +44,8 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	public void onEnabled (Context context) {
 		super.onEnabled(context);
 
-		weatherPresenter = new WeatherPresenter(this);
+		weatherPresenter = WeatherPresenter.getInstance();
+		weatherPresenter.initialize(this, context);
 		remoteViews = new RemoteViews(context.getPackageName(),
 			  R.layout.widget_layout_4x2);
 		initialize(context);
@@ -60,6 +62,8 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 
 	@Override
 	public void initialize (Context context) {
+		Log.d("viewinitializecontext ", context.toString());
+
 		this.context = context;
 		iconInflater = IconInflater.getInstance();
 		calendarHelper = CalendarHelper.getInstance();
@@ -78,6 +82,9 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 		intent.setAction(Constants.ACTION.UPDATE_CLICK);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
+
+		Log.d("setonclickupdate ", context.toString());
+
 	}
 
 	private void setViewFlipper (Context context){
@@ -106,7 +113,8 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 		updateWidgetDays(forecastDayArray);
 		updateWidgetHours(hourlyForecastArray);
 
-		appWidgetManager.updateAppWidget(widgetID, remoteViews);
+		Log.d("updatewidgetviews ", context.toString());
+
 	}
 
 	private void updateWidgetHours (HourlyForecast[] hourlyForecastArray) {
@@ -146,6 +154,7 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 			resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setImageViewResource(resID, iconInflater.choose(forecastDayArray[i].getIcon()));
 		}
+		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
 	private void updateWidgetMain (CurrentObservation currentObservation) {
@@ -159,6 +168,9 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
 		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, iconInflater.choose(currentObservation.getIcon()));
+
+		Log.d("updateWidgetMain: ", currentObservation.toString());
+		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
 	@Override
@@ -199,11 +211,11 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	}
 
 	private void startUpdateWidget () {
-		weatherPresenter.getGoogleAPILocation();
+		WeatherPresenter.getInstance().getGoogleAPILocation(context);
 	}
 
 	private void checkIfServiceIsRunning (Context context) {
-		weatherPresenter.isMyServiceRunning(context, ScreenServiceAndReceiver.class);
+		WeatherPresenter.getInstance().isMyServiceRunning(context, ScreenServiceAndReceiver.class);
 	}
 
 	public Context getContext () {

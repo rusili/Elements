@@ -33,19 +33,18 @@
         <!--</activity>-->
 
         <!-- 4x2 -->
-        <!--<receiver android:name=".activities.widgets.Weather4x2View" android:label="SimplyWeather"-->
-                  <!--android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">-->
+        <receiver android:name=".activities.widgets.Weather4x2View" android:label="SimplyWeather"
+                  android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
-                <!--<action android:name="android.intent.action.BOOT_COMPLETED" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-            <!--</intent-filter>-->
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
 
-            <!--<meta-data android:name="android.appwidget.provider"-->
-                       <!--android:resource="@xml/widget_weather_4x2"/>-->
-        <!--</receiver>-->
-        <!--<receiver android:name=".activities.widgets.Weather4x2View"/>-->
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/widget_weather_4x2"/>
+        </receiver>
 
         <service android:name=".utilities.ScreenServiceAndReceiver" android:label="ScreenMonitorService">
             <intent-filter>

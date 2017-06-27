@@ -11,6 +11,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 public class WeatherPresenter implements BasePresenterInterface {
+	private static WeatherPresenter weatherPresenter;
 	private Weather4x2View weather4x2View;
 	private WundergroundRetrofit.RetrofitListener retrofitListener;
 	private ActivityManager activityManager;
@@ -20,16 +21,23 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	private final String apiKey = Constants.DEVELOPER_KEY.API_KEY;
 
-	public WeatherPresenter(Weather4x2View weather4x2View){
+	private WeatherPresenter(){}
+
+	public static WeatherPresenter getInstance(){
+		if (weatherPresenter == null){
+			weatherPresenter = new WeatherPresenter();
+		}
+		return weatherPresenter;
+	}
+
+	public void initialize (Weather4x2View weather4x2View, Context context){
 		this.weather4x2View = weather4x2View;
-		initialize();
+
+		getGoogleAPILocation(context);
 	}
 
 	@Override
-	public void initialize () {}
-
-	@Override
-	public void getGoogleAPILocation () {
+	public void getGoogleAPILocation (Context context) {
 		googleLocationAPI = googleLocationAPI.getInstance();
 		googleLocationAPI.setRetrofitListener(new GoogleLocationAPI.GoogleLocationAPILIstener() {
 			@Override
@@ -37,7 +45,7 @@ public class WeatherPresenter implements BasePresenterInterface {
 				getWUndergroundAPIResponse(zipCode);
 			}
 		});
-		googleLocationAPI.getZipCode(weather4x2View.getContext());
+		googleLocationAPI.getZipCode(context);
 	}
 
 	@Override
