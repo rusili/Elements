@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.color.FragmentColor;
-import nyc.c4q.rusili.SimplyWeather.activities.configuration.fonts.FragmentFont;
 
 public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 	private static int NUM_PAGES = 3;
@@ -19,8 +18,6 @@ public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 		switch (position) {
 			case 0: // Fragment # 0 - This will show FirstFragment
 				return FragmentColor.newInstance(0, "Colors");
-			case 1: // Fragment # 0 - This will show FirstFragment different title
-				return FragmentFont.newInstance(1, "Fonts");
 			default:
 				return null;
 		}

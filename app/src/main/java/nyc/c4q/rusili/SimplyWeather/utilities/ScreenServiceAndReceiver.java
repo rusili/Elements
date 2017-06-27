@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import nyc.c4q.rusili.SimplyWeather.activities.widgets.WeatherWidget4x2;
+import nyc.c4q.rusili.SimplyWeather.activities.widgets.Weather4x2View;
 
 public class ScreenServiceAndReceiver extends Service {
 	private BroadcastReceiver broadcastReceiver;
@@ -65,7 +65,7 @@ public class ScreenServiceAndReceiver extends Service {
 					AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 					ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), "Weather4x2View");
 					int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
-					Intent updateWidgetIntent = new Intent(context, WeatherWidget4x2.class);
+					Intent updateWidgetIntent = new Intent(context, Weather4x2View.class);
 					updateWidgetIntent.setAction(Constants.ACTION.UPDATE_SCREEN);
 					updateWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
 					sendBroadcast(updateWidgetIntent);

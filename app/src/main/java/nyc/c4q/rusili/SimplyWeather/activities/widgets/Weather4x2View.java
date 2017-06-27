@@ -38,7 +38,6 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	private boolean viewFlipperHours = false;
 	private int widgetID;
 	private int resID;
-	private Date dateNow;
 
 	@Override
 	public void onEnabled (Context context) {
@@ -150,7 +149,7 @@ public class Weather4x2View extends AppWidgetProvider implements BaseViewInterfa
 	}
 
 	private void updateWidgetMain (CurrentObservation currentObservation) {
-		dateNow = new Date();
+		Date dateNow = calendarHelper.getDate();
 		SimpleDateFormat weekday = new SimpleDateFormat("E");
 		SimpleDateFormat month = new SimpleDateFormat("MM");
 		SimpleDateFormat day = new SimpleDateFormat("dd");

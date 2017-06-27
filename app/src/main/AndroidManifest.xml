@@ -33,7 +33,7 @@
         <!--</activity>-->
 
         <!-- 4x2 -->
-        <!--<receiver android:name=".activities.widgets.WeatherWidget4x2" android:label="SimplyWeather"-->
+        <!--<receiver android:name=".activities.widgets.Weather4x2View" android:label="SimplyWeather"-->
                   <!--android:permission="android.permission.RECEIVE_BOOT_COMPLETED" android:enabled="true">-->
 
             <!--<intent-filter>-->

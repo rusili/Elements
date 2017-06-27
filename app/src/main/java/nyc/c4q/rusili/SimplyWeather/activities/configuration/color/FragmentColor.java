@@ -43,7 +43,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	@Override
 	public void initialize () {
 		if (presenter == null) {
-			setPresenter(presenter);
+			setPresenter();
 		}
 
 		setViews();
@@ -55,7 +55,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	}
 
 	@Override
-	public void setPresenter (FragmentColorInterface.Presenter presenter) {
+	public void setPresenter () {
 		this.presenter = new FragmentColorPresenter(this);
 	}
 }

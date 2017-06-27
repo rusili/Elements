@@ -1,5 +1,7 @@
 http://www.androidauthority.com/create-simple-android-widget-608975/
 
+https://stackoverflow.com/questions/21830516/using-butterknife-to-inject-an-array-of-views
+
 App Widget uses RemoteViews which can only use these views:
     FrameLayout, LinearLayout, Relative`Layout, GridLayout
     Button, ImageButton, ImageView, TextView

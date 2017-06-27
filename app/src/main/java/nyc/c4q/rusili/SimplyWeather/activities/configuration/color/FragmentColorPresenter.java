@@ -7,8 +7,4 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 		this.fragmentColorView = fragmentColor;
 	}
 
-	@Override
-	public void start () {
-
-	}
 }

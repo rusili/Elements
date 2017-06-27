@@ -3,6 +3,7 @@ package nyc.c4q.rusili.SimplyWeather.utilities;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class CalendarHelper {
 	private static CalendarHelper calendarHelper;
@@ -14,6 +15,11 @@ public class CalendarHelper {
 			calendarHelper = new CalendarHelper();
 		}
 		return calendarHelper;
+	}
+
+	public Date getDate(){
+		Date date = new Date();
+		return date;
 	}
 
 	public CharSequence ifSingleDigit (String format) {

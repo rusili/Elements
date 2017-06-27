@@ -1,5 +1,6 @@
-To Do for Launch:
-Onboard
+To Do for Next Launch:
+Better Onboard
+Pictures/Screenshots
 
 New Features:
 OnClick to website

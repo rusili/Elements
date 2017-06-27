@@ -64,9 +64,9 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	}
 
 	private boolean isNetworkConnected (Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
 		boolean isConnected = activeNetwork != null &&
 			  activeNetwork.isConnectedOrConnecting();
 		this.context = context;

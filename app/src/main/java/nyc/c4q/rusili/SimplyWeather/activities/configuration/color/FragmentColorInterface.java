@@ -8,10 +8,12 @@ public class FragmentColorInterface {
 	interface Presenter extends BasePresenter {
 	}
 
-	interface View extends BaseView <Presenter> {
+	interface View extends BaseView<Presenter> {
 
 		void initialize ();
 
 		void setViews ();
+
+		void setPresenter();
 	}
 }

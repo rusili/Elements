@@ -11,10 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WundergroundRetrofit {
 	private static WundergroundRetrofit wundergroundRetrofit;
+	private retrofit2.Retrofit retrofit;
 	private RetrofitListener listener;
-
-	private String apiKey;
-	private int zipCode;
 
 	private WundergroundRetrofit () {
 		this.listener = null;
@@ -32,18 +30,18 @@ public class WundergroundRetrofit {
 	}
 
 	private WundergroundRetrofitCall connect () {
-		retrofit2.Retrofit retrofit = new retrofit2.Retrofit.Builder()
-			  .baseUrl(Constants.API_URL.WUNDERGROUND)
-			  .addConverterFactory(GsonConverterFactory.create())
-			  .build();
+		if (retrofit == null) {
+			retrofit = new retrofit2.Retrofit.Builder()
+				  .baseUrl(Constants.API_URL.WUNDERGROUND)
+				  .addConverterFactory(GsonConverterFactory.create())
+				  .build();
+		}
 		WundergroundRetrofitCall wundergroundRetrofitCall = retrofit.create(WundergroundRetrofitCall.class);
 
 		return wundergroundRetrofitCall;
 	}
 
-	public void getConditionsForecast10DayHourlyForecast (String apiKeyParam, int zipCodeParam) {
-		this.zipCode = zipCodeParam;
-		this.apiKey = apiKeyParam;
+	public void getConditionsForecast10DayHourlyForecast (String apiKey, int zipCode) {
 
 		WundergroundRetrofitCall wundergroundRetrofitCall = connect();
 		Call <ResponseConditionsForecast10DayHourly> getResponse = wundergroundRetrofitCall.getConditionsForecastHourly(apiKey, zipCode);

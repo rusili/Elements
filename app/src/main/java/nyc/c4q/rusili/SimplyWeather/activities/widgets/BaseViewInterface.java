@@ -4,7 +4,7 @@ import android.content.Context;
 
 import nyc.c4q.rusili.SimplyWeather.network.WUnderground.JSON.ResponseConditionsForecast10DayHourly;
 
-public interface BaseViewInterface<T> {
+public interface BaseViewInterface {
 
 	void initialize (Context context);
 
