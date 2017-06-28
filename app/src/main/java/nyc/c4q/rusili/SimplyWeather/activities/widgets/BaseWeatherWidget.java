@@ -1,41 +1,27 @@
 package nyc.c4q.rusili.SimplyWeather.activities.widgets;
 
-import android.Manifest;
-import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.HourlyForecast;
-import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
@@ -44,6 +30,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
+	public AppWidgetManager appWidgetManager;
 	public Location mLastLocation;
 	public static BaseWeatherWidget instance = null;
 
@@ -54,6 +41,9 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public int widgetID;
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
+	public int getWidgetID(){
+		return widgetID;
+	}
 	public CharSequence ifSingleDigit (String format) {
 		CharSequence charSequence = format;
 
@@ -74,19 +64,10 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		return charSequence;
 	}
 
-	public void startGoogleAPIClient (Context context) {
-		if (mGoogleApiClient == null) {
-			mGoogleApiClient = new GoogleApiClient.Builder(context)
-				  .addConnectionCallbacks(this)
-				  .addOnConnectionFailedListener(this)
-				  .addApi(LocationServices.API)
-				  .build();
-		}
-		this.context = context;
-		instance = this;
+	public void startNetworkCalls (Context context) {
 
 		if (isNetworkConnected(context)) {
-			mGoogleApiClient.connect();
+			downloadWeatherData(context);
 		} else {
 			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
 		}
@@ -102,60 +83,11 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		return isConnected;
 	}
 
-	@Override
-	public void onConnected (@Nullable Bundle bundle) {
-		if (ContextCompat.checkSelfPermission(context.getApplicationContext(),
-			  android.Manifest.permission.ACCESS_FINE_LOCATION)
-			  == PackageManager.PERMISSION_GRANTED) {
-			locationPermissionGranted = true;
-		} else {
-			ActivityCompat.requestPermissions((Activity) context.getApplicationContext(),
-				  new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-		}
-		mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-		getLastLocation(mLastLocation);
+	private void downloadWeatherData (Context context) {
+		WeatherPresenter.getInstance().getGoogleAPILocation(context);
 	}
 
-	private void getLastLocation (Location mLastLocation) {
-		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-		try {
-			List <Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-			zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		downloadWeatherData(context, AppWidgetManager.getInstance(context), widgetID, remoteViews, zipCode);
-		context = null;
-	}
-
-	private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews, final int zipCode) {
-		getGoogleLocation();
-
-
-		retroFitBase = new RetroFitBase(Constants.DEVELOPER_KEY.API_KEY, zipCode);
-		retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {
-			@Override
-			public void onConditionsRetrieved (CurrentObservation currentObservation) {
-				updateMain(appWidgetManager, widgetID, currentObservation);
-			}
-
-			@Override
-			public void onForecastDaysRetrieved (ForecastDay[] forecastDays) {
-				updateDays(context, appWidgetManager, widgetID, forecastDays, numOfDays);
-			}
-
-			@Override
-			public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts) {
-				updateHours(context, appWidgetManager, widgetID, hourlyForecasts, numOfDays);
-			}
-		});
-		retroFitBase.getConditions();
-		retroFitBase.getForecastDay();
-		retroFitBase.getHourlyForecast();
-	}
-
-	private void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
+	public void updateHours (Context context, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
 		int resID = 0;
 		int nextHourOffset = 0;
 		int hour = 1;
@@ -194,7 +126,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		return input;
 	}
 
-	private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
+	public void updateMain (int widgetID, CurrentObservation currentObservation) {
 		Date now = new Date();
 		SimpleDateFormat weekday = new SimpleDateFormat("E");
 		SimpleDateFormat month = new SimpleDateFormat("MM");
@@ -209,7 +141,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
-	public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
+	public void updateDays (Context context, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
 		int resID = 0;
 		remoteViews.setTextViewText(R.id.widget_component_main_hitemp_height2, String.valueOf(forecastDays[0].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_lowtemp_height2, String.valueOf(forecastDays[0].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);

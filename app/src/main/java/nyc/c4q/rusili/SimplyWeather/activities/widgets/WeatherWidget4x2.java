@@ -6,19 +6,18 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
-public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class WeatherWidget4x2 extends BaseWeatherWidget {
 	private boolean isViewFlipperOpen = false;
 
 	@Override
@@ -27,12 +26,14 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			this.widgetID = widgetID;
 			remoteViews = new RemoteViews(context.getPackageName(),
 				  R.layout.widget_layout_4x2);
+			this.appWidgetManager = appWidgetManager;
 
 			setOnClickUpdate(context);
 			//setOnClickConfig(context, widgetID);
 			setViewFlipper(context);
 
-			startGoogleAPIClient(context);
+			WeatherPresenter.getInstance().initialize(this);
+			startNetworkCalls(context);
 		}
 	}
 
@@ -57,12 +58,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		intent.setAction(Constants.ACTION.UPDATE_CLICK);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
-	}
-
-	@Override
-	public void updateDays (Context context, AppWidgetManager appWidgetManager, int widgetID, ForecastDay[] forecastDays, int numOfDays) {
-		numOfDays = Constants.NUM_OF_DAYS.WIDGET;
-		super.updateDays(context, appWidgetManager, widgetID, forecastDays, numOfDays);
 	}
 
 	@Override
@@ -112,5 +107,10 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 
 	private void killService (Context context) {
 		context.stopService(new Intent(context, ScreenServiceAndReceiver.class));
+	}
+
+	@Override
+	public void onConnected (@Nullable Bundle bundle) {
+
 	}
 }
