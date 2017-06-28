@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 

@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
-import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.CurrentObservation;
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ForecastDay;
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.HourlyForecast;
 import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
@@ -44,7 +44,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
-	public RetroFitBase retroFitBase;
 	public Location mLastLocation;
 	public static BaseWeatherWidget instance = null;
 
@@ -131,7 +130,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	}
 
 	private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews, final int zipCode) {
-		RetroFitBase.RetrofitListener retrofitListener;
+		getGoogleLocation();
+
 
 		retroFitBase = new RetroFitBase(Constants.DEVELOPER_KEY.API_KEY, zipCode);
 		retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {

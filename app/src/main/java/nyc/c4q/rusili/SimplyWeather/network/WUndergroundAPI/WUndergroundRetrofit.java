@@ -1,6 +1,8 @@
+package nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI;
 
 import android.util.Log;
 
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ResponseConditionsForecast10DayHourly;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +33,7 @@ public class WUndergroundRetrofit {
 		if (retrofit == null) {
 			retrofit = new retrofit2.Retrofit.Builder()
 				  .baseUrl(Constants.API_URL.WUNDERGROUND)
-				  .addConverterFactory(GWsonConverterFactory.create())
+				  .addConverterFactory(GsonConverterFactory.create())
 				  .build();
 		}
 		WUndergroundRetrofitCall WUndergroundRetrofitCall = retrofit.create(WUndergroundRetrofitCall.class);

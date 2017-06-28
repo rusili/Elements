@@ -1,8 +1,9 @@
 package nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI;
 
-	  import retrofit2.Call;
-	  import retrofit2.http.GET;
-	  import retrofit2.http.Path;
+import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ResponseConditionsForecast10DayHourly;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface WUndergroundRetrofitCall {
 

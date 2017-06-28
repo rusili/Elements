@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.network.JSON;
+package nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON;
 
 public class HourlyForecast {
 	FCTTIME FCTTIME;
