@@ -1,6 +1,5 @@
 package nyc.c4q.rusili.SimplyWeather.activities.widgets;
 
-import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -63,14 +62,13 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 	@Override
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
+
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 		ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
 		int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
 		RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget_layout_4x2);
 
-		if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
-			context.startService(new Intent(context, ScreenServiceAndReceiver.class));
-		}
+		WeatherPresenter.getInstance().isMyServiceRunning(context, ScreenServiceAndReceiver.class);
 
 		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
 			onUpdate(context, appWidgetManager, appWidgetIds);
@@ -87,16 +85,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 			}
 			appWidgetManager.updateAppWidget(appWidgetIds, root);
 		}
-	}
-
-	private boolean isMyServiceRunning (Context context, Class <?> serviceClass) {
-		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-		for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-			if (serviceClass.getName().equals(service.service.getClassName())) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
