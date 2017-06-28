@@ -3,6 +3,14 @@ package nyc.c4q.rusili.SimplyWeather.utilities;
 import nyc.c4q.rusili.SimplyWeather.R;
 
 public class IconInflater {
+	private static IconInflater iconInflater;
+
+	public static IconInflater getInstance(){
+		if (iconInflater == null){
+			iconInflater = new IconInflater();
+		}
+		return iconInflater;
+	}
 
 	public int choose (String resource) {
 		int resourceID = 0;

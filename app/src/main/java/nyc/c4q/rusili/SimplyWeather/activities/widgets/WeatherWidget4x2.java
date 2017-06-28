@@ -14,7 +14,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
-import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
+import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
@@ -31,8 +31,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			setOnClickUpdate(context);
 			//setOnClickConfig(context, widgetID);
 			setViewFlipper(context);
-
-			iconInflater = new IconInflater();
 
 			startGoogleAPIClient(context);
 		}

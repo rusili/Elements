@@ -44,7 +44,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
-	public IconInflater iconInflater;
 	public RetroFitBase retroFitBase;
 	public Location mLastLocation;
 	public static BaseWeatherWidget instance = null;
@@ -172,7 +171,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
 			resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setImageViewResource(resID, iconInflater.choose(hourlyForecasts[hour-nextHourOffset].getIcon()));
+			remoteViews.setImageViewResource(resID, IconInflater.getInstance().choose(hourlyForecasts[hour-nextHourOffset].getIcon()));
 			hour = hour + (i+1);
 		}
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
@@ -205,7 +204,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		remoteViews.setTextViewText(R.id.widget_component_main_day_height2, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
-		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, iconInflater.choose(currentObservation.getIcon()));
+		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2,  IconInflater.getInstance().choose(currentObservation.getIcon()));
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
@@ -225,7 +224,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 			resID = context.getResources().getIdentifier("widget_component_day_templow" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 			resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setImageViewResource(resID, iconInflater.choose(forecastDays[i].getIcon()));
+			remoteViews.setImageViewResource(resID,  IconInflater.getInstance().choose(forecastDays[i].getIcon()));
 		}
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
