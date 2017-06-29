@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,7 +27,7 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	private static GoogleLocationAPI googleLocationAPI;
-	private static GoogleApiClient googleAPIClient;
+	private GoogleApiClient googleAPIClient;
 
 	private GoogleLocationAPILIstener lIstener;
 	private boolean locationPermissionGranted = false;
@@ -35,9 +36,12 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	private GoogleLocationAPI(){}
 
 	public static GoogleLocationAPI getInstance(){
+
 		if (googleLocationAPI == null){
 			googleLocationAPI = new GoogleLocationAPI();
 		}
+		Log.d("Logging: ", "getGoogleLocationAPI");
+
 		return googleLocationAPI;
 	}
 
@@ -46,6 +50,8 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	}
 
 	private void startGoogleAPIClient (Context context) {
+		Log.d("Logging: ", "startGoogleAPIClient");
+
 		if (googleAPIClient == null) {
 			googleAPIClient = new GoogleApiClient.Builder(context)
 				  .addConnectionCallbacks(this)
@@ -74,6 +80,8 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 
 	@Override
 	public void getZipCode (Context context) {
+		Log.d("Logging: ", "getZipCode");
+
 		startGoogleAPIClient(context);
 	}
 
@@ -91,6 +99,8 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 
 	@Override
 	public void onConnected (@Nullable Bundle bundle) {
+		Log.d("Logging: ", "GoogleAPIonConnected");
+
 		if (lIstener != null) {
 			lIstener.onConnection(getLocation(checkPermissions()));
 		}

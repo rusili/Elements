@@ -42,18 +42,15 @@ public class WUndergroundRetrofit {
 	}
 
 	public void getConditionsForecast10DayHourlyForecast (String apiKey, int zipCode) {
-
 		WUndergroundRetrofitCall WUndergroundRetrofitCall = connect();
 		Call <ResponseConditionsForecast10DayHourly> getResponse = WUndergroundRetrofitCall.getConditionsForecastHourly(apiKey, zipCode);
 		getResponse.enqueue(new Callback <ResponseConditionsForecast10DayHourly>() {
 			@Override
 			public void onResponse (Call <ResponseConditionsForecast10DayHourly> call, Response <ResponseConditionsForecast10DayHourly> response) {
 				ResponseConditionsForecast10DayHourly jsonResponse = response.body();
-				Log.d("URL: ", call.request().url().toString());
 
 				if (listener != null) {
 					listener.onConditionsForecast10DayHourlytRetrieved(jsonResponse);
-					Log.d("listenernotnull: ", jsonResponse.toString());
 				}
 			}
 

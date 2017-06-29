@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
 			WeatherPresenter.getInstance().initialize(this);
 			startNetworkCalls(context);
+			Log.d("Logging: ", "onUpdate");
 		}
 	}
 
@@ -61,6 +63,8 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
 	@Override
 	public void onReceive (Context context, Intent intent) {
+		Log.d("Logging: ", "onReceived");
+
 		super.onReceive(context, intent);
 
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -94,6 +98,8 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 	}
 
 	private void killService (Context context) {
+		Log.d("Logging: ", "killService");
+
 		context.stopService(new Intent(context, ScreenServiceAndReceiver.class));
 	}
 

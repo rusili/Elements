@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import nyc.c4q.rusili.SimplyWeather.network.GoogleAPI.GoogleLocationAPI;
 import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ResponseConditionsForecast10DayHourly;
@@ -26,8 +27,10 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	public static WeatherPresenter getInstance(){
 		if (weatherPresenter == null){
+			Log.d("Logging: ", "newWeatherPresenter");
 			weatherPresenter = new WeatherPresenter();
 		}
+		Log.d("Logging: ", "getWeatherPresenter");
 		return weatherPresenter;
 	}
 
@@ -37,6 +40,8 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	@Override
 	public void getGoogleAPILocation (final Context context) {
+		Log.d("Logging: ", "getGoogleAPILocation");
+
 		googleLocationAPI = googleLocationAPI.getInstance();
 		googleLocationAPI.setRetrofitListener(new GoogleLocationAPI.GoogleLocationAPILIstener() {
 			@Override
@@ -49,6 +54,8 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	@Override
 	public void getWUndergroundAPIResponse (final Context context, int zipCode) {
+		Log.d("Logging: ", "getWUndergroundResponse");
+
 		wundergroundRetrofit = wundergroundRetrofit.getInstance();
 		wundergroundRetrofit.setRetrofitListener(retrofitListener = new WUndergroundRetrofit.RetrofitListener() {
 			@Override

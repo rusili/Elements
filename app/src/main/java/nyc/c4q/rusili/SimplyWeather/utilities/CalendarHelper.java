@@ -1,7 +1,5 @@
 package nyc.c4q.rusili.SimplyWeather.utilities;
 
-import android.util.Log;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,7 +42,6 @@ public class CalendarHelper {
 
 	public boolean before30Minutes () {
 		Calendar calendar = Calendar.getInstance();
-		Log.d("Minutes", String.valueOf(calendar.get(Calendar.MINUTE)));
 		if (calendar.get(Calendar.MINUTE) < 30){
 			return true;
 		}

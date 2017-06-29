@@ -26,7 +26,8 @@ android {
         applicationId "nyc.c4q.rusili.SimplyWeather"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 3
+        multiDexEnabled true
+                versionCode 3
         versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -48,6 +49,7 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
     // Advanced Recycler View:
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.0@aar') {
         transitive = true
