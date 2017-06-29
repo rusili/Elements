@@ -26,24 +26,11 @@ import java.util.Locale;
 public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
-	private static GoogleLocationAPI googleLocationAPI;
 	private GoogleApiClient googleAPIClient;
 
 	private GoogleLocationAPILIstener lIstener;
 	private boolean locationPermissionGranted = false;
 	private Context context;
-
-	private GoogleLocationAPI(){}
-
-	public static GoogleLocationAPI getInstance(){
-
-		if (googleLocationAPI == null){
-			googleLocationAPI = new GoogleLocationAPI();
-		}
-		Log.d("Logging: ", "getGoogleLocationAPI");
-
-		return googleLocationAPI;
-	}
 
 	public void setRetrofitListener (GoogleLocationAPILIstener googleLocationAPILIstener) {
 		this.lIstener = googleLocationAPILIstener;

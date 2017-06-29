@@ -17,7 +17,7 @@ public class WeatherPresenter implements BasePresenterInterface {
 	private WUndergroundRetrofit.RetrofitListener retrofitListener;
 	private ActivityManager activityManager;
 
-	private static GoogleLocationAPI googleLocationAPI;
+	private GoogleLocationAPI googleLocationAPI;
 	private static WUndergroundRetrofit wundergroundRetrofit;
 	private static BaseWeatherWidget baseWeatherWidget;
 
@@ -42,7 +42,7 @@ public class WeatherPresenter implements BasePresenterInterface {
 	public void getGoogleAPILocation (final Context context) {
 		Log.d("Logging: ", "getGoogleAPILocation");
 
-		googleLocationAPI = googleLocationAPI.getInstance();
+		googleLocationAPI = new GoogleLocationAPI();
 		googleLocationAPI.setRetrofitListener(new GoogleLocationAPI.GoogleLocationAPILIstener() {
 			@Override
 			public void onConnection (int zipCode) {
