@@ -66,4 +66,7 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    // Smart Tab Layout:
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+
 }
