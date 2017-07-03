@@ -34,7 +34,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 
 			WeatherPresenter.getInstance().initialize(this);
 			startNetworkCalls(context);
-			Log.d("Logging: ", "onUpdate");
 		}
 	}
 

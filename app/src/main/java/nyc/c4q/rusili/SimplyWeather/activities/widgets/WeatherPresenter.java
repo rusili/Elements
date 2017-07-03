@@ -17,9 +17,9 @@ public class WeatherPresenter implements BasePresenterInterface {
 	private WUndergroundRetrofit.RetrofitListener retrofitListener;
 	private ActivityManager activityManager;
 
-	private GoogleLocationAPI googleLocationAPI;
+	private static GoogleLocationAPI googleLocationAPI;
 	private static WUndergroundRetrofit wundergroundRetrofit;
-	private static BaseWeatherWidget baseWeatherWidget;
+	private BaseWeatherWidget baseWeatherWidget;
 
 	private final String apiKey = Constants.DEVELOPER_KEY.API_KEY;
 
