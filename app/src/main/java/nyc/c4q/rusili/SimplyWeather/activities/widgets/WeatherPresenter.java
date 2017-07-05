@@ -4,7 +4,12 @@ import android.app.ActivityManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import nyc.c4q.rusili.SimplyWeather.network.GoogleAPI.GoogleLocationAPI;
 import nyc.c4q.rusili.SimplyWeather.network.WUndergroundAPI.JSON.ResponseConditionsForecast10DayHourly;
@@ -13,6 +18,8 @@ import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 public class WeatherPresenter implements BasePresenterInterface {
+	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
+
 	private static WeatherPresenter weatherPresenter;
 	private WUndergroundRetrofit.RetrofitListener retrofitListener;
 	private ActivityManager activityManager;
@@ -36,6 +43,43 @@ public class WeatherPresenter implements BasePresenterInterface {
 
 	public void initialize (AppWidgetProvider appWidgetProvider){
 		this.baseWeatherWidget = (BaseWeatherWidget) appWidgetProvider;
+	}
+
+	public void startNetworkCalls (Context context) {
+		Log.d("Logging: ", "startNetworkCalls");
+
+		if (isNetworkConnected(context) && checkPermissions(context)) {
+			downloadWeatherData(context);
+		} else {
+			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private boolean checkPermissions (Context context) {
+		if (ContextCompat.checkSelfPermission(context,
+			  android.Manifest.permission.ACCESS_FINE_LOCATION)
+			  == PackageManager.PERMISSION_GRANTED) {
+			return true;
+		} else {
+			Toast.makeText(context, "You haven't granted location access to SimplyWeather", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+	}
+
+	private boolean isNetworkConnected (Context context) {
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+			  activeNetwork.isConnectedOrConnecting();
+
+		return isConnected;
+	}
+
+	private void downloadWeatherData (Context context) {
+		Log.d("Logging: ", "downloadWeatherData");
+
+		getGoogleAPILocation(context);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 To Do for Launch:
 Onboard
+Check for permissions everytime!!
+When no network, DON"T MAKE CALL
 
 New Features:
 OnClick to website

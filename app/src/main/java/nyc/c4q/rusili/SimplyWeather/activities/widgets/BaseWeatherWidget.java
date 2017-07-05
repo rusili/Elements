@@ -3,12 +3,9 @@ package nyc.c4q.rusili.SimplyWeather.activities.widgets;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -25,7 +22,6 @@ import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
 public abstract class BaseWeatherWidget extends AppWidgetProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	public AppWidgetManager appWidgetManager;
 	private CalendarHelper calendarHelper;
@@ -37,32 +33,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 	public int getWidgetID(){
 		return widgetID;
-	}
-
-	public void startNetworkCalls (Context context) {
-		Log.d("Logging: ", "startNetworkCalls");
-
-		if (isNetworkConnected(context)) {
-			downloadWeatherData(context);
-		} else {
-			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
-		}
-	}
-
-	private boolean isNetworkConnected (Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		boolean isConnected = activeNetwork != null &&
-			  activeNetwork.isConnectedOrConnecting();
-
-		return isConnected;
-	}
-
-	private void downloadWeatherData (Context context) {
-		Log.d("Logging: ", "downloadWeatherData");
-
-		WeatherPresenter.getInstance().getGoogleAPILocation(context);
 	}
 
 	public void updateHours (Context context, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {

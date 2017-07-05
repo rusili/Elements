@@ -18,6 +18,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget {
+	private static WeatherPresenter weatherPresenter;
 	private boolean isViewFlipperOpen = false;
 
 	@Override
@@ -28,12 +29,13 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 				  R.layout.widget_layout_4x2);
 			this.appWidgetManager = appWidgetManager;
 
-			setOnClickUpdate(context);
-			//setOnClickConfig(context, widgetID);
+			//setOnClickUpdate(context);
+			setOnClickConfig(context, widgetID);
 			setViewFlipper(context);
 
-			WeatherPresenter.getInstance().initialize(this);
-			startNetworkCalls(context);
+			weatherPresenter = WeatherPresenter.getInstance();
+			weatherPresenter.initialize(this);
+			weatherPresenter.startNetworkCalls(context);
 		}
 	}
 
