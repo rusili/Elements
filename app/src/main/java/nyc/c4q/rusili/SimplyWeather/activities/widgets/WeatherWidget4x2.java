@@ -12,6 +12,7 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
@@ -82,6 +83,15 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 			Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
+		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
+				Log.d(String.valueOf(getClass()), "Clicked Config!");
+				Intent intentConfig = new Intent(context, ActivityConfiguration.class);
+				Bundle bundle = new Bundle();
+				bundle.putString("Data", getClass().getName() + "/" + widgetID);
+				intentConfig.putExtras(bundle);
+				intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(intentConfig);
+
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
 				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
@@ -105,7 +115,5 @@ public class WeatherWidget4x2 extends BaseWeatherWidget {
 	}
 
 	@Override
-	public void onConnected (@Nullable Bundle bundle) {
-
-	}
+	public void onConnected (@Nullable Bundle bundle) {}
 }

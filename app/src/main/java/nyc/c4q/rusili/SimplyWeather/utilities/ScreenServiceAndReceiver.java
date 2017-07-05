@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -21,9 +22,11 @@ public class ScreenServiceAndReceiver extends Service {
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-		broadcastReceiver = new ScreenReceiver(currentTIme);
-		registerReceiver(broadcastReceiver, filter);
-		
+		if (broadcastReceiver == null) {
+			broadcastReceiver = new ScreenReceiver(currentTIme);
+			registerReceiver(broadcastReceiver, filter);
+		}
+
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -31,6 +34,7 @@ public class ScreenServiceAndReceiver extends Service {
 	public void onDestroy () {
 		super.onDestroy();
 		unregisterReceiver(broadcastReceiver);
+		Log.d("Logging: ", "unregisterReceiver called");
 	}
 
 	@Nullable
