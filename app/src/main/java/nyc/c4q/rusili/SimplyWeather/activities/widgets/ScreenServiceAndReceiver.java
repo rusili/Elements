@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -31,6 +32,7 @@ public class ScreenServiceAndReceiver extends Service {
 	public void onDestroy () {
 		super.onDestroy();
 		unregisterReceiver(broadcastReceiver);
+		Log.d("Logging: ", "unregisterReceiver called");
 	}
 
 	@Nullable

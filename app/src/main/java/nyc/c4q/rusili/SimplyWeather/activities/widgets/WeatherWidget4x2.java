@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -109,10 +110,12 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	@Override
 	public void onDisabled (Context context) {
 		super.onDisabled(context);
+		Log.d("Logging: ", "onDisabled called");
 		killService(context);
 	}
 
 	private void killService (Context context) {
 		context.stopService(new Intent(context, ScreenServiceAndReceiver.class));
+		Log.d("Logging: ", "killService called");
 	}
 }
