@@ -33,7 +33,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 			//setOnClickConfig(context, widgetID);
 			setViewFlipper(context);
 
-			iconInflater = new IconInflater();
+			iconInflater = IconInflater.getIconInflater();
 
 			startGoogleAPIClient(context);
 		}
