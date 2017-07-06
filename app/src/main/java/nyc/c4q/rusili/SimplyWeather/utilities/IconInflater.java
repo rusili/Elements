@@ -7,7 +7,7 @@ public class IconInflater {
 
 	private IconInflater(){}
 
-	public static IconInflater getIconInflater(){
+	public static IconInflater getInstance (){
 		if (iconInflater == null){
 			iconInflater = new IconInflater();
 		}

@@ -36,6 +36,7 @@ import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
 import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
+import nyc.c4q.rusili.SimplyWeather.utilities.CalendarHelper;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
@@ -45,6 +46,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
 	public IconInflater iconInflater;
+	public CalendarHelper calendarHelper;
 	public RetroFitBase retroFitBase;
 	public Location mLastLocation;
 	public static BaseWeatherWidget instance = null;
