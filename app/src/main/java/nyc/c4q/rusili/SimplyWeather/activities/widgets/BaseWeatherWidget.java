@@ -26,7 +26,6 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -38,10 +37,12 @@ import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
 import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.CalendarHelper;
 import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.DebugMode;
 import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
 
 public abstract class BaseWeatherWidget extends AppWidgetProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
+	private DebugMode debugMode = new DebugMode();
 
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
@@ -58,26 +59,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 	public int widgetID;
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
-	public CharSequence ifSingleDigit (String format) {
-		CharSequence charSequence = format;
-
-		if (Integer.parseInt(format) < 10) {
-			charSequence = String.valueOf(format.charAt(1));
-		}
-		return charSequence;
-	}
-
-	public CharSequence getTwoCharWeekday (String weekdayShort) {
-		CharSequence charSequence = weekdayShort;
-
-		if (weekdayShort.contains("T") || weekdayShort.contains("S")) {
-			charSequence = weekdayShort.substring(0, 2);
-		} else {
-			charSequence = String.valueOf(weekdayShort.charAt(0));
-		}
-		return charSequence;
-	}
-
 	public void startGoogleAPIClient (Context context) {
 		if (mGoogleApiClient == null) {
 			mGoogleApiClient = new GoogleApiClient.Builder(context)
@@ -92,6 +73,8 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		if (isNetworkConnected(context)) {
 			mGoogleApiClient.connect();
 		} else {
+			debugMode.logD(Thread.currentThread().getStackTrace().toString()+ " No network detected");
+
 			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
 		}
 	}
@@ -163,12 +146,12 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		int nextHourOffset = 0;
 		int hour = 1;
 
-		if (before30Minutes()){
+		if (CalendarHelper.getInstance().before30Minutes()){
 			nextHourOffset = 1;
 		}
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, is12Hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
+			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().change24to12hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getFCTTIME().getAmpm());
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
@@ -180,23 +163,6 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
-	private boolean before30Minutes () {
-		Calendar calendar = Calendar.getInstance();
-		Log.d("Minutes", String.valueOf(calendar.get(Calendar.MINUTE)));
-		if (calendar.get(Calendar.MINUTE) < 30){
-			return true;
-		}
-		return false;
-	}
-
-	private String is12Hour (String input) {
-		int hour = Integer.parseInt(input);
-		if (hour > 12){
-			return String.valueOf(hour - 12);
-		}
-		return input;
-	}
-
 	private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
 		Date now = new Date();
 		SimpleDateFormat weekday = new SimpleDateFormat("E");
@@ -204,7 +170,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		SimpleDateFormat day = new SimpleDateFormat("dd");
 
 		remoteViews.setTextViewText(R.id.widget_component_main_weekday_height2, weekday.format(now));
-		remoteViews.setTextViewText(R.id.widget_component_main_day_height2, ifSingleDigit(month.format(now)) + "/" + ifSingleDigit(day.format(now)));
+		remoteViews.setTextViewText(R.id.widget_component_main_day_height2, CalendarHelper.getInstance().ifSingleDigit(month.format(now)) + "/" + CalendarHelper.getInstance().ifSingleDigit(day.format(now)));
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
 		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, iconInflater.choose(currentObservation.getIcon()));
@@ -219,7 +185,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_day_weekday" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, getTwoCharWeekday(forecastDays[i].getDate().getWeekdayShort()));
+			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().getTwoCharWeekday(forecastDays[i].getDate().getWeekdayShort()));
 			resID = context.getResources().getIdentifier("widget_component_day_day" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, forecastDays[i].getDate().getDay());
 			resID = context.getResources().getIdentifier("widget_component_day_temphigh" + String.valueOf(i + 1), "id", context.getPackageName());

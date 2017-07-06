@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.activities.widgets;
+package nyc.c4q.rusili.SimplyWeather.utilities;
 
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -13,7 +13,7 @@ import android.util.Log;
 
 import java.util.Calendar;
 
-import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+import nyc.c4q.rusili.SimplyWeather.activities.widgets.WeatherWidget4x2;
 
 public class ScreenServiceAndReceiver extends Service {
 	private BroadcastReceiver broadcastReceiver;
@@ -22,8 +22,10 @@ public class ScreenServiceAndReceiver extends Service {
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-		broadcastReceiver = new ScreenReceiver(currentTIme);
-		registerReceiver(broadcastReceiver, filter);
+		if (broadcastReceiver == null) {
+			broadcastReceiver = new ScreenReceiver(currentTIme);
+			registerReceiver(broadcastReceiver, filter);
+		}
 		
 		return super.onStartCommand(intent, flags, startId);
 	}
