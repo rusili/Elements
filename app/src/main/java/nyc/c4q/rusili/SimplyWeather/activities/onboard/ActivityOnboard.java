@@ -1,6 +1,7 @@
 package nyc.c4q.rusili.SimplyWeather.activities.onboard;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -12,7 +13,9 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
 import io.fabric.sdk.android.Fabric;
+import nyc.c4q.rusili.SimplyWeather.BuildConfig;
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 
 public class ActivityOnboard extends AppIntro {
@@ -27,6 +30,7 @@ public class ActivityOnboard extends AppIntro {
 	}
 
 	private void initialize () {
+		checkDebugMode();
 		killService();
 		getPermissions();
 		createService();
@@ -56,6 +60,19 @@ public class ActivityOnboard extends AppIntro {
 	public void onDonePressed (Fragment currentFragment) {
 		super.onDonePressed(currentFragment);
 		endActivity();
+	}
+
+	private void checkDebugMode(){
+		SharedPreferences sharedPref = getSharedPreferences(Constants.SHARED_PREFERENCES.FILE_NAME, 0);
+		SharedPreferences.Editor editor = sharedPref.edit();
+
+		if (BuildConfig.DEBUG) {
+			editor.putBoolean(Constants.SHARED_PREFERENCES.BOOLEAN_ISDEBUGMODE, true);
+		} else {
+			editor.putBoolean(Constants.SHARED_PREFERENCES.BOOLEAN_ISDEBUGMODE, false);
+		}
+
+		editor.commit();
 	}
 
 	private void endActivity () {

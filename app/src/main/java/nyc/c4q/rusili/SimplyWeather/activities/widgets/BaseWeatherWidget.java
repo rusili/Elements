@@ -73,7 +73,7 @@ public abstract class BaseWeatherWidget extends AppWidgetProvider implements Goo
 		if (isNetworkConnected(context)) {
 			mGoogleApiClient.connect();
 		} else {
-			debugMode.logD(Thread.currentThread().getStackTrace().toString()+ " No network detected");
+			debugMode.logD(context, "Debug: ", "onUpdate");
 
 			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
 		}

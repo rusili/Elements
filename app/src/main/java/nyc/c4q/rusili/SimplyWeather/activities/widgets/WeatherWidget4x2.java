@@ -22,16 +22,15 @@ import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	private DebugMode debugMode;
-
 	private boolean isViewFlipperOpen = false;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		for (int widgetID : appWidgetIds) {
 			this.widgetID = widgetID;
-			debugMode = new DebugMode();
-			debugMode.logD(context.getClass().getName()+Thread.currentThread().getStackTrace().toString());
+
+			DebugMode.logD(context, "onUpdate", "");
+
 			remoteViews = new RemoteViews(context.getPackageName(),
 				  R.layout.widget_layout_4x2);
 
@@ -78,7 +77,6 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	@Override
 	public void onReceive (Context context, Intent intent) {
 		super.onReceive(context, intent);
-		debugMode = new DebugMode();
 
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 		ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(), getClass().getName());
@@ -90,12 +88,12 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		}
 
 		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
-			debugMode.logD(Thread.currentThread().getStackTrace().toString()+" update screen");
+			DebugMode.logD(context, "onReceive", "UPDATE_SCREEN");
 
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
-			debugMode.logD(Thread.currentThread().getStackTrace().toString()+" update click");
+			DebugMode.logD(context, "onReceive", "UPDATE_CLICK");
 
 			Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
 			onUpdate(context, appWidgetManager, appWidgetIds);
@@ -114,9 +112,11 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 		for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 			if (serviceClass.getName().equals(service.service.getClassName())) {
+				DebugMode.logD(context, "isMyServiceRunning", "TRUE");
 				return true;
 			}
 		}
+		DebugMode.logD(context, "isMyServiceRunning", "FALSE");
 		return false;
 	}
 
@@ -124,6 +124,7 @@ public class WeatherWidget4x2 extends BaseWeatherWidget implements GoogleApiClie
 	public void onDisabled (Context context) {
 		super.onDisabled(context);
 
+		DebugMode.logD(context, "Debug: ", "onDisabled");
 		killService(context);
 	}
 

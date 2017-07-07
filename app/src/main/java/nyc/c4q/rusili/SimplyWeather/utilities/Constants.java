@@ -2,6 +2,11 @@ package nyc.c4q.rusili.SimplyWeather.utilities;
 
 public class Constants {
 
+	public interface SHARED_PREFERENCES{
+		public static String FILE_NAME = "SimplyWeather";
+		public static String BOOLEAN_ISDEBUGMODE = "isDebugMode";
+	}
+
 	public interface API_URL {
 		public static String WUNDERGROUND = "http://api.wunderground.com/";
 	}
