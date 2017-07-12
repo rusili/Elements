@@ -41,16 +41,13 @@ import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.CalendarHelper;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.IconInflater;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
-import nyc.c4q.rusili.SimplyWeather.utilities.generic.AppContext;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.ShowToast;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
-public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-	private AppContext appContext = new AppContext();
-
+public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private boolean isViewFlipperOpen = false;
 
 	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;

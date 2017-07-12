@@ -17,7 +17,7 @@
 //import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 //
 //
-//public class WeatherPresenter {
+//public class WeatherPresenter implements WidgetInterface.WidgetPresenter{
 //	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 //
 //	private static WeatherPresenter weatherPresenter;

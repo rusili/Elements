@@ -144,15 +144,16 @@
                 android:layout_weight="40"
                 />
 
-            <ImageView
-                android:id="@+id/widget_component_main_icon_height2"
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="60"
-                android:background="@color/transparent"
-                android:scaleType="fitCenter"
-                />
+                <ImageView
+                    android:id="@+id/widget_component_main_icon_height2"
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="60"
+                    android:background="@color/transparent"
+                    android:scaleType="fitCenter"
+                    android:tint="@color/grayFiveOverlay"
+                    />
 
         </LinearLayout>
 
