@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
@@ -77,8 +78,8 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 				remoteViews = new RemoteViews(context.getPackageName(),
 					  R.layout.widget_layout_4x2);
 
-				setOnClickUpdate(context);
-				//setOnClickConfig(context, widgetID);
+				//setOnClickUpdate(context);
+				setOnClickConfig(context, widgetID);
 				setViewFlipper(context);
 
 				iconInflater = IconInflater.getInstance();
@@ -287,6 +288,14 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 			ShowToast.show(context, "SimplyWeather updated!");
 			onUpdate(context, appWidgetManager, appWidgetIds);
+
+		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
+			DebugMode.logD(context, "onReceive " + "CONFIG_CLICK" + String.valueOf(AppWidgetManager.EXTRA_APPWIDGET_ID) + " " + appWidgetIds[0]);
+
+			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
+			intentConfig.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[0]);    //set widget id
+			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(intentConfig);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
