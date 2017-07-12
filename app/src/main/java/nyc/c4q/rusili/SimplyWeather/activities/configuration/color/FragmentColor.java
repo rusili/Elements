@@ -60,8 +60,8 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 		this.presenter = new FragmentColorPresenter(this);
 	}
 
-	private void createColorDialog(int color){
-		MyAlertDialog.getMyAlertDialog().showColorPicker(view.getContext(), "Pick a color:", color);
+	private void createColorDialog (View colorView, int defaultColor){
+		MyAlertDialog.getMyAlertDialog().showColorPicker(colorView, "Pick a color:", defaultColor);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	@Override
 	public void onClick (View v) {
 		if (v == imageButton){
-			createColorDialog(getColor(imageButton));
+			createColorDialog(v, getColor(imageButton));
 		}
 	}
 

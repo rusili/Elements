@@ -25,6 +25,7 @@ public class ColorPicker {
 	public void setColorPicker (final AlertDialog alertDialog, int defaultColor) {
 		colorSave = defaultColor;
 		final ImageView imageViewColor = (ImageView) alertDialog.findViewById(R.id.fragmentconfigurationcolor_colorcircle);
+		imageViewColor.getDrawable().setColorFilter(colorSave, PorterDuff.Mode.MULTIPLY);
 
 		final HSLColorPicker colorPicker = (HSLColorPicker) alertDialog.findViewById(R.id.fragmentconfigurationcolor_HSLColorPicker);
 		colorPicker.setColor(defaultColor);
