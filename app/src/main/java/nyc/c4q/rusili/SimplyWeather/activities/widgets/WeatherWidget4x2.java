@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.activities.configuration.ActivityConfiguration;
+import nyc.c4q.rusili.SimplyWeather.activities.configuration.ConfigurationActivity;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
@@ -292,7 +292,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_CLICK)) {
 			DebugMode.logD(context, "onReceive " + "CONFIG_CLICK" + String.valueOf(AppWidgetManager.EXTRA_APPWIDGET_ID) + " " + appWidgetIds[0]);
 
-			Intent intentConfig = new Intent(context, ActivityConfiguration.class);
+			Intent intentConfig = new Intent(context, ConfigurationActivity.class);
 			intentConfig.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[0]);    //set widget id
 			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intentConfig);

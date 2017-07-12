@@ -26,8 +26,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.configuration.ActivityConfiguration">
+        <activity android:name=".activities.configuration.ConfigurationActivity">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>

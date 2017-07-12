@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:pikolo="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+    >
 
     <TextView
         android:id="@+id/fragment_configuration_color"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment_configuration_font"
+        android:layout_height="100dp"
+        android:text="fragment_configuration_color"
         />
+
+    <ImageButton
+        android:id="@+id/fragmentconfigurationcolor_imagebutton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        />
+
 
 </LinearLayout>

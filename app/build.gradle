@@ -47,6 +47,7 @@ dependencies {
     })
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     // Advanced Recycler View:
     compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.10.0@aar') {
@@ -57,6 +58,8 @@ dependencies {
     // Google Play Services Location:
     compile 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.google.android.gms:play-services-places:10.2.1'
+    // Pikolo:
+    compile 'com.github.madrapps:pikolo:1.1.6'
     // Retrofit:
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

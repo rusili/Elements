@@ -15,18 +15,18 @@
 
 
     <!-- Height x1 -->
-        <!-- Main -->
+    <!-- Main -->
     <dimen name="height1_main_top_marginpadding">1dp</dimen>
     <dimen name="height1_main_bottom_marginpadding">6dp</dimen>
     <dimen name="height1_main_weekday_fontsize">14sp</dimen>
-        <!-- Font -->
+    <!-- Font -->
     <dimen name="height1_main_date_fontsize">14sp</dimen>
     <dimen name="height1_main_highlowtemp_fontsize">16sp</dimen>
 
-        <!-- Day -->
+    <!-- Day -->
     <dimen name="height1_day_vertical_padding">2dp</dimen>
     <dimen name="height1_day_bottom_marginpadding">4dp</dimen>
-        <!-- Font -->
+    <!-- Font -->
     <dimen name="height1_day_weekday_fontsize">11sp</dimen>
     <dimen name="height1_day_date_fontsize">12sp</dimen>
     <dimen name="height1_day_highlowtemp_fontsize">14sp</dimen>
@@ -34,13 +34,13 @@
 
 
     <!-- Height x2 -->
-        <!-- Main -->
+    <!-- Main -->
 
-        <!-- Day -->
+    <!-- Day -->
     <dimen name="height2_day_horizontal_padding">8dp</dimen>
     <dimen name="height2_day_vertical_padding">4dp</dimen>
     <dimen name="height2_bottom_marginpadding">12dp</dimen>
-        <!-- Font -->
+    <!-- Font -->
     <dimen name="height2_day_weekday_fontsize">13sp</dimen>
     <dimen name="height2_day_date_fontsize">20sp</dimen>
     <dimen name="height2_day_highlowtemp_fontsize">20sp</dimen>

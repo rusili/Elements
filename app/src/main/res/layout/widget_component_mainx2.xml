@@ -39,15 +39,15 @@
                 />
 
             <!--<TextView-->
-                <!--android:id="@+id/widget_component_main_onClickDebug"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_toRightOf="@id/widget_component_main_weekday_height2"-->
-                <!--android:gravity="bottom"-->
-                <!--android:textAllCaps="true"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:textSize="12sp"-->
-                <!--/>-->
+            <!--android:id="@+id/widget_component_main_onClickDebug"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_toRightOf="@id/widget_component_main_weekday_height2"-->
+            <!--android:gravity="bottom"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12sp"-->
+            <!--/>-->
 
             <TextView
                 android:id="@+id/widget_component_main_day_height2"
@@ -144,16 +144,16 @@
                 android:layout_weight="40"
                 />
 
-                <ImageView
-                    android:id="@+id/widget_component_main_icon_height2"
-                    android:layout_width="0dp"
-                    android:layout_height="70dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="60"
-                    android:background="@color/transparent"
-                    android:scaleType="fitCenter"
-                    android:tint="@color/grayFiveOverlay"
-                    />
+            <ImageView
+                android:id="@+id/widget_component_main_icon_height2"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="60"
+                android:background="@color/transparent"
+                android:scaleType="fitCenter"
+                android:tint="@color/grayFiveOverlay"
+                />
 
         </LinearLayout>
 

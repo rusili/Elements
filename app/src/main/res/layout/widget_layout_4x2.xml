@@ -29,6 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
+
             <include
                 android:id="@+id/widget_layout_4x2_include_day2"
                 layout="@layout/widget_component_day2x2"

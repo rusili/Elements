@@ -1,6 +1,7 @@
 package nyc.c4q.rusili.SimplyWeather.activities.configuration;
 
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,9 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
 
-public class ActivityConfiguration extends AppCompatActivity {
+public class ConfigurationActivity extends AppCompatActivity implements ConfigurationInterface.View{
+	private ConfigurationInterface.Presenter configurationPresenter;
+
 	private ViewPager viewPager;
 	private TabLayout tabLayout;
 
@@ -35,6 +38,8 @@ public class ActivityConfiguration extends AppCompatActivity {
 	}
 
 	private void initialize () {
+		configurationPresenter = new ConfigurationPresenter(this);
+
 		getAppWidgetID();
 		setToolbar();
 		setViews();
@@ -91,5 +96,10 @@ public class ActivityConfiguration extends AppCompatActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public Context getContext () {
+		return this;
 	}
 }

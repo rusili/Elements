@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center"
+    >
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:padding="24dp"
+        xmlns:pikolo="http://schemas.android.com/apk/res-auto"
+        >
+
+        <com.madrapps.pikolo.HSLColorPicker
+            android:id="@+id/fragmentconfigurationcolor_HSLColorPicker"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/fragmentconfigurationcolor_colorcircle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bg_circle"
+            android:layout_gravity="center"
+            android:tint="@color/colorPrimary"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>
