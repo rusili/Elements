@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities;
+package nyc.c4q.rusili.SimplyWeather.utilities.generic;
 
 public class Constants {
 

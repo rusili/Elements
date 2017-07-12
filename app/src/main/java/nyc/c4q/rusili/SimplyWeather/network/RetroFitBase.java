@@ -8,7 +8,7 @@ import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseHourly;
-import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

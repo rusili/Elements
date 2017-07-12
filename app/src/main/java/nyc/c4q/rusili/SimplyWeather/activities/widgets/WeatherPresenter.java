@@ -14,7 +14,7 @@
 //import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseConditionsForecast10DayHourly;
 //import nyc.c4q.rusili.SimplyWeather.network.googleAPI.GoogleLocationAPI;
 //import nyc.c4q.rusili.SimplyWeather.network.wundergroundAPI.WUndergroundRetrofit;
-//import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+//import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 //
 //
 //public class WeatherPresenter {

@@ -22,7 +22,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,15 +38,19 @@ import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
 import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
-import nyc.c4q.rusili.SimplyWeather.utilities.CalendarHelper;
-import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
-import nyc.c4q.rusili.SimplyWeather.utilities.DebugMode;
-import nyc.c4q.rusili.SimplyWeather.utilities.IconInflater;
-import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.app.CalendarHelper;
+import nyc.c4q.rusili.SimplyWeather.utilities.app.IconInflater;
+import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.AppContext;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.ShowToast;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+	private AppContext appContext = new AppContext();
+
 	private boolean isViewFlipperOpen = false;
 
 	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
@@ -58,7 +61,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 	public CalendarHelper calendarHelper;
 	public RetroFitBase retroFitBase;
 	public Location mLastLocation;
-	
+
 	public RemoteViews remoteViews;
 
 	public boolean locationPermissionGranted;
@@ -69,23 +72,23 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-		for (int widgetID : appWidgetIds) {
-			this.widgetID = widgetID;
+			for (int widgetID : appWidgetIds) {
+				this.widgetID = widgetID;
 
-			DebugMode.logD(context, "onUpdate", "");
+				DebugMode.logD(context, "onUpdate");
 
-			remoteViews = new RemoteViews(context.getPackageName(),
-				  R.layout.widget_layout_4x2);
+				remoteViews = new RemoteViews(context.getPackageName(),
+					  R.layout.widget_layout_4x2);
 
-			setOnClickUpdate(context);
-			//setOnClickConfig(context, widgetID);
-			setViewFlipper(context);
+				setOnClickUpdate(context);
+				//setOnClickConfig(context, widgetID);
+				setViewFlipper(context);
 
-			iconInflater = IconInflater.getInstance();
-			calendarHelper = CalendarHelper.getInstance();
+				iconInflater = IconInflater.getInstance();
+				calendarHelper = CalendarHelper.getInstance();
 
-			startGoogleAPIClient(context);
-		}
+				startGoogleAPIClient(context);
+			}
 	}
 
 	private void startGoogleAPIClient (Context context) {
@@ -101,7 +104,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 		if (isNetworkConnected(context)) {
 			mGoogleApiClient.connect();
 		} else {
-			Toast.makeText(context, "No network detected", Toast.LENGTH_SHORT).show();
+			ShowToast.show(context, "No network detected");
 		}
 	}
 
@@ -127,6 +130,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}
 		mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		DebugMode.logD(context, mLastLocation.toString());
 		getLastLocation(mLastLocation);
 	}
 
@@ -272,15 +276,19 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 			context.startService(new Intent(context, ScreenServiceAndReceiver.class));
 		}
 
-		if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
-			DebugMode.logD(context, "onReceive", "UPDATE_SCREEN");
+		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+			DebugMode.logD(context, "onReceive " + "BOOT_COMPLETED");
+			onUpdate(context, appWidgetManager, appWidgetIds);
+
+		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
+			DebugMode.logD(context, "onReceive " + "UPDATE_SCREEN");
 
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {
-			DebugMode.logD(context, "onReceive", "UPDATE_CLICK");
+			DebugMode.logD(context, "onReceive " + "UPDATE_CLICK");
 
-			Toast.makeText(context, "SimplyWeather updated!", Toast.LENGTH_SHORT).show();
+			ShowToast.show(context, "SimplyWeather updated!");
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
@@ -297,11 +305,11 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 		ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
 		for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
 			if (serviceClass.getName().equals(service.service.getClassName())) {
-				DebugMode.logD(context, "isMyServiceRunning", "TRUE");
+				DebugMode.logD(context, "isMyServiceRunning " + "TRUE");
 				return true;
 			}
 		}
-		DebugMode.logD(context, "isMyServiceRunning", "FALSE");
+		DebugMode.logD(context, "isMyServiceRunning " + "FALSE");
 		return false;
 	}
 
@@ -309,7 +317,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements GoogleApiClie
 	public void onDisabled (Context context) {
 		super.onDisabled(context);
 
-		DebugMode.logD(context, "Debug: ", "onDisabled");
+		DebugMode.logD(context, "Debug: " + "onDisabled");
 		killService(context);
 	}
 

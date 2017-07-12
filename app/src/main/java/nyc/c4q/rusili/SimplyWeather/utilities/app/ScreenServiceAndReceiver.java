@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities;
+package nyc.c4q.rusili.SimplyWeather.utilities.app;
 
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -14,6 +14,7 @@ import android.util.Log;
 import java.util.Calendar;
 
 import nyc.c4q.rusili.SimplyWeather.activities.widgets.WeatherWidget4x2;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 
 public class ScreenServiceAndReceiver extends Service {
 	private BroadcastReceiver broadcastReceiver;

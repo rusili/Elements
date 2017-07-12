@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities;
+package nyc.c4q.rusili.SimplyWeather.utilities.generic;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 public class DebugMode {
 
-	public static void logD (Context context, String string1, String string2){
+	public static void logD (Context context, String text){
 		SharedPreferences prefs = context.getSharedPreferences(Constants.SHARED_PREFERENCES.FILE_NAME,0);
 		Boolean isDebugMode = prefs.getBoolean("isDebugMode", false);
 
 		if (isDebugMode) {
-			Log.d("Debug: ", string1 + " " + string2);
+			Log.d("Debug: ", text);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities;
+package nyc.c4q.rusili.SimplyWeather.utilities.app;
 
 import java.util.Calendar;
 import java.util.Date;

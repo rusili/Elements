@@ -3,7 +3,7 @@ package nyc.c4q.rusili.SimplyWeather.network.wundergroundAPI;
 import android.util.Log;
 
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ResponseConditionsForecast10DayHourly;
-import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

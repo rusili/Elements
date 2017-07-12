@@ -15,8 +15,8 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import io.fabric.sdk.android.Fabric;
 import nyc.c4q.rusili.SimplyWeather.BuildConfig;
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.utilities.Constants;
-import nyc.c4q.rusili.SimplyWeather.utilities.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
+import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
