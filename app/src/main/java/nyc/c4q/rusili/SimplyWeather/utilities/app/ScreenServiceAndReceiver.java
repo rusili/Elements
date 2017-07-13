@@ -27,7 +27,7 @@ public class ScreenServiceAndReceiver extends Service {
 			broadcastReceiver = new ScreenReceiver(currentTIme);
 			registerReceiver(broadcastReceiver, filter);
 		}
-		
+
 		return super.onStartCommand(intent, flags, startId);
 	}
 

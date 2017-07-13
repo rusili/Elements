@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.MyAlertDialog;
 
-public class FragmentColor extends Fragment implements FragmentColorInterface.View, View.OnClickListener{
+public class FragmentColor extends Fragment implements FragmentColorInterface.View, View.OnClickListener {
 	private FragmentColorInterface.Presenter presenter;
 	private View view;
 	private ImageButton imageButton;
@@ -20,7 +20,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	private int page;
 	private String title;
 
-	public static FragmentColor newInstance(int page, String title) {
+	public static FragmentColor newInstance (int page, String title) {
 		FragmentColor fragmentColor = new FragmentColor();
 		Bundle args = new Bundle();
 		args.putInt("Page", page);
@@ -30,7 +30,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		page = getArguments().getInt("Page", 0);
 		title = getArguments().getString("Title");
@@ -60,7 +60,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 		this.presenter = new FragmentColorPresenter(this);
 	}
 
-	private void createColorDialog (View colorView, int defaultColor){
+	private void createColorDialog (View colorView, int defaultColor) {
 		MyAlertDialog.getMyAlertDialog().showColorPicker(colorView, "Pick a color:", defaultColor);
 	}
 
@@ -71,12 +71,12 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 
 	@Override
 	public void onClick (View v) {
-		if (v == imageButton){
-			createColorDialog(v, getColor(imageButton));
+		if (v == imageButton) {
+			createColorDialog(v, getButtonColor(imageButton));
 		}
 	}
 
-	private int getColor (ImageButton imageButton) {
+	private int getButtonColor (ImageButton imageButton) {
 		return ((ColorDrawable) imageButton.getBackground()).getColor();
 	}
 }

@@ -101,7 +101,9 @@ public class RetroFitBase {
 
 	public interface RetrofitListener {
 		public void onConditionsRetrieved (CurrentObservation currentObservation);
+
 		public void onForecastDaysRetrieved (ForecastDay[] forecastDays);
+
 		public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts);
 	}
 }

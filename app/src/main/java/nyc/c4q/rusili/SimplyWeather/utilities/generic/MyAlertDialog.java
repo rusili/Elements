@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.utilities.app.ColorPicker;
 
 public class MyAlertDialog {
 	private static MyAlertDialog myAlertDialog;
@@ -20,19 +21,18 @@ public class MyAlertDialog {
 		return myAlertDialog;
 	}
 
-	public void showDefaultAlert(Context context, String title, String message, String buttonText){
+	public void showDefaultAlert (Context context, String title, String message, String buttonText) {
 		new AlertDialog.Builder(context)
 			  .setTitle(title)
 			  .setMessage(message)
 			  .setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
-				  public void onClick(DialogInterface dialog, int which) {
+				  public void onClick (DialogInterface dialog, int which) {
 					  System.exit(0);
 				  }
 			  })
 			  .setIcon(android.R.drawable.ic_dialog_alert)
 			  .show();
 	}
-
 
 	public void showColorPicker (final View view, String title, int defaultColor) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());

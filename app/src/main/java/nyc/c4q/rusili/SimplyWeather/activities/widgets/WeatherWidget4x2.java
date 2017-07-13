@@ -10,6 +10,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -35,6 +36,7 @@ import java.util.Locale;
 
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.ConfigurationActivity;
+import nyc.c4q.rusili.SimplyWeather.database.SQLiteDatabaseHandler;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
@@ -55,38 +57,40 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 	public Context context;
 	public GoogleApiClient mGoogleApiClient;
-	public IconInflater iconInflater;
-	public CalendarHelper calendarHelper;
 	public RetroFitBase retroFitBase;
-	public Location mLastLocation;
+	public Location lastLocation;
+	private SQLiteDatabase sqLiteDatabase;
 
 	public RemoteViews remoteViews;
 
 	public boolean locationPermissionGranted;
-	public int zipCode = 0;
+	public int zipCode = 11375;
 	public int widgetID;
 
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-			for (int widgetID : appWidgetIds) {
-				this.widgetID = widgetID;
+		for (int widgetID : appWidgetIds) {
+			this.widgetID = widgetID;
+			DebugMode.logD(context, "onUpdate");
 
-				DebugMode.logD(context, "onUpdate");
+			remoteViews = new RemoteViews(context.getPackageName(),
+				  R.layout.widget_layout_4x2);
 
-				remoteViews = new RemoteViews(context.getPackageName(),
-					  R.layout.widget_layout_4x2);
+			loadFromDatabase(context);
+			//setOnClickUpdate(context);
+			setOnClickConfig(context, widgetID);
+			setViewFlipper(context);
 
-				//setOnClickUpdate(context);
-				setOnClickConfig(context, widgetID);
-				setViewFlipper(context);
+			startGoogleAPIClient(context);
+		}
+	}
 
-				iconInflater = IconInflater.getInstance();
-				calendarHelper = CalendarHelper.getInstance();
+	private void loadFromDatabase (Context context) {
+		SQLiteDatabaseHandler sqLiteDatabaseHandler = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context);
+		sqLiteDatabase = sqLiteDatabaseHandler.getWritableDatabase();
 
-				startGoogleAPIClient(context);
-			}
 	}
 
 	private void startGoogleAPIClient (Context context) {
@@ -127,15 +131,17 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 				  new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
 		}
-		mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-		DebugMode.logD(context, mLastLocation.toString());
-		getLastLocation(mLastLocation);
+		lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		if (lastLocation != null) {
+			DebugMode.logD(context, lastLocation.toString());
+			getLastLocation(lastLocation);
+		}
 	}
 
 	private void getLastLocation (Location mLastLocation) {
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		try {
-			List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+			List <Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
 			zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -174,19 +180,19 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		int nextHourOffset = 0;
 		int hour = 1;
 
-		if (CalendarHelper.getInstance().before30Minutes()){
+		if (CalendarHelper.getInstance().before30Minutes()) {
 			nextHourOffset = 1;
 		}
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().change24to12hour(hourlyForecasts[hour-nextHourOffset].getFCTTIME().getHour()));
+			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().change24to12hour(hourlyForecasts[hour - nextHourOffset].getFCTTIME().getHour()));
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getFCTTIME().getAmpm());
+			remoteViews.setTextViewText(resID, hourlyForecasts[hour - nextHourOffset].getFCTTIME().getAmpm());
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setTextViewText(resID, hourlyForecasts[hour-nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextViewText(resID, hourlyForecasts[hour - nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
 			resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setImageViewResource(resID, iconInflater.choose(hourlyForecasts[hour-nextHourOffset].getIcon()));
-			hour = hour + (i+1);
+			remoteViews.setImageViewResource(resID, IconInflater.getInstance().choose(hourlyForecasts[hour - nextHourOffset].getIcon()));
+			hour = hour + (i + 1);
 		}
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
@@ -201,7 +207,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		remoteViews.setTextViewText(R.id.widget_component_main_day_height2, CalendarHelper.getInstance().ifSingleDigit(month.format(now)) + "/" + CalendarHelper.getInstance().ifSingleDigit(day.format(now)));
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
-		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, iconInflater.choose(currentObservation.getIcon()));
+		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, IconInflater.getInstance().choose(currentObservation.getIcon()));
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
@@ -223,7 +229,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 			resID = context.getResources().getIdentifier("widget_component_day_templow" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
 			resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i + 1), "id", context.getPackageName());
-			remoteViews.setImageViewResource(resID, iconInflater.choose(forecastDays[i].getIcon()));
+			remoteViews.setImageViewResource(resID, IconInflater.getInstance().choose(forecastDays[i].getIcon()));
 		}
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
@@ -246,7 +252,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		remoteViews.setOnClickPendingIntent(R.id.widget_layout_4x2_container, pendingIntent);
 	}
 
-	private void setViewFlipper (Context context){
+	private void setViewFlipper (Context context) {
 		Intent intent = new Intent(context, WeatherWidget4x2.class);
 		intent.setAction(Constants.ACTION.VIEWFLIPPER_CLICK);
 		intent.putExtra("isOpen", isViewFlipperOpen);
@@ -300,7 +306,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
 				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
-			} else if (intent.getBooleanExtra("isOpen", false) == true){
+			} else if (intent.getBooleanExtra("isOpen", false) == true) {
 				root.showPrevious(R.id.widget_layout_4x2_viewflipper);
 			}
 			appWidgetManager.updateAppWidget(appWidgetIds, root);

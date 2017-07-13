@@ -6,16 +6,17 @@ import java.util.Date;
 public class CalendarHelper {
 	private static CalendarHelper calendarHelper;
 
-	private CalendarHelper(){}
+	private CalendarHelper () {
+	}
 
-	public static CalendarHelper getInstance(){
-		if (calendarHelper == null){
+	public static CalendarHelper getInstance () {
+		if (calendarHelper == null) {
 			calendarHelper = new CalendarHelper();
 		}
 		return calendarHelper;
 	}
 
-	public Date getDate(){
+	public Date getDate () {
 		Date date = new Date();
 		return date;
 	}
@@ -42,7 +43,7 @@ public class CalendarHelper {
 
 	public boolean before30Minutes () {
 		Calendar calendar = Calendar.getInstance();
-		if (calendar.get(Calendar.MINUTE) < 30){
+		if (calendar.get(Calendar.MINUTE) < 30) {
 			return true;
 		}
 		return false;
@@ -50,7 +51,7 @@ public class CalendarHelper {
 
 	public String change24to12hour (String input) {
 		int hour = Integer.parseInt(input);
-		if (hour > 12){
+		if (hour > 12) {
 			return String.valueOf(hour - 12);
 		}
 		return input;

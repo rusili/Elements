@@ -9,7 +9,7 @@ public class HourlyForecast {
 		return FCTTIME;
 	}
 
-	public class FCTTIME{
+	public class FCTTIME {
 		String hour;
 		String ampm;
 
@@ -30,7 +30,7 @@ public class HourlyForecast {
 		return temp;
 	}
 
-	public class temp{
+	public class temp {
 		String english;
 
 		public String getEnglish () {

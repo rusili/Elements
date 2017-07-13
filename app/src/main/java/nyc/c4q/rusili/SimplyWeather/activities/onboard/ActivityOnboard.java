@@ -17,6 +17,7 @@ import nyc.c4q.rusili.SimplyWeather.BuildConfig;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 
 public class ActivityOnboard extends AppIntro {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
@@ -31,10 +32,15 @@ public class ActivityOnboard extends AppIntro {
 
 	private void initialize () {
 		checkDebugMode();
+		loadStetho();
 		killService();
 		getPermissions();
 		createService();
 		setSlides();
+	}
+
+	private void loadStetho () {
+		DebugMode.loadStetho(this);
 	}
 
 	private void createService () {
@@ -62,7 +68,7 @@ public class ActivityOnboard extends AppIntro {
 		endActivity();
 	}
 
-	private void checkDebugMode(){
+	private void checkDebugMode () {
 		SharedPreferences sharedPref = getSharedPreferences(Constants.SHARED_PREFERENCES.FILE_NAME, 0);
 		SharedPreferences.Editor editor = sharedPref.edit();
 

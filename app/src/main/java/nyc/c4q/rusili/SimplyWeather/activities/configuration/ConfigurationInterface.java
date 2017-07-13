@@ -4,11 +4,11 @@ import android.content.Context;
 
 public interface ConfigurationInterface {
 
-	public interface View{
-		Context getContext();
+	public interface View {
+		Context getContext ();
 	}
 
-	public interface Presenter{
+	public interface Presenter {
 
 	}
 }

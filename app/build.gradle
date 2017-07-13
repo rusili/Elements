@@ -55,6 +55,8 @@ dependencies {
     }
     // App Intro:
     compile 'com.github.paolorotolo:appintro:4.1.0'
+    // Cupboard
+    compile 'nl.qbusict:cupboard:2.1.4'
     // Google Play Services Location:
     compile 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.google.android.gms:play-services-places:10.2.1'
@@ -67,4 +69,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
+    // Stetho:
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
 }

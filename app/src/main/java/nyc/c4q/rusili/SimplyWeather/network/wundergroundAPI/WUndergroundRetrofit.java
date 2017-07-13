@@ -18,8 +18,8 @@ public class WUndergroundRetrofit {
 		this.listener = null;
 	}
 
-	public static WUndergroundRetrofit getInstance(){
-		if (WUndergroundRetrofit == null){
+	public static WUndergroundRetrofit getInstance () {
+		if (WUndergroundRetrofit == null) {
 			WUndergroundRetrofit = new WUndergroundRetrofit();
 		}
 		return WUndergroundRetrofit;

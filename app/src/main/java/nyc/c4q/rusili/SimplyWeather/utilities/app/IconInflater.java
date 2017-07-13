@@ -5,10 +5,11 @@ import nyc.c4q.rusili.SimplyWeather.R;
 public class IconInflater {
 	private static IconInflater iconInflater;
 
-	private IconInflater(){}
+	private IconInflater () {
+	}
 
-	public static IconInflater getInstance (){
-		if (iconInflater == null){
+	public static IconInflater getInstance () {
+		if (iconInflater == null) {
 			iconInflater = new IconInflater();
 		}
 		return iconInflater;

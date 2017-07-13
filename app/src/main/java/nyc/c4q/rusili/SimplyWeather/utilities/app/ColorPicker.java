@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities.generic;
+package nyc.c4q.rusili.SimplyWeather.utilities.app;
 
 import android.graphics.PorterDuff;
 import android.support.v7.app.AlertDialog;
@@ -8,15 +8,17 @@ import com.madrapps.pikolo.HSLColorPicker;
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 
 public class ColorPicker {
 	private static ColorPicker colorPicker;
 	private int colorSave;
 
-	private ColorPicker(){}
+	private ColorPicker () {
+	}
 
-	public static ColorPicker getColorPicker(){
-		if (colorPicker == null){
+	public static ColorPicker getColorPicker () {
+		if (colorPicker == null) {
 			colorPicker = new ColorPicker();
 		}
 		return colorPicker;
@@ -31,7 +33,7 @@ public class ColorPicker {
 		colorPicker.setColor(defaultColor);
 		colorPicker.setColorSelectionListener(new SimpleColorSelectionListener() {
 			@Override
-			public void onColorSelected(int color) {
+			public void onColorSelected (int color) {
 				imageViewColor.getDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 				colorSave = color;
 				DebugMode.logD(alertDialog.getContext(), String.valueOf(color));

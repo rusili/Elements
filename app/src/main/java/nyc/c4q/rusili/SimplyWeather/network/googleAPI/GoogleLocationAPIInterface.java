@@ -13,11 +13,14 @@ public abstract class GoogleLocationAPIInterface implements GoogleApiClient.Conn
 	public abstract void getZipCode (Context context);
 
 	@Override
-	public void onConnected (@Nullable Bundle bundle) {}
+	public void onConnected (@Nullable Bundle bundle) {
+	}
 
 	@Override
-	public void onConnectionSuspended (int i) {}
+	public void onConnectionSuspended (int i) {
+	}
 
 	@Override
-	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {}
+	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
+	}
 }

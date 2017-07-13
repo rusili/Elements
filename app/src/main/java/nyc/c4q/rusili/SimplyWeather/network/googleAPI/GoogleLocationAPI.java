@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class GoogleLocationAPI extends GoogleLocationAPIInterface{
+public class GoogleLocationAPI extends GoogleLocationAPIInterface {
 	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	private GoogleApiClient googleAPIClient;
@@ -72,10 +72,10 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 		startGoogleAPIClient(context);
 	}
 
-	private int getLocation(Location location){
+	private int getLocation (Location location) {
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		try {
-			List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+			List <Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 			return Integer.parseInt(addresses.get(0).getPostalCode());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 		}
 	}
 
-	private Location checkPermissions(){
+	private Location checkPermissions () {
 		if (ContextCompat.checkSelfPermission(context.getApplicationContext(),
 			  android.Manifest.permission.ACCESS_FINE_LOCATION)
 			  == PackageManager.PERMISSION_GRANTED) {
@@ -106,7 +106,7 @@ public class GoogleLocationAPI extends GoogleLocationAPIInterface{
 		return LocationServices.FusedLocationApi.getLastLocation(googleAPIClient);
 	}
 
-	public interface GoogleLocationAPILIstener{
-		void onConnection(int zipCode);
+	public interface GoogleLocationAPILIstener {
+		void onConnection (int zipCode);
 	}
 }

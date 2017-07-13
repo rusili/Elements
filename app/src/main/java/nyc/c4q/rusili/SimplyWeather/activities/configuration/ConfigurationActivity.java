@@ -18,7 +18,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 import static android.appwidget.AppWidgetManager.INVALID_APPWIDGET_ID;
 
-public class ConfigurationActivity extends AppCompatActivity implements ConfigurationInterface.View{
+public class ConfigurationActivity extends AppCompatActivity implements ConfigurationInterface.View {
 	private ConfigurationInterface.Presenter configurationPresenter;
 
 	private ViewPager viewPager;

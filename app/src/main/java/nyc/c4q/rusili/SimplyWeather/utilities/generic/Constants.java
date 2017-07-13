@@ -2,7 +2,7 @@ package nyc.c4q.rusili.SimplyWeather.utilities.generic;
 
 public class Constants {
 
-	public interface SHARED_PREFERENCES{
+	public interface SHARED_PREFERENCES {
 		public static String FILE_NAME = "SimplyWeather";
 		public static String BOOLEAN_ISDEBUGMODE = "isDebugMode";
 	}
