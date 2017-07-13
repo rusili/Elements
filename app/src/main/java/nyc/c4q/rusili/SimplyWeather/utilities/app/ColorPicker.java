@@ -36,6 +36,7 @@ public class ColorPicker {
 			public void onColorSelected (int color) {
 				imageViewColor.getDrawable().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 				colorSave = color;
+				// Save color
 				DebugMode.logD(alertDialog.getContext(), String.valueOf(color));
 			}
 		});

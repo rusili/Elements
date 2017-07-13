@@ -1,5 +1,6 @@
 package nyc.c4q.rusili.SimplyWeather.activities.configuration.color;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.MyAlertDialog;
 
 public class FragmentColor extends Fragment implements FragmentColorInterface.View, View.OnClickListener {
 	private FragmentColorInterface.Presenter presenter;
+	private MyAlertDialog.onClickColorListener onClickColorListener;
 	private View view;
 	private ImageButton imageButton;
 
@@ -60,8 +62,14 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 		this.presenter = new FragmentColorPresenter(this);
 	}
 
-	private void createColorDialog (View colorView, int defaultColor) {
-		MyAlertDialog.getMyAlertDialog().showColorPicker(colorView, "Pick a color:", defaultColor);
+	private void createColorDialog (View v, int defaultColor) {
+		onClickColorListener = new MyAlertDialog.onClickColorListener() {
+			@Override
+			public void returnColor (View view, int color) {
+				presenter.saveColorToDatabase(view, color);
+			}
+		};
+		MyAlertDialog.getMyAlertDialog().showColorPicker(onClickColorListener, v, defaultColor);
 	}
 
 	@Override
@@ -74,6 +82,11 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 		if (v == imageButton) {
 			createColorDialog(v, getButtonColor(imageButton));
 		}
+	}
+
+	@Override
+	public Context getContext () {
+		return view.getContext();
 	}
 
 	private int getButtonColor (ImageButton imageButton) {

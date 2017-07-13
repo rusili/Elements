@@ -17,4 +17,8 @@
     <string name="hour_period_default"></string>
     <string name="hour_temp_default"></string>
 
+    <string name="colorpicker_title">Pick a color:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

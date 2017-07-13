@@ -18,7 +18,7 @@ public class ConfigurationViewPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem (int position) {
 		switch (position) {
 			case 0: // Fragment # 0 - This will show FirstFragment
-				return FragmentColor.newInstance(0, "dbColor");
+				return FragmentColor.newInstance(0, "DBColor");
 			default:
 				return null;
 		}

@@ -1,12 +1,13 @@
 package nyc.c4q.rusili.SimplyWeather.database.model;
 
-public class dbColor {
-	private String name;
-	private int color;
+public class DBColor {
+	public Long _id; // for cupboard
+	public String name;
+	public int color;
 
-	public dbColor (){}
+	public DBColor (){}
 
-	public dbColor (String name, int color){
+	public DBColor (String name, int color){
 		this.name = name;
 		this.color = color;
 	}

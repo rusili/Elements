@@ -10,7 +10,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -59,7 +58,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 	public GoogleApiClient mGoogleApiClient;
 	public RetroFitBase retroFitBase;
 	public Location lastLocation;
-	private SQLiteDatabase sqLiteDatabase;
 
 	public RemoteViews remoteViews;
 
@@ -89,8 +87,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 	private void loadFromDatabase (Context context) {
 		SQLiteDatabaseHandler sqLiteDatabaseHandler = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context);
-		sqLiteDatabase = sqLiteDatabaseHandler.getWritableDatabase();
-
+		// load
 	}
 
 	private void startGoogleAPIClient (Context context) {

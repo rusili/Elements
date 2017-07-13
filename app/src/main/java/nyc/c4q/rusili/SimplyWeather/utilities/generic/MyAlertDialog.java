@@ -10,6 +10,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.app.ColorPicker;
 
 public class MyAlertDialog {
 	private static MyAlertDialog myAlertDialog;
+	private onClickColorListener onClickColorListener;
 
 	private MyAlertDialog () {
 	}
@@ -34,16 +35,18 @@ public class MyAlertDialog {
 			  .show();
 	}
 
-	public void showColorPicker (final View view, String title, int defaultColor) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+	public void showColorPicker (final onClickColorListener onClickColorListener, final View view, final int defaultColor) {
+		final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		builder.setView(R.layout.colorpicker);
 		builder.setCancelable(true);
-		builder.setTitle(title);
-		builder.setNegativeButton("Cancel", null);
-		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+		builder.setTitle(R.string.colorpicker_title);
+		builder.setNegativeButton(R.string.cancel, null);
+		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick (DialogInterface dialog, int which) {
-				view.setBackgroundColor(ColorPicker.getColorPicker().getColorSave());
+				int color = ColorPicker.getColorPicker().getColorSave();
+				view.setBackgroundColor(color);
+				onClickColorListener.returnColor(view, color);
 			}
 		});
 		AlertDialog alertDialog = builder.create();
@@ -51,4 +54,7 @@ public class MyAlertDialog {
 		ColorPicker.getColorPicker().setColorPicker(alertDialog, defaultColor);
 	}
 
+	public interface onClickColorListener {
+		public void returnColor(View view, int color);
+	}
 }
