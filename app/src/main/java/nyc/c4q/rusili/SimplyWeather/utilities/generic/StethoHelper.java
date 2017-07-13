@@ -1,4 +1,4 @@
-package nyc.c4q.rusili.SimplyWeather.utilities.app;
+package nyc.c4q.rusili.SimplyWeather.utilities.generic;
 
 import android.content.Context;
 
@@ -9,12 +9,12 @@ import okhttp3.OkHttpClient;
 
 public class StethoHelper {
 
-	public StethoHelper(Context context){
+	public StethoHelper (Context context) {
 		Stetho.initializeWithDefaults(context);
 		initializeOKHTTP();
 	}
 
-	public void initializeOKHTTP(){
+	public void initializeOKHTTP () {
 		new OkHttpClient.Builder()
 			  .addNetworkInterceptor(new StethoInterceptor())
 			  .build();

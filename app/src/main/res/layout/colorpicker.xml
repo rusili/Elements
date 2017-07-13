@@ -9,7 +9,10 @@
     <FrameLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:padding="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="12dp"
         xmlns:pikolo="http://schemas.android.com/apk/res-auto"
         >
 

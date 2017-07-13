@@ -9,7 +9,7 @@ import nyc.c4q.rusili.SimplyWeather.database.model.DBColor;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
 
-public class SQLiteDatabaseHandler  extends SQLiteOpenHelper{
+public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 	private static SQLiteDatabase sqLiteDatabase;
 
 	private static final String DATABASE_NAME = "simpleweather.db";
@@ -23,7 +23,7 @@ public class SQLiteDatabaseHandler  extends SQLiteOpenHelper{
 
 	private static Object database;
 
-	private SQLiteDatabaseHandler(Context context){
+	private SQLiteDatabaseHandler (Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
@@ -35,14 +35,8 @@ public class SQLiteDatabaseHandler  extends SQLiteOpenHelper{
 		return sqLiteDatabaseHandler;
 	}
 
-	public void loadFromDatabase(){
-
-	}
-
-	public void saveColorToDatabase (int ID, int color){
-		DBColor dbColor = cupboard().withDatabase(sqLiteDatabase).get(DBColor.class, ID);
-		dbColor.setColor(color);
-		cupboard().withDatabase(sqLiteDatabase).put(dbColor);
+	public SQLiteDatabase getSqLiteDatabase(){
+		return sqLiteDatabase;
 	}
 
 	@Override

@@ -2,6 +2,22 @@
     <string name="app_name">SimplyWeather</string>
     <string name="wunderground_api_key">b2cac2700e06dc8e</string>
 
+    <!-- Wunderground icon names -->
+    <string name="WUnderground_icon_chance">chance</string>
+    <string name="WUnderground_icon_rain">rain</string>
+    <string name="WUnderground_icon_sleet">sleet</string>
+    <string name="WUnderground_icon_flurries">flurries</string>
+    <string name="WUnderground_icon_snow">snow/</string>
+    <string name="WUnderground_icon_storm">storm/</string>
+    <string name="WUnderground_icon_partlycloudy">partycloudy/</string>
+    <string name="WUnderground_icon_partlysunny">partlysunny/</string>
+    <string name="WUnderground_icon_mostlycloudy">mostlycloudy/</string>
+    <string name="WUnderground_icon_mostlysunny">mostlysunny/</string>
+    <string name="WUnderground_icon_clear">clear/</string>
+    <string name="WUnderground_icon_cloudy">cloudy/</string>
+    <string name="WUnderground_icon_fog">fog/</string>
+    <string name="WUnderground_icon_hazy">hazy/</string>
+
     <string name="main_weekday_default"></string>
     <string name="main_date_default"></string>
     <string name="main_high_default"></string>
@@ -20,5 +36,10 @@
     <string name="colorpicker_title">Pick a color:</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+
+    <string name="color_primary">Primary</string>
+    <string name="color_secondary">Secondary</string>
+    <string name="color_font_primary">Font Primary</string>
+    <string name="color_font_secondary">Font Secondary</string>
 
 </resources>

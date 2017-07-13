@@ -5,7 +5,7 @@ import android.content.Context;
 public interface FragmentColorInterface {
 
 	public interface View {
-		Context getContext();
+		Context getContext ();
 	}
 
 	public interface Presenter {

@@ -10,7 +10,6 @@ import nyc.c4q.rusili.SimplyWeather.utilities.app.ColorPicker;
 
 public class MyAlertDialog {
 	private static MyAlertDialog myAlertDialog;
-	private onClickColorListener onClickColorListener;
 
 	private MyAlertDialog () {
 	}

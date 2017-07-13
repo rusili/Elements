@@ -2,7 +2,7 @@ package nyc.c4q.rusili.SimplyWeather.utilities.generic;
 
 public class Constants {
 
-	public interface SQLiteDatabaseID{
+	public interface SQLiteDatabaseID {
 		int COLOR_PRIMARY = 1;
 		int COLOR_SECONDARY = 2;
 		int COLOR_FONT_PRIMARY = 3;

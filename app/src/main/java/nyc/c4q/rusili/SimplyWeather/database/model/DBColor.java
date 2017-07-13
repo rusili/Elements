@@ -5,11 +5,15 @@ public class DBColor {
 	public String name;
 	public int color;
 
-	public DBColor (){}
+	public DBColor () {}
 
-	public DBColor (String name, int color){
+	public DBColor (String name, int color) {
 		this.name = name;
 		this.color = color;
+	}
+
+	public Long get_id () {
+		return _id;
 	}
 
 	public String getName () {
