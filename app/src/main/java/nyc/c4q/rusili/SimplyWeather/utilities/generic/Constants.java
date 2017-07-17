@@ -35,6 +35,7 @@ public class Constants {
 		public static String UPDATE_CLICK = "ACTION_UPDATE_CLICK";
 		public static String CONFIG_CLICK = "ACTION_CONFIG_CLICK";
 		public static String VIEWFLIPPER_CLICK = "ACTION_VIEWFLIPPER_CLICK";
+		public static String CONFIG_COMPLETE = "ACTION_CONFIG_COMPLETE";
 	}
 
 	public interface UPDATE_DELAY {

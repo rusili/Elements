@@ -5,6 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import nl.qbusict.cupboard.QueryResultIterable;
 import nyc.c4q.rusili.SimplyWeather.database.model.DBColor;
 
 import static nl.qbusict.cupboard.CupboardFactory.cupboard;
@@ -17,11 +21,11 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
 	private static SQLiteDatabaseHandler sqLiteDatabaseHandler;
 
+	private List<DBColor> listOfDBColors = new ArrayList <>();
+
 	static {
 		cupboard().register(DBColor.class);
 	}
-
-	private static Object database;
 
 	private SQLiteDatabaseHandler (Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,10 +47,33 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 	public void onCreate (SQLiteDatabase db) {
 		cupboard().withDatabase(db).createTables();
 
-		cupboard().withDatabase(db).put(new DBColor("Primary", Color.BLUE));
-		cupboard().withDatabase(db).put(new DBColor("Secondary", Color.BLUE));
-		cupboard().withDatabase(db).put(new DBColor("FontPrimary", Color.WHITE));
-		cupboard().withDatabase(db).put(new DBColor("FontSecondary", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("Background", Color.BLUE));
+		cupboard().withDatabase(db).put(new DBColor("FontWeekday", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("FontDate", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("FontCurrentTemp", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("FontHighTemp", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("FontLowTemp", Color.WHITE));
+	}
+
+	public List<DBColor> getListOfColors(){
+		QueryResultIterable<DBColor> itr =cupboard().withDatabase(sqLiteDatabase).query(DBColor.class).query();
+		for (DBColor color : itr) {
+			listOfDBColors.add(color);
+		}
+		return listOfDBColors;
+	}
+
+	public void createItems(){
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("Background", Color.BLACK));
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontWeekday", Color.BLUE));
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontDate", Color.WHITE));
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontCurrentTemp", Color.BLUE));
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontHighTemp", Color.WHITE));
+		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontLowTemp", Color.WHITE));
+	}
+
+	public void deleteDatabase(){
+		cupboard().withDatabase(sqLiteDatabase).delete(DBColor.class, null);
 	}
 
 	@Override

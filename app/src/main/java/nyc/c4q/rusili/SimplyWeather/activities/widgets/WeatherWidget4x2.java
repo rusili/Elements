@@ -29,6 +29,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -36,6 +37,7 @@ import java.util.Locale;
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.ConfigurationActivity;
 import nyc.c4q.rusili.SimplyWeather.database.SQLiteDatabaseHandler;
+import nyc.c4q.rusili.SimplyWeather.database.model.DBColor;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
@@ -65,6 +67,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 	public int zipCode = 11375;
 	public int widgetID;
 
+	private List<DBColor> dbColorList = new ArrayList <>();
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
 	@Override
@@ -77,6 +80,8 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 				  R.layout.widget_layout_4x2);
 
 			loadFromDatabase(context);
+			applyDatabase();
+
 			//setOnClickUpdate(context);
 			setOnClickConfig(context, widgetID);
 			setViewFlipper(context);
@@ -85,9 +90,16 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		}
 	}
 
+	private void applyDatabase () {
+		applyColors();
+	}
+
+	private void applyColors () {
+		remoteViews.setTextColor(R.id.widget_component_main_currenttemp_height2, dbColorList.get(3).getColor());
+	}
+
 	private void loadFromDatabase (Context context) {
-		SQLiteDatabaseHandler sqLiteDatabaseHandler = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context);
-		// load
+		dbColorList = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context).getListOfColors();
 	}
 
 	private void startGoogleAPIClient (Context context) {
@@ -299,6 +311,13 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 			intentConfig.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[0]);    //set widget id
 			intentConfig.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intentConfig);
+
+		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_COMPLETE)) {
+			DebugMode.logD(context, "onReceive " + "CONFIG_COMPLETE");
+
+			loadFromDatabase(context);
+			applyDatabase();
+			appWidgetManager.updateAppWidget(appWidgetIds, root);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
