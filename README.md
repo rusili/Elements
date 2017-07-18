@@ -12,7 +12,6 @@ Current, High, & Low Temperatures & Weather.
 Next few days:
 High & Low Temperatures & Weather.
 
+[Get the app on the Google Play Store here!](https://play.google.com/store/apps/details?id=nyc.c4q.rusili.SimplyWeather&hl=en)
 
-Rusi Li
-
-[this]: <https://github.com/rooksoto/Parallel>
+## By Rusi Li
