@@ -80,7 +80,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 				  R.layout.widget_layout_4x2);
 
 			loadFromDatabase(context);
-			applyDatabase();
 
 			//setOnClickUpdate(context);
 			setOnClickConfig(context, widgetID);
@@ -88,14 +87,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 			startGoogleAPIClient(context);
 		}
-	}
-
-	private void applyDatabase () {
-		applyColors();
-	}
-
-	private void applyColors () {
-		remoteViews.setTextColor(R.id.widget_component_main_currenttemp_height2, dbColorList.get(3).getColor());
 	}
 
 	private void loadFromDatabase (Context context) {
@@ -195,10 +186,16 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_hour_hour" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().change24to12hour(hourlyForecasts[hour - nextHourOffset].getFCTTIME().getHour()));
+			remoteViews.setTextColor(resID, dbColorList.get(1).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_hour_period" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, hourlyForecasts[hour - nextHourOffset].getFCTTIME().getAmpm());
+			remoteViews.setTextColor(resID, dbColorList.get(2).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_hour_temp" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, hourlyForecasts[hour - nextHourOffset].getTemp().getEnglish() + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextColor(resID, dbColorList.get(4).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_hour_icon" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setImageViewResource(resID, IconInflater.getInstance().choose(hourlyForecasts[hour - nextHourOffset].getIcon()));
 			hour = hour + (i + 1);
@@ -213,9 +210,17 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		SimpleDateFormat day = new SimpleDateFormat("dd");
 
 		remoteViews.setTextViewText(R.id.widget_component_main_weekday_height2, weekday.format(now));
+		remoteViews.setTextColor(R.id.widget_component_main_weekday_height2, dbColorList.get(1).getColor());
+
 		remoteViews.setTextViewText(R.id.widget_component_main_day_height2, CalendarHelper.getInstance().ifSingleDigit(month.format(now)) + "/" + CalendarHelper.getInstance().ifSingleDigit(day.format(now)));
+		remoteViews.setTextColor(R.id.widget_component_main_day_height2, dbColorList.get(2).getColor());
+
 		remoteViews.setTextViewText(R.id.widget_component_main_currenttemp_height2, String.valueOf((int) currentObservation.getTemp_f()) + Constants.SYMBOLS.DEGREE);
+		remoteViews.setTextColor(R.id.widget_component_main_currenttemp_height2, dbColorList.get(3).getColor());
+
 		remoteViews.setTextViewText(R.id.widget_component_main_location_height2, currentObservation.getDisplay_location().getCity());
+		//remoteViews.setTextColor(R.id.widget_component_main_location_height2, dbColorList.get(6).getColor());
+
 		remoteViews.setImageViewResource(R.id.widget_component_main_icon_height2, IconInflater.getInstance().choose(currentObservation.getIcon()));
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
@@ -231,12 +236,20 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		for (int i = 1; i < numOfDays; i++) {
 			resID = context.getResources().getIdentifier("widget_component_day_weekday" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, CalendarHelper.getInstance().getTwoCharWeekday(forecastDays[i].getDate().getWeekdayShort()));
+			remoteViews.setTextColor(resID, dbColorList.get(1).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_day_day" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, forecastDays[i].getDate().getDay());
+			remoteViews.setTextColor(resID, dbColorList.get(2).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_day_temphigh" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getHigh().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextColor(resID, dbColorList.get(4).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_day_templow" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setTextViewText(resID, String.valueOf(forecastDays[i].getLow().getFahrenheit()) + Constants.SYMBOLS.DEGREE);
+			remoteViews.setTextColor(resID, dbColorList.get(5).getColor());
+
 			resID = context.getResources().getIdentifier("widget_component_day_icon" + String.valueOf(i + 1), "id", context.getPackageName());
 			remoteViews.setImageViewResource(resID, IconInflater.getInstance().choose(forecastDays[i].getIcon()));
 		}
@@ -314,9 +327,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_COMPLETE)) {
 			DebugMode.logD(context, "onReceive " + "CONFIG_COMPLETE");
-
-			loadFromDatabase(context);
-			applyDatabase();
 			appWidgetManager.updateAppWidget(appWidgetIds, root);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {

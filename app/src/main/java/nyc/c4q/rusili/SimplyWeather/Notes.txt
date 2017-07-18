@@ -1,5 +1,14 @@
 http://www.androidauthority.com/create-simple-android-widget-608975/
 
+Database IDs:
+1 - Background
+2 - FontWeekday
+3 - FontDate
+4 - FontCurrentTemp
+5 - FontHighTemp
+6 - FontLowTemp
+7 - FontLocation
+
 App Widget uses RemoteViews which can only use these views:
     FrameLayout, LinearLayout, Relative`Layout, GridLayout
     Button, ImageButton, ImageView, TextView

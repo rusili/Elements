@@ -53,6 +53,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 		cupboard().withDatabase(db).put(new DBColor("FontCurrentTemp", Color.WHITE));
 		cupboard().withDatabase(db).put(new DBColor("FontHighTemp", Color.WHITE));
 		cupboard().withDatabase(db).put(new DBColor("FontLowTemp", Color.WHITE));
+		cupboard().withDatabase(db).put(new DBColor("FontLocation", Color.WHITE));
 	}
 
 	public List<DBColor> getListOfColors(){
