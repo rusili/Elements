@@ -11,17 +11,24 @@
     <TextView
         android:id="@+id/fragment_configuration_color"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:text="fragment_configuration_color"
         />
 
     <ImageButton
         android:id="@+id/fragmentconfigurationcolor_imagebutton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:tag="3"
         />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_configuration_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

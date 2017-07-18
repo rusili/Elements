@@ -5,12 +5,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.activities.configuration.color.recyclerview.ColorRecyclerviewAdapter;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.MyAlertDialog;
 
 public class FragmentColor extends Fragment implements FragmentColorInterface.View, View.OnClickListener {
@@ -18,6 +21,7 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	private MyAlertDialog.onClickColorListener onClickColorListener;
 	private View view;
 	private ImageButton imageButton;
+	private RecyclerView recyclerView;
 
 	private int page;
 	private String title;
@@ -54,6 +58,10 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	}
 
 	private void setViews () {
+		recyclerView = (RecyclerView) view.findViewById(R.id.fragment_configuration_recyclerview);
+		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
+		recyclerView.setAdapter(new ColorRecyclerviewAdapter());
+
 		imageButton = (ImageButton) view.findViewById(R.id.fragmentconfigurationcolor_imagebutton);
 		imageButton.setOnClickListener(this);
 	}

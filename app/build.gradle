@@ -62,6 +62,8 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:10.2.1'
     // Pikolo:
     compile 'com.github.madrapps:pikolo:1.1.6'
+    // Recyclerview:
+    compile 'com.android.support:recyclerview-v7:25.1.1'
     // Retrofit:
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
