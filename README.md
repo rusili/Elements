@@ -1,4 +1,6 @@
 
+![alt text](https://github.com/rusili/SimplyWeather/edit/ConfigurationActivity/src/ "Banner")
+
 ## SimplyWeather
 
 A simple weather widget born out of not being able to find the "perfect" weather widget for my tastes. They either had too much information or too little, or took up too much space or any other number of reasons. Currently uses the wunderground api.
