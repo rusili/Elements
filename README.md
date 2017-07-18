@@ -1,11 +1,11 @@
 
-![alt text](https://github.com/rusili/SimplyWeather/blob/ConfigurationActivity/app/src/main/res/drawable/preview.png "Banner")
+![alt text](https://github.com/rusili/SimplyWeather/blob/ConfigurationActivity/app/src/main/res/drawable/banner.png "Banner")
 
 ## SimplyWeather
 
 A simple weather widget born out of not being able to find the "perfect" weather widget for my tastes. They either had too much information or too little, or took up too much space or any other number of reasons. Currently uses the wunderground api.
 
-![alt text](https://github.com/rusili/SimplyWeather/blob/ConfigurationActivity/app/src/main/res/drawable/playstore2.png "Preview")
+![alt text](https://github.com/rusili/SimplyWeather/blob/ConfigurationActivity/app/src/main/res/drawable/preview.png "Preview")
 
 ## Information displayed:
 
