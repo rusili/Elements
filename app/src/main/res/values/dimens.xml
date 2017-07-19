@@ -50,4 +50,14 @@
     <dimen name="height2_hours_temp_fontsize">24sp</dimen>
     <!-- Height x2 -->
 
+    <!-- Configuration Activity -->
+    <dimen name="recyclerview_card_height">64dp</dimen>
+    <dimen name="recyclerview_card_margin_leftright">12dp</dimen>
+    <dimen name="recyclerview_card_fontsize">18sp</dimen>
+
+    <dimen name="fragment_title_textview_height">48dp</dimen>
+    <dimen name="fragment_title_textview_fontsize">20sp</dimen>
+
+    <!-- Configuration Activity -->
+
 </resources>

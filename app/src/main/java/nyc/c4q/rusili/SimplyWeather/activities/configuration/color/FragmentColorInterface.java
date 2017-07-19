@@ -9,6 +9,6 @@ public interface FragmentColorInterface {
 	}
 
 	public interface Presenter {
-		void saveColorToDatabase (android.view.View view, int ID);
+		void saveColorToDatabase (android.view.View view, int ID, int position);
 	}
 }

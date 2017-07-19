@@ -1,7 +1,6 @@
 package nyc.c4q.rusili.SimplyWeather.activities.configuration.color;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,17 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.color.recyclerview.ColorRecyclerviewAdapter;
-import nyc.c4q.rusili.SimplyWeather.utilities.generic.MyAlertDialog;
 
 public class FragmentColor extends Fragment implements FragmentColorInterface.View, View.OnClickListener {
 	private FragmentColorInterface.Presenter presenter;
-	private MyAlertDialog.onClickColorListener onClickColorListener;
 	private View view;
-	private ImageButton imageButton;
 	private RecyclerView recyclerView;
 
 	private int page;
@@ -60,24 +55,11 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 	private void setViews () {
 		recyclerView = (RecyclerView) view.findViewById(R.id.fragment_configuration_recyclerview);
 		recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false));
-		recyclerView.setAdapter(new ColorRecyclerviewAdapter());
-
-		imageButton = (ImageButton) view.findViewById(R.id.fragmentconfigurationcolor_imagebutton);
-		imageButton.setOnClickListener(this);
+		recyclerView.setAdapter(new ColorRecyclerviewAdapter(presenter));
 	}
 
 	private void setPresenter (FragmentColorInterface.Presenter presenter) {
 		this.presenter = new FragmentColorPresenter(this);
-	}
-
-	private void createColorDialog (View v, int defaultColor) {
-		onClickColorListener = new MyAlertDialog.onClickColorListener() {
-			@Override
-			public void returnColor (View view, int color) {
-				presenter.saveColorToDatabase(view, color);
-			}
-		};
-		MyAlertDialog.getMyAlertDialog().showColorPicker(onClickColorListener, v, defaultColor);
 	}
 
 	@Override
@@ -87,17 +69,10 @@ public class FragmentColor extends Fragment implements FragmentColorInterface.Vi
 
 	@Override
 	public void onClick (View v) {
-		if (v == imageButton) {
-			createColorDialog(v, getButtonColor(imageButton));
-		}
 	}
 
 	@Override
 	public Context getContext () {
 		return view.getContext();
-	}
-
-	private int getButtonColor (ImageButton imageButton) {
-		return ((ColorDrawable) imageButton.getBackground()).getColor();
 	}
 }

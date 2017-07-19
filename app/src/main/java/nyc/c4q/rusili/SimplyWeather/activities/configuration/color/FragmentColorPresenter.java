@@ -45,10 +45,10 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 		return dbColorArrayListTemp;
 	}
 
-	public void saveColorToDatabase (View view, int color) {
+	public void saveColorToDatabase (View view, int color, int position) {
 		sqLiteDatabase = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(view.getContext()).getSqLiteDatabase();
 
-		DBColor dbColor = cupboard().withDatabase(sqLiteDatabase).get(DBColor.class, Integer.valueOf(view.getTag().toString()));
+		DBColor dbColor = cupboard().withDatabase(sqLiteDatabase).get(DBColor.class, Integer.valueOf(position)+1);
 		dbColor.setColor(color);
 		cupboard().withDatabase(sqLiteDatabase).put(dbColor);
 
