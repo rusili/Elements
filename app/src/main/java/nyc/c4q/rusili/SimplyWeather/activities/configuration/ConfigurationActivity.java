@@ -1,6 +1,5 @@
 package nyc.c4q.rusili.SimplyWeather.activities.configuration;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import nyc.c4q.rusili.SimplyWeather.R;
+import nyc.c4q.rusili.SimplyWeather.activities.widgets.WeatherWidget4x2;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 
@@ -45,8 +45,6 @@ public class ConfigurationActivity extends AppCompatActivity implements Configur
 		setToolbar();
 		setViews();
 		setViewPager();
-
-
 	}
 
 	private void setViewPager () {
@@ -78,9 +76,13 @@ public class ConfigurationActivity extends AppCompatActivity implements Configur
 	}
 
 	private void finishConfiguration () {
-		Intent intent = new Intent();
+		Intent intent = new Intent(this, WeatherWidget4x2.class);
+		intent.putExtra(EXTRA_APPWIDGET_ID, appWidgetId);
 		intent.setAction(Constants.ACTION.CONFIG_COMPLETE);
-		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+		sendBroadcast(intent);
+
+//		intent.setAction(Constants.ACTION.CONFIG_COMPLETE);
+//		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 		setResult(RESULT_OK, intent);
 		finish();
 	}

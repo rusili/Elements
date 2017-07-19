@@ -327,7 +327,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_COMPLETE)) {
 			DebugMode.logD(context, "onReceive " + "CONFIG_COMPLETE");
-			appWidgetManager.updateAppWidget(appWidgetIds, root);
+			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
 			if (intent.getBooleanExtra("isOpen", false) == false) {
