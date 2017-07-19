@@ -91,6 +91,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 	private void loadFromDatabase (Context context) {
 		dbColorList = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context).getListOfColors();
+		DebugMode.logD(context, "loadFromDatabase: " + dbColorList.get(0) + ", "+ dbColorList.get(1) + ", "+ dbColorList.get(2) + ", "+ dbColorList.get(3) + ", "+ dbColorList.get(4) + ", "+ dbColorList.get(5) + ", ");
 	}
 
 	private void startGoogleAPIClient (Context context) {
@@ -308,7 +309,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_SCREEN)) {
 			DebugMode.logD(context, "onReceive " + "UPDATE_SCREEN");
-
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.UPDATE_CLICK)) {

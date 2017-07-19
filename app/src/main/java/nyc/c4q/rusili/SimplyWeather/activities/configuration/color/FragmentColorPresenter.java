@@ -55,6 +55,10 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 		DebugMode.logD(view.getContext(), "ID: " + dbColor.get_id() + " = " + color);
 	}
 
+	public List <DBColor> getDbColorArrayList () {
+		return dbColorArrayList;
+	}
+
 	public void onDestroy () {
 		this.fragmentColorView = null;
 	}
