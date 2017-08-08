@@ -1,7 +1,5 @@
 package nyc.c4q.rusili.SimplyWeather.activities.widgets;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,39 +7,23 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
+import javax.inject.Inject;
 
 import nyc.c4q.rusili.SimplyWeather.R;
 import nyc.c4q.rusili.SimplyWeather.activities.configuration.ConfigurationActivity;
+import nyc.c4q.rusili.SimplyWeather.dagger.AppDagger;
 import nyc.c4q.rusili.SimplyWeather.database.SQLiteDatabaseHandler;
 import nyc.c4q.rusili.SimplyWeather.database.model.DBColor;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.CurrentObservation;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.ForecastDay;
 import nyc.c4q.rusili.SimplyWeather.network.JSON.HourlyForecast;
-import nyc.c4q.rusili.SimplyWeather.network.RetroFitBase;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.CalendarHelper;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.IconInflater;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
@@ -51,21 +33,17 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.ShowToast;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
-public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider{
+	@Inject
+	WeatherPresenter weatherPresenter;
+
 	private boolean isViewFlipperOpen = false;
 	private boolean changeColor = false;
-
-	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
+	private boolean firstRun = true;
 
 	public Context context;
-	public GoogleApiClient mGoogleApiClient;
-	public RetroFitBase retroFitBase;
-	public Location lastLocation;
-
 	public RemoteViews remoteViews;
 
-	public boolean locationPermissionGranted;
-	public int zipCode = 11375;
 	public int widgetID;
 
 	private List<DBColor> dbColorList = new ArrayList <>();
@@ -74,24 +52,44 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		for (int widgetID : appWidgetIds) {
+			if (firstRun){
+				initialize(context, widgetID);
+			}
+
 			this.widgetID = widgetID;
 			DebugMode.logD(context, "onUpdate");
 
-			remoteViews = new RemoteViews(context.getPackageName(),
-				  R.layout.widget_layout_4x2);
 			if (changeColor){
 				changeColors(appWidgetManager, widgetID, remoteViews);
 			} else {
-
 				loadFromDatabase(context);
 
-				//setOnClickUpdate(context);
-				setOnClickConfig(context, widgetID);
-				setViewFlipper(context);
-
-				startGoogleAPIClient(context);
+				weatherPresenter.startGoogleAPIClient(context, widgetID, remoteViews);
 			}
 		}
+	}
+
+	private void initialize (Context context, int widgetID) {
+		bind(context);
+		setViews(context);
+		setOnClickListeners(context, widgetID);
+		firstRun = false;
+	}
+
+	private void bind (Context context) {
+		((AppDagger) context.getApplicationContext()).getAppComponent().inject(this);
+		weatherPresenter.bindView(this);
+	}
+
+	private void setViews (Context context) {
+		remoteViews = new RemoteViews(context.getPackageName(),
+			  R.layout.widget_layout_4x2);
+	}
+
+	private void setOnClickListeners (Context context, int widgetID) {
+		//setOnClickUpdate(context);
+		setOnClickConfig(context, widgetID);
+		setViewFlipper(context);
 	}
 
 	private void changeColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews){
@@ -105,89 +103,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		DebugMode.logD(context, "loadFromDatabase: " + dbColorList.get(0) + ", "+ dbColorList.get(1) + ", "+ dbColorList.get(2) + ", "+ dbColorList.get(3) + ", "+ dbColorList.get(4) + ", "+ dbColorList.get(5) + ", ");
 	}
 
-	private void startGoogleAPIClient (Context context) {
-		if (mGoogleApiClient == null) {
-			mGoogleApiClient = new GoogleApiClient.Builder(context)
-				  .addConnectionCallbacks(this)
-				  .addOnConnectionFailedListener(this)
-				  .addApi(LocationServices.API)
-				  .build();
-		}
-		this.context = context;
-
-		if (isNetworkConnected(context)) {
-			mGoogleApiClient.connect();
-		} else {
-			ShowToast.show(context, "No network detected");
-		}
-	}
-
-	private boolean isNetworkConnected (Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		boolean isConnected = activeNetwork != null &&
-			  activeNetwork.isConnectedOrConnecting();
-
-		return isConnected;
-	}
-
-	@Override
-	public void onConnected (@Nullable Bundle bundle) {
-		if (ContextCompat.checkSelfPermission(context.getApplicationContext(),
-			  android.Manifest.permission.ACCESS_FINE_LOCATION)
-			  == PackageManager.PERMISSION_GRANTED) {
-			locationPermissionGranted = true;
-		} else {
-			ActivityCompat.requestPermissions((Activity) context.getApplicationContext(),
-				  new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-				  PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-		}
-		lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-		if (lastLocation != null) {
-			DebugMode.logD(context, lastLocation.toString());
-			getLastLocation(lastLocation);
-		}
-	}
-
-	private void getLastLocation (Location mLastLocation) {
-		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-		try {
-			List <Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-			zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		downloadWeatherData(context, AppWidgetManager.getInstance(context), widgetID, remoteViews, zipCode);
-		context = null;
-	}
-
-	private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews, final int zipCode) {
-		RetroFitBase.RetrofitListener retrofitListener;
-
-		retroFitBase = new RetroFitBase(Constants.DEVELOPER_KEY.API_KEY, zipCode);
-		retroFitBase.setRetrofitListener(retrofitListener = new RetroFitBase.RetrofitListener() {
-			@Override
-			public void onConditionsRetrieved (CurrentObservation currentObservation) {
-				updateMain(appWidgetManager, widgetID, currentObservation);
-			}
-
-			@Override
-			public void onForecastDaysRetrieved (ForecastDay[] forecastDays) {
-				updateDays(context, appWidgetManager, widgetID, forecastDays, numOfDays);
-			}
-
-			@Override
-			public void onHourlyRetrieved (HourlyForecast[] hourlyForecasts) {
-				updateHours(context, appWidgetManager, widgetID, hourlyForecasts, numOfDays);
-			}
-		});
-		retroFitBase.getConditions();
-		retroFitBase.getForecastDay();
-		retroFitBase.getHourlyForecast();
-	}
-
-	private void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
+	public void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {
 		int resID = 0;
 		int nextHourOffset = 0;
 		int hour = 1;
@@ -215,7 +131,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
 
-	private void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
+	public void updateMain (AppWidgetManager appWidgetManager, int widgetID, CurrentObservation currentObservation) {
 		Date now = new Date();
 		SimpleDateFormat weekday = new SimpleDateFormat("E");
 		SimpleDateFormat month = new SimpleDateFormat("MM");
@@ -267,15 +183,6 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		}
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
-	}
-
-	@Override
-	public void onConnectionSuspended (int i) {
-	}
-
-	@Override
-	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
-		Log.d("onConnectionFailed: ", connectionResult.getErrorMessage());
 	}
 
 	private void setOnClickConfig (Context context, int widgetID) {
