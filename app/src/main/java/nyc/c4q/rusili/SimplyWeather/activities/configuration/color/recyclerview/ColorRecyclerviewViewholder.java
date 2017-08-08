@@ -35,7 +35,7 @@ public class ColorRecyclerviewViewholder extends RecyclerView.ViewHolder impleme
 
 	public void bind (String field, int position) {
 		textViewField.setText(field);
-		imageButtonColor.setBackgroundColor(presenter.getDbColorArrayList().get(position).getColor());
+		imageButtonColor.setBackgroundColor(presenter.getDbColorList().get(position).getColor());
 		this.position = position;
 	}
 

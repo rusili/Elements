@@ -57,11 +57,15 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	public List<DBColor> getListOfColors(){
-		QueryResultIterable<DBColor> itr =cupboard().withDatabase(sqLiteDatabase).query(DBColor.class).query();
-		for (DBColor color : itr) {
-			listOfDBColors.add(color);
-		}
-		return listOfDBColors;
+		List<DBColor> dbColorArrayListTemp = new ArrayList<>();
+		try {
+			QueryResultIterable<DBColor> itr = cupboard().withDatabase(sqLiteDatabase).query(DBColor.class).query();
+			for (DBColor dbColor : itr) {
+				dbColorArrayListTemp.add(dbColor);
+			}
+			itr.close();
+		} catch (Exception e) {}
+		return dbColorArrayListTemp;
 	}
 
 	public void createItems(){
