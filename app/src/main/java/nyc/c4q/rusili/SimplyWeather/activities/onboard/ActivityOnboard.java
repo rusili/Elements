@@ -32,15 +32,16 @@ public class ActivityOnboard extends AppIntro {
 
 	private void initialize () {
 		checkDebugMode();
-		loadStetho();
+		loadStethoAndCanary();
 		killService();
 		getPermissions();
 		createService();
 		setSlides();
 	}
 
-	private void loadStetho () {
+	private void loadStethoAndCanary () {
 		DebugMode.loadStetho(this);
+		DebugMode.loadCanary(getApplication());
 	}
 
 	private void createService () {

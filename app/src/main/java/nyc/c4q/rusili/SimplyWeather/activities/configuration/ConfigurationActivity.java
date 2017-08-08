@@ -75,7 +75,7 @@ public class ConfigurationActivity extends AppCompatActivity implements Configur
 		}
 	}
 
-	private void finishConfiguration () {
+	private boolean finishConfiguration () {
 		Intent intent = new Intent(this, WeatherWidget4x2.class);
 		intent.putExtra(EXTRA_APPWIDGET_ID, appWidgetId);
 		intent.setAction(Constants.ACTION.CONFIG_COMPLETE);
@@ -85,6 +85,7 @@ public class ConfigurationActivity extends AppCompatActivity implements Configur
 //		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 		setResult(RESULT_OK, intent);
 		finish();
+		return true;
 	}
 
 	@Override

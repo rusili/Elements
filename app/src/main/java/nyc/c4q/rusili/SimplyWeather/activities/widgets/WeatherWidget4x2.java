@@ -53,6 +53,7 @@ import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
 public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private boolean isViewFlipperOpen = false;
+	private boolean changeColor = false;
 
 	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
@@ -78,15 +79,25 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 			remoteViews = new RemoteViews(context.getPackageName(),
 				  R.layout.widget_layout_4x2);
+			if (changeColor){
+				changeColors(appWidgetManager, widgetID, remoteViews);
+			} else {
 
-			loadFromDatabase(context);
+				loadFromDatabase(context);
 
-			//setOnClickUpdate(context);
-			setOnClickConfig(context, widgetID);
-			setViewFlipper(context);
+				//setOnClickUpdate(context);
+				setOnClickConfig(context, widgetID);
+				setViewFlipper(context);
 
-			startGoogleAPIClient(context);
+				startGoogleAPIClient(context);
+			}
 		}
+	}
+
+	private void changeColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews){
+
+		appWidgetManager.updateAppWidget(widgetID, remoteViews);
+		changeColor = false;
 	}
 
 	private void loadFromDatabase (Context context) {
@@ -327,6 +338,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 		} else if (intent.getAction().equals(Constants.ACTION.CONFIG_COMPLETE)) {
 			DebugMode.logD(context, "onReceive " + "CONFIG_COMPLETE");
+			changeColor = true;
 			onUpdate(context, appWidgetManager, appWidgetIds);
 
 		} else if (intent.getAction().equals(Constants.ACTION.VIEWFLIPPER_CLICK)) {
