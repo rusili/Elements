@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
@@ -41,13 +42,9 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 	private boolean changeColor = false;
 	private boolean firstRun = true;
 
-	public Context context;
 	public RemoteViews remoteViews;
 
-	public int widgetID;
-
 	private List<DBColor> dbColorList = new ArrayList <>();
-	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -56,14 +53,12 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 				initialize(context, widgetID);
 			}
 
-			this.widgetID = widgetID;
 			DebugMode.logD(context, "onUpdate");
+			loadFromDatabase(context);
 
 			if (changeColor){
-				changeColors(appWidgetManager, widgetID, remoteViews);
+				applyColors(appWidgetManager, widgetID, remoteViews);
 			} else {
-				loadFromDatabase(context);
-
 				weatherPresenter.startGoogleAPIClient(context, widgetID, remoteViews);
 			}
 		}
@@ -73,6 +68,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		bind(context);
 		setViews(context);
 		setOnClickListeners(context, widgetID);
+		createService(context);
 		firstRun = false;
 	}
 
@@ -92,14 +88,22 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		setViewFlipper(context);
 	}
 
-	private void changeColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews){
+	private void createService (Context context) {
+		context.startService(new Intent(context, ScreenServiceAndReceiver.class));
+	}
+
+	private void applyColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews){
+		remoteViews.setTextColor(R.id.widget_component_main_weekday_height2, Color.GRAY);
+		//get from dbColors
 
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 		changeColor = false;
 	}
 
 	private void loadFromDatabase (Context context) {
-		dbColorList = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context).getListOfColors();
+		dbColorList = SQLiteDatabaseHandler
+			  .getSqLiteDatabaseHandler(context)
+			  .getListOfColors();
 		DebugMode.logD(context, "loadFromDatabase: " + dbColorList.get(0) + ", "+ dbColorList.get(1) + ", "+ dbColorList.get(2) + ", "+ dbColorList.get(3) + ", "+ dbColorList.get(4) + ", "+ dbColorList.get(5) + ", ");
 	}
 
@@ -218,7 +222,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		RemoteViews root = new RemoteViews(context.getPackageName(), R.layout.widget_layout_4x2);
 
 		if (!isMyServiceRunning(context, ScreenServiceAndReceiver.class)) {            // Checks to make sure the service is running. If not, restart the service.
-			context.startService(new Intent(context, ScreenServiceAndReceiver.class));
+			createService(context);
 		}
 
 		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {

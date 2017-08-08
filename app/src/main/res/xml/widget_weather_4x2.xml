@@ -6,6 +6,6 @@
                     android:initialLayout="@layout/widget_layout_4x2"
                     android:widgetCategory="home_screen"
                     android:previewImage="@drawable/preview"
-                    android:configure="nyc.c4q.rusili.SimplyWeather.activities.configuration.ConfigurationActivity">
+                    >
 
 </appwidget-provider>

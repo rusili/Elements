@@ -36,17 +36,16 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.ShowToast;
 
 @Module
-public class WeatherPresenter implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class WeatherPresenter implements WidgetInterface.WidgetPresenter, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 	private WidgetInterface.WidgetProvider widgetProvider;
 
-	public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
+	public final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 
 	public boolean locationPermissionGranted;
 
 	private GoogleApiClient googleApiClient;
 	private Context context;
 	private Location lastLocation;
-	public int zipCode = 11375;
 
 	private int widgetID;
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
@@ -122,6 +121,7 @@ public class WeatherPresenter implements GoogleApiClient.ConnectionCallbacks, Go
 		}
 		downloadWeatherData(context, AppWidgetManager.getInstance(context), widgetID, remoteViews, zipCode);
 		context = null;
+		remoteViews = null;
 	}
 
 	private void downloadWeatherData (final Context context, final AppWidgetManager appWidgetManager, final int widgetID, final RemoteViews remoteViews, final int zipCode) {
@@ -156,5 +156,10 @@ public class WeatherPresenter implements GoogleApiClient.ConnectionCallbacks, Go
 	@Override
 	public void onConnectionFailed (@NonNull ConnectionResult connectionResult) {
 		Log.d("onConnectionFailed: ", connectionResult.getErrorMessage());
+	}
+
+	@Override
+	public void unBind () {
+		widgetProvider = null;
 	}
 }

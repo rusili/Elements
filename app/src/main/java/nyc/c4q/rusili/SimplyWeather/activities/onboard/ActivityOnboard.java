@@ -15,12 +15,12 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import io.fabric.sdk.android.Fabric;
 import nyc.c4q.rusili.SimplyWeather.BuildConfig;
 import nyc.c4q.rusili.SimplyWeather.R;
-import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.app.ScreenServiceAndReceiver;
+import nyc.c4q.rusili.SimplyWeather.utilities.generic.Constants;
 import nyc.c4q.rusili.SimplyWeather.utilities.generic.DebugMode;
 
 public class ActivityOnboard extends AppIntro {
-	private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
+	private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 6;
 	public boolean locationPermissionGranted;
 
 	@Override
@@ -32,10 +32,9 @@ public class ActivityOnboard extends AppIntro {
 
 	private void initialize () {
 		checkDebugMode();
-		loadStethoAndCanary();
 		killService();
+		loadStethoAndCanary();
 		getPermissions();
-		createService();
 		setSlides();
 	}
 
