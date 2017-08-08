@@ -51,13 +51,14 @@ public class WeatherPresenter implements WidgetInterface.WidgetPresenter, Google
 	private int numOfDays = Constants.NUM_OF_DAYS.WIDGET;
 	private RemoteViews remoteViews;
 
-	public WeatherPresenter(){
+	public WeatherPresenter () {
 		initialize();
 	}
 
-	private void initialize () {}
+	private void initialize () {
+	}
 
-	public void bindView(WidgetInterface.WidgetProvider widgetProvider){
+	public void bindView (WidgetInterface.WidgetProvider widgetProvider) {
 		this.widgetProvider = widgetProvider;
 	}
 
@@ -114,7 +115,7 @@ public class WeatherPresenter implements WidgetInterface.WidgetPresenter, Google
 
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		try {
-			List<Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+			List <Address> addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
 			zipCode = Integer.parseInt(addresses.get(0).getPostalCode());
 		} catch (IOException e) {
 			e.printStackTrace();

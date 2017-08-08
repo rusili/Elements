@@ -5,7 +5,8 @@ public class DBColor {
 	public String name;
 	public int color;
 
-	public DBColor () {}
+	public DBColor () {
+	}
 
 	public DBColor (String name, int color) {
 		this.name = name;

@@ -21,7 +21,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
 	private static SQLiteDatabaseHandler sqLiteDatabaseHandler;
 
-	private List<DBColor> listOfDBColors = new ArrayList <>();
+	private List <DBColor> listOfDBColors = new ArrayList <>();
 
 	static {
 		cupboard().register(DBColor.class);
@@ -39,7 +39,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 		return sqLiteDatabaseHandler;
 	}
 
-	public SQLiteDatabase getSqLiteDatabase(){
+	public SQLiteDatabase getSqLiteDatabase () {
 		return sqLiteDatabase;
 	}
 
@@ -56,19 +56,20 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 		cupboard().withDatabase(db).put(new DBColor("FontLocation", Color.WHITE));
 	}
 
-	public List<DBColor> getListOfColors(){
-		List<DBColor> dbColorArrayListTemp = new ArrayList<>();
+	public List <DBColor> getListOfColors () {
+		List <DBColor> dbColorArrayListTemp = new ArrayList <>();
 		try {
-			QueryResultIterable<DBColor> itr = cupboard().withDatabase(sqLiteDatabase).query(DBColor.class).query();
+			QueryResultIterable <DBColor> itr = cupboard().withDatabase(sqLiteDatabase).query(DBColor.class).query();
 			for (DBColor dbColor : itr) {
 				dbColorArrayListTemp.add(dbColor);
 			}
 			itr.close();
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		return dbColorArrayListTemp;
 	}
 
-	public void createItems(){
+	public void createItems () {
 		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("Background", Color.BLACK));
 		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontWeekday", Color.BLUE));
 		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontDate", Color.WHITE));
@@ -77,7 +78,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 		cupboard().withDatabase(sqLiteDatabase).put(new DBColor("FontLowTemp", Color.WHITE));
 	}
 
-	public void deleteDatabase(){
+	public void deleteDatabase () {
 		cupboard().withDatabase(sqLiteDatabase).delete(DBColor.class, null);
 	}
 

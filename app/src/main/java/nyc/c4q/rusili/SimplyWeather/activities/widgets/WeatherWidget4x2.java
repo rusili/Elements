@@ -33,7 +33,7 @@ import nyc.c4q.rusili.SimplyWeather.utilities.generic.ShowToast;
 
 import static android.appwidget.AppWidgetManager.EXTRA_APPWIDGET_ID;
 
-public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider{
+public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterface.WidgetProvider {
 	@Inject
 	WeatherPresenter weatherPresenter;
 
@@ -43,19 +43,19 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 	public RemoteViews remoteViews;
 
-	private List<DBColor> dbColorList = new ArrayList <>();
+	private List <DBColor> dbColorList = new ArrayList <>();
 
 	@Override
 	public void onUpdate (final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		for (int widgetID : appWidgetIds) {
-			if (firstRun){
+			if (firstRun) {
 				initialize(context, widgetID);
 			}
 
 			DebugMode.logD(context, "onUpdate");
 			loadFromDatabase(context);
 
-			if (changeColor){
+			if (changeColor) {
 				applyColors(appWidgetManager, widgetID, remoteViews);
 			} else {
 				weatherPresenter.startGoogleAPIClient(context, widgetID, remoteViews);
@@ -91,7 +91,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		context.startService(new Intent(context, ScreenServiceAndReceiver.class));
 	}
 
-	private void applyColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews){
+	private void applyColors (AppWidgetManager appWidgetManager, int widgetID, RemoteViews remoteViews) {
 		applyColorMain(appWidgetManager, widgetID);
 		applyColorDays();
 		applyColorHours();
@@ -102,7 +102,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 
 	private void applyColorMain (AppWidgetManager appWidgetManager, int widgetID) {
 		remoteViews.setTextColor(R.id.widget_component_main_weekday_height2, dbColorList.get(1).getColor());
-		remoteViews.setTextColor(R.id.widget_component_main_day_height2,  dbColorList.get(2).getColor());
+		remoteViews.setTextColor(R.id.widget_component_main_day_height2, dbColorList.get(2).getColor());
 		remoteViews.setTextColor(R.id.widget_component_main_currenttemp_height2, dbColorList.get(3).getColor());
 		appWidgetManager.updateAppWidget(widgetID, remoteViews);
 	}
@@ -119,7 +119,7 @@ public class WeatherWidget4x2 extends AppWidgetProvider implements WidgetInterfa
 		dbColorList = SQLiteDatabaseHandler
 			  .getSqLiteDatabaseHandler(context)
 			  .getListOfColors();
-		DebugMode.logD(context, "loadFromDatabase: " + dbColorList.get(0).getColor() + ", "+ dbColorList.get(1).getColor() + ", "+ dbColorList.get(2).getColor() + ", "+ dbColorList.get(3).getColor() + ", "+ dbColorList.get(4).getColor() + ", "+ dbColorList.get(5).getColor() + ", ");
+		DebugMode.logD(context, "loadFromDatabase: " + dbColorList.get(0).getColor() + ", " + dbColorList.get(1).getColor() + ", " + dbColorList.get(2).getColor() + ", " + dbColorList.get(3).getColor() + ", " + dbColorList.get(4).getColor() + ", " + dbColorList.get(5).getColor() + ", ");
 	}
 
 	public void updateHours (Context context, AppWidgetManager appWidgetManager, int widgetID, HourlyForecast[] hourlyForecasts, int numOfDays) {

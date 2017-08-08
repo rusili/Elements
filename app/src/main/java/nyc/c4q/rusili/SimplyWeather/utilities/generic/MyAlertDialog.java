@@ -54,6 +54,6 @@ public class MyAlertDialog {
 	}
 
 	public interface onClickColorListener {
-		public void returnColor(View view, int color);
+		public void returnColor (View view, int color);
 	}
 }

@@ -15,6 +15,6 @@ public interface FragmentColorInterface {
 	public interface Presenter {
 		void saveColorToDatabase (android.view.View view, int ID, int position);
 
-		List<DBColor> getDbColorList ();
+		List <DBColor> getDbColorList ();
 	}
 }

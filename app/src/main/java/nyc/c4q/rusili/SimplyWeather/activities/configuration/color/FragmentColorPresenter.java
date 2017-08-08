@@ -16,7 +16,7 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 	private FragmentColorInterface.View fragmentColorView;
 	private SQLiteDatabase sqLiteDatabase;
 
-	private List<DBColor> dbColorList;
+	private List <DBColor> dbColorList;
 
 	public FragmentColorPresenter (FragmentColorInterface.View fragmentColorView) {
 		this.fragmentColorView = fragmentColorView;
@@ -27,7 +27,7 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 		loadColorsFromDatabase(fragmentColorView.getContext());
 	}
 
-	public void loadColorsFromDatabase(Context context){
+	public void loadColorsFromDatabase (Context context) {
 		sqLiteDatabase = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(context).getSqLiteDatabase();
 
 		dbColorList = SQLiteDatabaseHandler
@@ -38,7 +38,7 @@ public class FragmentColorPresenter implements FragmentColorInterface.Presenter 
 	public void saveColorToDatabase (View view, int color, int position) {
 		sqLiteDatabase = SQLiteDatabaseHandler.getSqLiteDatabaseHandler(view.getContext()).getSqLiteDatabase();
 
-		DBColor dbColor = cupboard().withDatabase(sqLiteDatabase).get(DBColor.class, Integer.valueOf(position)+1);
+		DBColor dbColor = cupboard().withDatabase(sqLiteDatabase).get(DBColor.class, Integer.valueOf(position) + 1);
 		dbColor.setColor(color);
 		cupboard().withDatabase(sqLiteDatabase).put(dbColor);
 
